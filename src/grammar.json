@@ -1,0 +1,32 @@
+{
+  "name": "Neopolitan",
+  "rules": {
+    "source_file": {
+      "type": "REPEAT",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_section"
+      }
+    },
+    "_section": {
+      "type": "SYMBOL",
+      "name": "section_header"
+    },
+    "section_header": {
+      "type": "STRING",
+      "value": "-- title"
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}
+
