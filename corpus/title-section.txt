@@ -4,10 +4,48 @@ Title Section 1
 
 -- title
 
-This is a title
+This is a basic title
 
 ---
 
 (source_file
-    (section_header)
+    (title_section
+        (title_token)
+    (title_headline
+        (paragraph_first_word)
+        (word)
+        (word)
+        (word)
+        (word)
+    )
   )
+)
+
+
+===============
+Multiline Title
+===============
+
+-- title
+
+This is a title with
+multiple lines
+
+---
+
+(source_file
+    (title_section
+        (title_token)
+    (title_headline
+        (paragraph_first_word)
+        (word)
+        (word)
+        (word)
+        (word)
+        (word)
+        (word)
+    )
+  )
+)
+
+

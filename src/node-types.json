@@ -1,21 +1,73 @@
 [
   {
+    "type": "paragraph_first_word",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "section_header",
+          "type": "title_section",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "section_header",
+    "type": "title_headline",
+    "named": false,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "paragraph_first_word",
+          "named": true
+        },
+        {
+          "type": "word",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "title_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "title_headline",
+          "named": true
+        },
+        {
+          "type": "title_token",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "word",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "empty_line",
+    "named": true
+  },
+  {
+    "type": "title_token",
     "named": true
   }
 ]

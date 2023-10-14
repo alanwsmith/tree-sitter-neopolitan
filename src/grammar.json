@@ -2,19 +2,97 @@
   "name": "Neopolitan",
   "rules": {
     "source_file": {
-      "type": "REPEAT",
+      "type": "REPEAT1",
       "content": {
-        "type": "SYMBOL",
-        "name": "_section"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "title_section"
+          }
+        ]
       }
     },
-    "_section": {
-      "type": "SYMBOL",
-      "name": "section_header"
+    "empty_line": {
+      "type": "PATTERN",
+      "value": "\\n *\\n"
     },
-    "section_header": {
+    "paragraph": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "paragraph_first_word"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "word"
+          }
+        }
+      ]
+    },
+    "paragraph_first_word": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\w+"
+        }
+      ]
+    },
+    "title_headline": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "paragraph"
+      },
+      "named": false,
+      "value": "title_headline"
+    },
+    "title_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "title_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "title_headline"
+        }
+      ]
+    },
+    "title_start": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "title_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "empty_line"
+        }
+      ]
+    },
+    "title_token": {
       "type": "STRING",
       "value": "-- title"
+    },
+    "whitespace": {
+      "type": "PATTERN",
+      "value": "[ \\t]+"
+    },
+    "word": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\S+"
+        }
+      ]
     }
   },
   "extras": [

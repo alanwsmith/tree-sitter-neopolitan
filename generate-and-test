@@ -1,5 +1,6 @@
 #!/bin/bash
 
-echo "Staring Gen An Run"
+clear
+echo "Starting Gen An Run"
 tree-sitter generate
 tree-sitter test
