@@ -17,12 +17,44 @@
       "type": "PATTERN",
       "value": " *\\n"
     },
-    "following_word_chars": {
-      "type": "TOKEN",
+    "headline": {
+      "type": "ALIAS",
       "content": {
-        "type": "PATTERN",
-        "value": "[^ \\n\\t]"
-      }
+        "type": "SYMBOL",
+        "name": "paragraph"
+      },
+      "named": false,
+      "value": "headline"
+    },
+    "initial_word_chars": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "non_lt_char"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "lt_with_non_lt_char"
+        }
+      ]
+    },
+    "lt_with_non_lt_char": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "non_lt_char"
+        }
+      ]
+    },
+    "following_word_chars": {
+      "type": "PATTERN",
+      "value": "[^ \\n\\t]+"
     },
     "non_lt_char": {
       "type": "TOKEN",
@@ -35,24 +67,31 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "REPEAT1",
+          "type": "SYMBOL",
+          "name": "paragraph_first_word"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "wordbreak"
+        },
+        {
+          "type": "REPEAT",
           "content": {
-            "type": "CHOICE",
+            "type": "SEQ",
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "paragraph_first_word"
+                "name": "word"
               },
               {
-                "type": "SEQ",
+                "type": "CHOICE",
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "whitespace"
+                    "name": "wordbreak"
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "word"
+                    "type": "BLANK"
                   }
                 ]
               }
@@ -62,17 +101,21 @@
       ]
     },
     "paragraph_first_word": {
-      "type": "PATTERN",
-      "value": "\\S+"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "non_lt_char"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "following_word_chars"
+        }
+      ]
     },
-    "title_headline": {
-      "type": "ALIAS",
-      "content": {
-        "type": "SYMBOL",
-        "name": "paragraph"
-      },
-      "named": false,
-      "value": "title_headline"
+    "single_newline": {
+      "type": "PATTERN",
+      "value": "\\n"
     },
     "title_section": {
       "type": "SEQ",
@@ -87,45 +130,43 @@
         },
         {
           "type": "SYMBOL",
-          "name": "title_headline"
+          "name": "headline"
         }
       ]
     },
     "title_token": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "-- title"
-          },
-          {
-            "type": "PATTERN",
-            "value": " *\\n"
-          }
-        ]
-      }
+      "type": "STRING",
+      "value": "-- title\n"
     },
     "whitespace": {
       "type": "PATTERN",
       "value": "[ \\t]+"
     },
     "word": {
-      "type": "IMMEDIATE_TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "[^< \\n\\t]"
-          },
-          {
-            "type": "PATTERN",
-            "value": "[^ \\n\\t]+"
-          }
-        ]
-      }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "initial_word_chars"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "following_word_chars"
+        }
+      ]
+    },
+    "wordbreak": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "whitespace"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_newline"
+        }
+      ]
     }
   },
   "extras": [],

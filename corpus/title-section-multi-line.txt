@@ -1,0 +1,19 @@
+================================================================================
+Title Section - Multi-line
+================================================================================
+-- title
+ 
+Multi-line Example
+
+Alfa bravo
+--------------------------------------------------------------------------------
+
+(source_file
+  (title_section
+    (title_token)
+    (empty_line)
+    (title_headline
+      (paragraph_first_word)
+      (whitespace)
+      (word)
+      )))

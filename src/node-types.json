@@ -1,22 +1,7 @@
 [
   {
-    "type": "source_file",
+    "type": "headline",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "title_section",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "title_headline",
-    "named": false,
     "fields": {},
     "children": {
       "multiple": true,
@@ -27,11 +12,79 @@
           "named": true
         },
         {
-          "type": "whitespace",
+          "type": "word",
           "named": true
         },
         {
-          "type": "word",
+          "type": "wordbreak",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "initial_word_chars",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "lt_with_non_lt_char",
+          "named": true
+        },
+        {
+          "type": "non_lt_char",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lt_with_non_lt_char",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "non_lt_char",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "paragraph_first_word",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "following_word_chars",
+          "named": true
+        },
+        {
+          "type": "non_lt_char",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "title_section",
           "named": true
         }
       ]
@@ -50,7 +103,7 @@
           "named": true
         },
         {
-          "type": "title_headline",
+          "type": "headline",
           "named": true
         },
         {
@@ -61,11 +114,61 @@
     }
   },
   {
+    "type": "word",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "following_word_chars",
+          "named": true
+        },
+        {
+          "type": "initial_word_chars",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "wordbreak",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "single_newline",
+          "named": true
+        },
+        {
+          "type": "whitespace",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "<",
+    "named": false
+  },
+  {
     "type": "empty_line",
     "named": true
   },
   {
-    "type": "paragraph_first_word",
+    "type": "following_word_chars",
+    "named": true
+  },
+  {
+    "type": "non_lt_char",
+    "named": true
+  },
+  {
+    "type": "single_newline",
     "named": true
   },
   {
@@ -74,10 +177,6 @@
   },
   {
     "type": "whitespace",
-    "named": true
-  },
-  {
-    "type": "word",
     "named": true
   }
 ]

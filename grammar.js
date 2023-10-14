@@ -9,52 +9,59 @@ module.exports = grammar({
 
     empty_line: _ => / *\n/,
 
-    following_word_chars: _ => token(/[^ \n\t]/),
+    headline: $ => alias($.paragraph, 'headline'),
+
+    initial_word_chars: $ => choice($.non_lt_char, $.lt_with_non_lt_char),
+
+    lt_with_non_lt_char: $ => seq("<", $.non_lt_char),
+
+    following_word_chars: _ => /[^ \n\t]+/,
 
     non_lt_char: _ => token(/[^< \n\t]/),
 
     paragraph: $ => seq(
-      repeat1(
-        choice(
-          $.paragraph_first_word, 
-          seq(
-            $.whitespace, $.word
-          ),
-        )
+      $.paragraph_first_word,
+      $.wordbreak,
+      repeat(
+        seq(
+          $.word,
+          optional($.wordbreak)
+        ),
       )
     ),
 
-    paragraph_first_word: $ => 
-      /\S+/,
-
-    title_headline: $ => alias(
-      $.paragraph, 
-      'title_headline'
+    // TODO: Switch to specific first
+    // paragraph character
+    paragraph_first_word: $ => seq(
+      $.non_lt_char,
+      $.following_word_chars,
     ),
+
+    single_newline: _ => /\n/,
 
     title_section: $ => seq(
-      $.title_token, 
+      $.title_token,
       $.empty_line,
-      $.title_headline,
+      $.headline,
     ),
 
-    title_token: _ => token(
-      seq(
-        "-- title",
-        / *\n/
-      ),
-    ),
-
+    title_token: _ => "-- title\n",
 
     whitespace: _ => /[ \t]+/,
 
-    word: _ => token.immediate(seq(
-      /[^< \n\t]/,
-      /[^ \n\t]+/,
-    )),
+    word: $ => seq(
+      $.initial_word_chars,
+      $.following_word_chars
+    ),
+
+    wordbreak: $ => choice(
+      $.whitespace,
+      $.single_newline,
+    ),
+
   },
+
   extras: _ => []
+
 });
-
-
 

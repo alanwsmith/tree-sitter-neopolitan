@@ -2,6 +2,11 @@
 
 clear
 echo "Starting Gen An Run"
-tree-sitter generate
-tree-sitter test -d
+# This is my hacked version of tree-sitter that
+# adds a darkmode and allows browser-sync 
+# auto-refresh to work
+/Users/alan/.cargo/bin/tree-sitter generate
+#tree-sitter test -d
+#tree-sitter test -f "Basic"
+/Users/alan/.cargo/bin/tree-sitter test -D -f "Basic"
 #tree-sitter test -D
