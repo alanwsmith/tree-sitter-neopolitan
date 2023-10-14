@@ -61,6 +61,33 @@
     }
   },
   {
+    "type": "p_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "empty_line",
+          "named": true
+        },
+        {
+          "type": "p_section_header",
+          "named": true
+        },
+        {
+          "type": "paragraph",
+          "named": true
+        },
+        {
+          "type": "single_newline",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "paragraph",
     "named": true,
     "fields": {},
@@ -119,6 +146,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "p_section",
+          "named": true
+        },
         {
           "type": "title_section",
           "named": true
@@ -205,6 +236,10 @@
   },
   {
     "type": "non_lt_char",
+    "named": true
+  },
+  {
+    "type": "p_section_header",
     "named": true
   },
   {

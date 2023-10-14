@@ -3,7 +3,8 @@ module.exports = grammar({
   rules: {
     source_file: $ => repeat1(
       choice(
-        $.title_section
+        $.title_section,
+        $.p_section,
       )
     ),
 
@@ -18,6 +19,15 @@ module.exports = grammar({
     following_word_chars: _ => /[^ \n\t]+/,
 
     non_lt_char: _ => /[^< \n\t]/,
+
+    p_section: $ => seq(
+      $.p_section_header,
+      $.single_newline,
+      $.empty_line,
+       repeat($.paragraph),
+    ),
+
+    p_section_header: $ => /-- p/,
 
     paragraph: $ => prec.left(
       seq(
@@ -42,15 +52,17 @@ module.exports = grammar({
 
     single_newline: _ => prec.right(/\n/),
 
-    title_section: $ => seq(
-      $.title_token,
-      $.empty_line,
-      $.headline,
-
-      optional(
-        seq(
-          $.empty_line,
-          optional($.paragraph),
+    title_section: $ => prec.left(
+      5,
+      seq(
+        $.title_token,
+        $.empty_line,
+        $.headline,
+        optional(
+          seq(
+            $.empty_line,
+            optional($.paragraph),
+          )
         )
       )
     ),
