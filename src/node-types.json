@@ -161,6 +161,10 @@
       "required": true,
       "types": [
         {
+          "type": "dashes",
+          "named": true
+        },
+        {
           "type": "headline",
           "named": true
         },
@@ -173,7 +177,7 @@
           "named": true
         },
         {
-          "type": "title_token",
+          "type": "title_section_token",
           "named": true
         }
       ]
@@ -242,7 +246,7 @@
     "named": true
   },
   {
-    "type": "title_token",
+    "type": "title_section_token",
     "named": true
   },
   {

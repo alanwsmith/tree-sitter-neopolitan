@@ -61,14 +61,16 @@ module.exports = grammar({
     title_section: $ => prec.left(
       5,
       seq(
-        $.title_token,
+        $.dashes,
+        $.title_section_token,
+        $.newline,
         $.newline,
         $.headline,
         optional($.paragraph),
       )
     ),
 
-    title_token: _ => "-- title\n",
+    title_section_token: _ => "title",
 
     whitespace: _ => /[ \t]+/,
 

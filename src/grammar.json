@@ -151,7 +151,15 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "title_token"
+            "name": "dashes"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "title_section_token"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "newline"
           },
           {
             "type": "SYMBOL",
@@ -176,9 +184,9 @@
         ]
       }
     },
-    "title_token": {
+    "title_section_token": {
       "type": "STRING",
-      "value": "-- title\n"
+      "value": "title"
     },
     "whitespace": {
       "type": "PATTERN",
