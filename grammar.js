@@ -3,12 +3,15 @@ module.exports = grammar({
   rules: {
     source_file: $ => repeat1(
       choice(
-        $.title_section,
         $.p_section,
+        $.title_section,
       )
     ),
 
-    empty_line: _ => / *\n/,
+    dashes: _ => /-- +/,
+
+    // TODO: Remove this
+    // empty_line: _ => / *\n/,
 
     headline: $ => alias($.paragraph, 'headline'),
 
@@ -21,26 +24,26 @@ module.exports = grammar({
     non_lt_char: _ => /[^< \n\t]/,
 
     p_section: $ => seq(
-      $.p_section_header,
-      $.single_newline,
-      $.empty_line,
-       repeat($.paragraph),
+      $.dashes,
+      $.p_section_token,
+      $.newline,
+      $.newline,
+      $.paragraph,
     ),
 
-    p_section_header: $ => /-- p/,
+    p_section_token: _ => /p */,
 
-    paragraph: $ => prec.left(
+    paragraph: $ => 
       seq(
         $.paragraph_first_word,
-        optional($.wordbreak),
+        $.wordbreak,
         repeat(
           seq(
-            $.word,
-            prec.left(2, optional($.wordbreak)),
+           $.word,
+           $.wordbreak,
           ),
         ),
-        prec.right(1, $.single_newline),
-      ),
+        $.newline,
     ),
 
     // TODO: Switch to specific first
@@ -50,20 +53,18 @@ module.exports = grammar({
       $.following_word_chars,
     ),
 
-    single_newline: _ => prec.right(/\n/),
+    // TODO: Remove this
+    // single_newline: _ => prec.right(/\n/),
+
+    newline: _ => / *\n/,
 
     title_section: $ => prec.left(
       5,
       seq(
         $.title_token,
-        $.empty_line,
+        $.newline,
         $.headline,
-        optional(
-          seq(
-            $.empty_line,
-            optional($.paragraph),
-          )
-        )
+        optional($.paragraph),
       )
     ),
 
@@ -76,10 +77,10 @@ module.exports = grammar({
       $.following_word_chars
     ),
 
-    wordbreak: $ => prec.left(2, choice(
+    wordbreak: $ => choice(
       $.whitespace,
-      $.single_newline,
-    )),
+      $.newline,
+    ),
   },
 
   extras: _ => []

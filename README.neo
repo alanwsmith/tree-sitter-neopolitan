@@ -1,0 +1,15 @@
+-- title
+
+Neopolitan Tree-Sitter Parser And Syntax Highlighter
+
+-- notes
+
+- for dev on mac, update: `~/Library/Application Support/tree-sitter/config.json``
+to add a `parser-directories`` array item to point to the 
+dev location (e.g. `/Users/alan/workshop/tree-sitter-neopolitan/src``)
+
+
+
+
+
+

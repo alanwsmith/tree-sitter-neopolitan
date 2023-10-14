@@ -3,15 +3,19 @@ Paragraph Section - Basic
 ================================================================================
 -- p
 
-alfa bravo 
-charlie delta
+alfa bravo charlie
+delta echo
+
+
 --------------------------------------------------------------------------------
 
 (source_file
-  (title_section
-    (title_token)
-    (empty_line)
-    (headline
+  (p_section
+    (dashes)
+    (p_section_token)
+    (newline)
+    (newline)
+    (paragraph
       (paragraph_first_word
         (non_lt_char)
         (following_word_chars))
@@ -27,5 +31,18 @@ charlie delta
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (single_newline
-        (MISSING "single_newline_token1")))))
+      (wordbreak
+        (newline))
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
+      (wordbreak
+        (whitespace))
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
+      (wordbreak
+        (newline))
+      (newline))))

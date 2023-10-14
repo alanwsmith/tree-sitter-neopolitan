@@ -4,12 +4,14 @@ Basic Title Section
 -- title
  
 Basic Title Example
+
+
 --------------------------------------------------------------------------------
 
 (source_file
   (title_section
     (title_token)
-    (empty_line)
+    (newline)
     (headline
       (paragraph_first_word
         (non_lt_char)
@@ -26,5 +28,6 @@ Basic Title Example
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (single_newline
-        (MISSING "single_newline_token1")))))
+      (wordbreak
+        (newline))
+      (newline))))

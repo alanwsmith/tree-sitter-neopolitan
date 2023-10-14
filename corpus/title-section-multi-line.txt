@@ -6,12 +6,14 @@ Title Section - Multi-line
 Multi line Example
 
 Alfa bravo
+
+
 --------------------------------------------------------------------------------
 
 (source_file
   (title_section
     (title_token)
-    (empty_line)
+    (newline)
     (headline
       (paragraph_first_word
         (non_lt_char)
@@ -28,8 +30,9 @@ Alfa bravo
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (single_newline))
-    (empty_line)
+      (wordbreak
+        (newline))
+      (newline))
     (paragraph
       (paragraph_first_word
         (non_lt_char)
@@ -40,5 +43,6 @@ Alfa bravo
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (single_newline
-        (MISSING "single_newline_token1")))))
+      (wordbreak
+        (newline))
+      (newline))))
