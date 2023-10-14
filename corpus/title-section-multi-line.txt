@@ -3,7 +3,7 @@ Title Section - Multi-line
 ================================================================================
 -- title
  
-Multi-line Example
+Multi line Example
 
 Alfa bravo
 --------------------------------------------------------------------------------
@@ -12,8 +12,33 @@ Alfa bravo
   (title_section
     (title_token)
     (empty_line)
-    (title_headline
-      (paragraph_first_word)
-      (whitespace)
-      (word)
-      )))
+    (headline
+      (paragraph_first_word
+        (non_lt_char)
+        (following_word_chars))
+      (wordbreak
+        (whitespace))
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
+      (wordbreak
+        (whitespace))
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
+      (single_newline))
+    (empty_line)
+    (paragraph
+      (paragraph_first_word
+        (non_lt_char)
+        (following_word_chars))
+      (wordbreak
+        (whitespace))
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
+      (single_newline
+        (MISSING "single_newline_token1")))))

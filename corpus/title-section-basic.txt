@@ -25,4 +25,6 @@ Basic Title Example
       (word
         (initial_word_chars
           (non_lt_char))
-        (following_word_chars)))))
+        (following_word_chars))
+      (single_newline
+        (MISSING "single_newline_token1")))))

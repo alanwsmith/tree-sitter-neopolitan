@@ -17,17 +17,20 @@ module.exports = grammar({
 
     following_word_chars: _ => /[^ \n\t]+/,
 
-    non_lt_char: _ => token(/[^< \n\t]/),
+    non_lt_char: _ => /[^< \n\t]/,
 
-    paragraph: $ => seq(
-      $.paragraph_first_word,
-      $.wordbreak,
-      repeat(
-        seq(
-          $.word,
-          optional($.wordbreak)
+    paragraph: $ => prec.left(
+      seq(
+        $.paragraph_first_word,
+        optional($.wordbreak),
+        repeat(
+          seq(
+            $.word,
+            prec.left(2, optional($.wordbreak)),
+          ),
         ),
-      )
+        prec.right(1, $.single_newline),
+      ),
     ),
 
     // TODO: Switch to specific first
@@ -37,12 +40,19 @@ module.exports = grammar({
       $.following_word_chars,
     ),
 
-    single_newline: _ => /\n/,
+    single_newline: _ => prec.right(/\n/),
 
     title_section: $ => seq(
       $.title_token,
       $.empty_line,
       $.headline,
+
+      optional(
+        seq(
+          $.empty_line,
+          optional($.paragraph),
+        )
+      )
     ),
 
     title_token: _ => "-- title\n",
@@ -54,11 +64,10 @@ module.exports = grammar({
       $.following_word_chars
     ),
 
-    wordbreak: $ => choice(
+    wordbreak: $ => prec.left(2, choice(
       $.whitespace,
       $.single_newline,
-    ),
-
+    )),
   },
 
   extras: _ => []
