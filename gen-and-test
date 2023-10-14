@@ -3,4 +3,5 @@
 clear
 echo "Starting Gen An Run"
 tree-sitter generate
-tree-sitter test
+tree-sitter test -d
+#tree-sitter test -D

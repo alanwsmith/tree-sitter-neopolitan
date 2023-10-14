@@ -7,18 +7,25 @@ module.exports = grammar({
       )
     ),
 
-    empty_line: _ => /\n *\n/,
+    empty_line: _ => / *\n/,
+
+    following_word_chars: _ => token(/[^ \n\t]/),
+
+    non_lt_char: _ => token(/[^< \n\t]/),
 
     paragraph: $ => seq(
-      $.paragraph_first_word, 
-      repeat(
-        $.word
+      repeat1(
+        choice(
+          $.paragraph_first_word, 
+          seq(
+            $.whitespace, $.word
+          ),
+        )
       )
     ),
 
-    paragraph_first_word: _ => seq(
-      /\w+/
-    ),
+    paragraph_first_word: $ => 
+      /\S+/,
 
     title_headline: $ => alias(
       $.paragraph, 
@@ -27,22 +34,26 @@ module.exports = grammar({
 
     title_section: $ => seq(
       $.title_token, 
-      $.title_headline
+      $.empty_line,
+      $.title_headline,
     ),
 
-    title_start: $ => seq(
-      $.title_token, 
-      $.empty_line
+    title_token: _ => token(
+      seq(
+        "-- title",
+        / *\n/
+      ),
     ),
 
-    title_token: _ => '-- title',
 
     whitespace: _ => /[ \t]+/,
 
-    word: _ => seq(
-      /\S+/
-    ),
-  }
+    word: _ => token.immediate(seq(
+      /[^< \n\t]/,
+      /[^ \n\t]+/,
+    )),
+  },
+  extras: _ => []
 });
 
 
