@@ -17,6 +17,10 @@
           {
             "type": "SYMBOL",
             "name": "title_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "todo_section"
           }
         ]
       }
@@ -63,12 +67,11 @@
           "name": "whitespace"
         },
         {
-          "type": "SYMBOL",
-          "name": "paragraph_body"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "newline"
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph"
+          }
         }
       ]
     },
@@ -191,19 +194,23 @@
       ]
     },
     "paragraph_body": {
-      "type": "REPEAT1",
+      "type": "PREC_LEFT",
+      "value": 0,
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "word"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "wordbreak"
-          }
-        ]
+        "type": "REPEAT1",
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "word"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "wordbreak"
+            }
+          ]
+        }
       }
     },
     "paragraph_first_word": {
@@ -267,6 +274,84 @@
     "title_section_token": {
       "type": "STRING",
       "value": "title"
+    },
+    "empty_todo_bracket": {
+      "type": "PATTERN",
+      "value": "\\[ *\\]"
+    },
+    "completed_todo_bracket": {
+      "type": "PATTERN",
+      "value": "\\[[xX]\\]"
+    },
+    "todo_item": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "empty_todo_bracket"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "completed_todo_bracket"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "whitespace"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "paragraph_body"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "todo_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_section_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "todo_item"
+          }
+        }
+      ]
+    },
+    "todo_section_token": {
+      "type": "STRING",
+      "value": "todo"
     },
     "whitespace": {
       "type": "PATTERN",

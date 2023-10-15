@@ -15,7 +15,8 @@ Sections To Do
 
 -- todo
 
-(these lines don't work for now)
+(these lines don't work for now. also this list needs some 
+updates, it's just the scratchpad to start with)
 
 [] Add scriptsrc
 
@@ -30,6 +31,8 @@ Sections To Do
 [] <<link|checklist|/pages/neo-sections-checklist--2tr5lyeh/index.html>>
 
 [] <<link|code|/pages/neo-sections-code--2trnbldk/index.html>>
+
+[] comment
 
 [] <<link|endarticle|/pages/neo-sections-endarticle--2tr3drgp/index.html>>
 
@@ -63,15 +66,13 @@ Sections To Do
 
 [] <<link|h6|/pages/neo-sections-h6--2tp7sfd3/index.html>>
 
-[] <<link|hidden|/pages/neo-sections-hidden--2tso1rfz/index.html>>
-
 [] <<link|html|/pages/neo-sections-html--2trp8m8x/index.html>>
 
 [] <<link|hr|/pages/neo-sections-hr--2twvjkjl/index.html>>
 
 [] <<link|image|/pages/neo-sections-image--2syvoutz/index.html>>
 
-[] <<link|list|/pages/neo-sections-list--2sze3ncf/index.html>>
+[x] <<link|list|/pages/neo-sections-list--2sze3ncf/index.html>>
 
 [] <<link|metadata|/pages/neo-sections-metadata--2tsmqaax/index.html>>
 
