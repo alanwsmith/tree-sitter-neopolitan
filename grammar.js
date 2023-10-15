@@ -40,6 +40,8 @@ module.exports = grammar({
 
     non_lt_char: _ => /[^< \n\t]/,
 
+    optional_nb_whitespace: _ => /[ \t]*/,
+
     p_section: $ => seq(
       $.dashes,
       $.p_section_token,
@@ -94,7 +96,14 @@ module.exports = grammar({
 
     title_section_token: _ => "title",
 
-    empty_todo_bracket: _ => /\[ *\]/,
+    todo_left_bracket: _ => "[",
+    todo_right_bracket: _ => "]",
+
+    empty_todo_bracket: $ => seq(
+      $.todo_left_bracket, 
+      $.optional_nb_whitespace,
+      $.todo_right_bracket, 
+    ),
 
     completed_todo_bracket: _ => /\[[xX]\]/,
 

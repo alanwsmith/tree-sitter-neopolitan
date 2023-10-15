@@ -1,11 +1,11 @@
 ================================================================================
-TODO Section - Unchecked Items
+TODO Section - Checked Item
 ================================================================================
 -- todo 
 
 [] alfa charlie 
 
-[] bravo delta
+[x] bravo delta
 
 
 --------------------------------------------------------------------------------
@@ -37,10 +37,7 @@ TODO Section - Unchecked Items
               (newline)))
             (newline))
     (todo_item
-      (empty_todo_bracket
-        (todo_left_bracket)
-        (optional_nb_whitespace)
-        (todo_right_bracket))
+      (completed_todo_bracket)
       (whitespace)
       (paragraph_body
         (word

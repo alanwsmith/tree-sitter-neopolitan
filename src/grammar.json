@@ -128,6 +128,10 @@
       "type": "PATTERN",
       "value": "[^< \\n\\t]"
     },
+    "optional_nb_whitespace": {
+      "type": "PATTERN",
+      "value": "[ \\t]*"
+    },
     "p_section": {
       "type": "SEQ",
       "members": [
@@ -275,9 +279,30 @@
       "type": "STRING",
       "value": "title"
     },
+    "todo_left_bracket": {
+      "type": "STRING",
+      "value": "["
+    },
+    "todo_right_bracket": {
+      "type": "STRING",
+      "value": "]"
+    },
     "empty_todo_bracket": {
-      "type": "PATTERN",
-      "value": "\\[ *\\]"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "todo_left_bracket"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "optional_nb_whitespace"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_right_bracket"
+        }
+      ]
     },
     "completed_todo_bracket": {
       "type": "PATTERN",

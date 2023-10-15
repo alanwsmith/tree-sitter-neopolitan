@@ -1,5 +1,28 @@
 [
   {
+    "type": "empty_todo_bracket",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "optional_nb_whitespace",
+          "named": true
+        },
+        {
+          "type": "todo_left_bracket",
+          "named": true
+        },
+        {
+          "type": "todo_right_bracket",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "headline",
     "named": true,
     "fields": {},
@@ -369,10 +392,6 @@
     "named": true
   },
   {
-    "type": "empty_todo_bracket",
-    "named": true
-  },
-  {
     "type": "following_word_chars",
     "named": true
   },
@@ -393,11 +412,23 @@
     "named": true
   },
   {
+    "type": "optional_nb_whitespace",
+    "named": true
+  },
+  {
     "type": "p_section_token",
     "named": true
   },
   {
     "type": "title_section_token",
+    "named": true
+  },
+  {
+    "type": "todo_left_bracket",
+    "named": true
+  },
+  {
+    "type": "todo_right_bracket",
     "named": true
   },
   {

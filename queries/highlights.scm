@@ -9,4 +9,3 @@
 (whitespace) @whitespace.test
 (word) @tag
 (empty_todo_bracket) @function
-
