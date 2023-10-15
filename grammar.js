@@ -10,7 +10,6 @@ module.exports = grammar({
       )
     ),
 
-
     dashes: _ => /-- +/,
 
     headline: $ => alias($.paragraph, 'headline'),
@@ -82,7 +81,6 @@ module.exports = grammar({
       $.non_lt_char,
       $.following_word_chars,
     ),
-
 
     title_section: $ => prec.left(
       5,

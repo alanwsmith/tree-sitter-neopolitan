@@ -8,4 +8,6 @@
 (todo_section_token) @number
 (whitespace) @whitespace.test
 (word) @tag
-(empty_todo_bracket) @function
+(todo_left_bracket) @function
+(todo_right_bracket) @function
+(todo_checkmark) @property
