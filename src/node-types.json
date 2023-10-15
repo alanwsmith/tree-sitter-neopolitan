@@ -69,6 +69,29 @@
     }
   },
   {
+    "type": "in_progress_todo_bracket",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "not_a_checkmark",
+          "named": true
+        },
+        {
+          "type": "todo_left_bracket",
+          "named": true
+        },
+        {
+          "type": "todo_right_bracket",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "initial_word_chars",
     "named": true,
     "fields": {},
@@ -319,6 +342,10 @@
           "named": true
         },
         {
+          "type": "in_progress_todo_bracket",
+          "named": true
+        },
+        {
           "type": "newline",
           "named": true
         },
@@ -424,6 +451,10 @@
   },
   {
     "type": "non_lt_char",
+    "named": true
+  },
+  {
+    "type": "not_a_checkmark",
     "named": true
   },
   {

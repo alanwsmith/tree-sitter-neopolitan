@@ -320,6 +320,27 @@
         }
       ]
     },
+    "in_progress_todo_bracket": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "todo_left_bracket"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "not_a_checkmark"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_right_bracket"
+        }
+      ]
+    },
+    "not_a_checkmark": {
+      "type": "PATTERN",
+      "value": "[^xX\\]]+"
+    },
     "todo_item": {
       "type": "SEQ",
       "members": [
@@ -328,11 +349,15 @@
           "members": [
             {
               "type": "SYMBOL",
+              "name": "completed_todo_bracket"
+            },
+            {
+              "type": "SYMBOL",
               "name": "empty_todo_bracket"
             },
             {
               "type": "SYMBOL",
-              "name": "completed_todo_bracket"
+              "name": "in_progress_todo_bracket"
             }
           ]
         },

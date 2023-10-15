@@ -113,10 +113,19 @@ module.exports = grammar({
       $.todo_right_bracket,
     ),
 
+    in_progress_todo_bracket: $ => seq(
+      $.todo_left_bracket,
+      $.not_a_checkmark,
+      $.todo_right_bracket,
+    ),
+
+    not_a_checkmark: _ => /[^xX\]]+/,
+
     todo_item: $ => seq(
       choice(
-        $.empty_todo_bracket,
         $.completed_todo_bracket,
+        $.empty_todo_bracket,
+        $.in_progress_todo_bracket,
       ),
       $.whitespace,
       repeat1(

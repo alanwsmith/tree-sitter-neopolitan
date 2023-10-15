@@ -11,3 +11,4 @@
 (todo_left_bracket) @function
 (todo_right_bracket) @function
 (todo_checkmark) @property
+(not_a_checkmark) @string
