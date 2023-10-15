@@ -32,7 +32,7 @@ module.exports = grammar({
       $.list_section_token,
       $.newline,
       $.newline,
-      $.list_item,
+      repeat1($.list_item),
     ),
 
     list_section_token: $ => /list */,

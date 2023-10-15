@@ -92,8 +92,11 @@
           "name": "newline"
         },
         {
-          "type": "SYMBOL",
-          "name": "list_item"
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "list_item"
+          }
         }
       ]
     },

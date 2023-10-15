@@ -1,0 +1,52 @@
+================================================================================
+SOLO List Section - One Item
+================================================================================
+-- list
+
+- papa charlie
+
+- victor kilo 
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (list_section
+    (dashes)
+    (list_section_token)
+    (newline)
+    (newline)
+    (list_item
+      (list_dash)
+      (whitespace)
+      (paragraph_body
+        (word
+          (initial_word_chars
+            (non_lt_char))
+          (following_word_chars))
+        (wordbreak
+          (whitespace))
+        (word
+          (initial_word_chars
+            (non_lt_char))
+          (following_word_chars))
+        (wordbreak
+          (newline)))
+      (newline))
+    (list_item
+      (list_dash)
+      (whitespace)
+      (paragraph_body
+        (word
+          (initial_word_chars
+            (non_lt_char))
+          (following_word_chars))
+        (wordbreak
+          (whitespace))
+        (word
+          (initial_word_chars
+            (non_lt_char))
+          (following_word_chars))
+        (wordbreak
+          (newline)))
+      (newline))))
