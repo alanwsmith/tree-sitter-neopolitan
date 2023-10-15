@@ -37,7 +37,10 @@ TODO Section - Checked Item
               (newline)))
             (newline))
     (todo_item
-      (completed_todo_bracket)
+      (completed_todo_bracket
+        (todo_left_bracket)
+        (todo_checkmark)
+        (todo_right_bracket))
       (whitespace)
       (paragraph_body
         (word

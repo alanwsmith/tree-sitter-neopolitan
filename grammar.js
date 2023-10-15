@@ -97,7 +97,10 @@ module.exports = grammar({
     title_section_token: _ => "title",
 
     todo_left_bracket: _ => "[",
+
     todo_right_bracket: _ => "]",
+
+    todo_checkmark: _ => /[xX]/,
 
     empty_todo_bracket: $ => seq(
       $.todo_left_bracket, 
@@ -105,7 +108,11 @@ module.exports = grammar({
       $.todo_right_bracket, 
     ),
 
-    completed_todo_bracket: _ => /\[[xX]\]/,
+    completed_todo_bracket: $ => seq(
+      $.todo_left_bracket, 
+      $.todo_checkmark,
+      $.todo_right_bracket, 
+    ),
 
     todo_item: $ => seq(
       choice(

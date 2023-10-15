@@ -1,5 +1,28 @@
 [
   {
+    "type": "completed_todo_bracket",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_checkmark",
+          "named": true
+        },
+        {
+          "type": "todo_left_bracket",
+          "named": true
+        },
+        {
+          "type": "todo_right_bracket",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "empty_todo_bracket",
     "named": true,
     "fields": {},
@@ -384,10 +407,6 @@
     "named": false
   },
   {
-    "type": "completed_todo_bracket",
-    "named": true
-  },
-  {
     "type": "dashes",
     "named": true
   },
@@ -421,6 +440,10 @@
   },
   {
     "type": "title_section_token",
+    "named": true
+  },
+  {
+    "type": "todo_checkmark",
     "named": true
   },
   {

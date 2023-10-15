@@ -287,6 +287,10 @@
       "type": "STRING",
       "value": "]"
     },
+    "todo_checkmark": {
+      "type": "PATTERN",
+      "value": "[xX]"
+    },
     "empty_todo_bracket": {
       "type": "SEQ",
       "members": [
@@ -305,8 +309,21 @@
       ]
     },
     "completed_todo_bracket": {
-      "type": "PATTERN",
-      "value": "\\[[xX]\\]"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "todo_left_bracket"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_checkmark"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_right_bracket"
+        }
+      ]
     },
     "todo_item": {
       "type": "SEQ",
