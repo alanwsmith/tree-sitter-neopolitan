@@ -342,7 +342,7 @@
     },
     "non_lt_char": {
       "type": "PATTERN",
-      "value": "[^< \\n\\t]"
+      "value": "[^-< \\n\\t]"
     },
     "p_section": {
       "type": "SEQ",

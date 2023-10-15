@@ -52,7 +52,6 @@ module.exports = grammar({
       repeat1($.paragraph),
     ),
 
-
     code_start_section: $ => seq(
       $.section_dashes,
       $.code_section_token,
@@ -113,7 +112,9 @@ module.exports = grammar({
 
     newline: _ => / *\n/,
 
-    non_lt_char: _ => /[^< \n\t]/,
+    // this also has "-" which might
+    // be better off to be moved elsewhere
+    non_lt_char: _ => /[^-< \n\t]/,
 
     p_section: $ => seq(
       $.section_dashes,

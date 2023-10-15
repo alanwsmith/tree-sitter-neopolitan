@@ -7,11 +7,16 @@ and more stuff
 
 -- code/
 
-asdf
+fn main() {
+  println!("Hello, neo");
+}
 
 -- /code
 
--- p 
+alfabravo charliedelta
+echo foxtrot
+
+-- p
 
 asdf
 
@@ -21,7 +26,7 @@ asdf
 -- class: bravo
 -- some other thing
 
-this is a test
+this is some test
 with some lines
 
 more text
@@ -46,6 +51,13 @@ with more text
 
 [etc] romeo foxtrot
 
+-- code/
+
+println!("asdf");
+
+-- /code
+
+this needs to be here right now
 
 -- html
 
@@ -54,14 +66,6 @@ with more text
 ello, world
 
 </a>
-
-
-
--- code/
-
-some code
-
--- /code
 
 
 
