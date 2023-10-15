@@ -1,0 +1,37 @@
+-- title
+-- class: alfa
+
+this is some stuff
+
+with some data
+
+-- p
+-- autofocus
+-- id: tango
+-- class: bravo
+-- some other thing 
+
+this is a test
+with some lines
+
+more text
+
+-- list
+-- class: alfa
+
+- delta echo
+
+- bravo kilo
+
+with more text
+
+-- todo
+-- class: alfa
+
+[] sierra tango
+
+[] echo whiskey
+
+[x] charlie delta
+
+[etc] romeo foxtrot

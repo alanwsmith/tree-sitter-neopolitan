@@ -1,0 +1,39 @@
+================================================================================
+Attribute - Key Value - Single 
+================================================================================
+-- p
+-- class: alfa
+
+delta echo
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (p_section
+    (section_dashes)
+    (p_section_token)
+    (newline)
+    (attr
+      (attr_dashes)
+      (nb_whitespace)
+      (attr_kv_pair
+        (attr_key)
+        (attr_separator)
+        (nb_whitespace)
+        (attr_value))
+      (newline))
+    (newline)
+    (paragraph
+      (paragraph_first_word
+        (non_lt_char)
+        (following_word_chars))
+      (wordbreak
+        (nb_whitespace))
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
+      (wordbreak
+        (newline))
+      (newline))))

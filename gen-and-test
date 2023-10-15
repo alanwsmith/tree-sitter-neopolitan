@@ -1,0 +1,14 @@
+#!/bin/bash
+
+clear
+# This is my hacked version of tree-sitter that
+# adds a darkmode and allows browser-sync 
+# auto-refresh to work
+/Users/alan/.cargo/bin/tree-sitter generate && \
+/Users/alan/.cargo/bin/tree-sitter test -D -f "SOLO"
+#/Users/alan/.cargo/bin/tree-sitter test -D -f "Multi"
+#tree-sitter test -d
+#tree-sitter test -f "Basic"
+#/Users/alan/.cargo/bin/tree-sitter test -D -f "Basic"
+#/Users/alan/.cargo/bin/tree-sitter test -D 
+#tree-sitter test -D

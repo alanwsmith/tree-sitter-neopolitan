@@ -1,0 +1,3 @@
+#!/bin/bash
+
+watchexec --project-origin . -w grammar.js -w corpus "sleep 1 && tree-sitter test"

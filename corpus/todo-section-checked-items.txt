@@ -1,0 +1,59 @@
+================================================================================
+TODO Section - Checked Item
+================================================================================
+-- todo 
+
+[] alfa charlie 
+
+[x] bravo delta
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (todo_section
+    (section_dashes)
+    (todo_section_token)
+    (newline)
+    (newline)
+    (todo_item
+      (empty_todo_bracket
+        (todo_left_bracket)
+        (todo_right_bracket))
+      (nb_whitespace)
+      (paragraph_body
+        (word
+          (initial_word_chars
+            (non_lt_char))
+          (following_word_chars))
+            (wordbreak
+              (nb_whitespace))
+          (word
+            (initial_word_chars
+              (non_lt_char))
+          (following_word_chars))
+            (wordbreak
+              (newline)))
+            (newline))
+    (todo_item
+      (completed_todo_bracket
+        (todo_left_bracket)
+        (todo_checkmark)
+        (todo_right_bracket))
+      (nb_whitespace)
+      (paragraph_body
+        (word
+          (initial_word_chars
+            (non_lt_char))
+          (following_word_chars))
+            (wordbreak
+              (nb_whitespace))
+          (word
+            (initial_word_chars
+              (non_lt_char))
+          (following_word_chars))
+            (wordbreak
+              (newline)))
+        (newline))))
+
+

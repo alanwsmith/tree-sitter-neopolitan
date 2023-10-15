@@ -1,0 +1,34 @@
+================================================================================
+List Section - One Item
+================================================================================
+-- list
+
+- whiskey alfa
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (list_section
+    (section_dashes)
+    (list_section_token)
+    (newline)
+    (newline)
+    (list_item
+      (list_dash)
+      (nb_whitespace)
+      (paragraph
+        (paragraph_first_word
+          (non_lt_char)
+          (following_word_chars))
+        (wordbreak
+          (nb_whitespace))
+        (word
+          (initial_word_chars
+            (non_lt_char))
+          (following_word_chars))
+        (wordbreak
+          (newline))
+      (newline)))))
+          
+          
