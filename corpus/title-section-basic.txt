@@ -1,5 +1,5 @@
 ================================================================================
-Basic Title Section
+Title Section - Basic
 ================================================================================
 -- title
  
@@ -10,7 +10,9 @@ Basic Title Example
 
 (source_file
   (title_section
-    (title_token)
+    (dashes)
+    (title_section_token)
+    (newline)
     (newline)
     (headline
       (paragraph_first_word

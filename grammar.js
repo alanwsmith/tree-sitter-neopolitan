@@ -5,8 +5,8 @@ module.exports = grammar({
       choice(
         $.list_section,
         $.p_section,
-        $.title_section,
-        $.todo_section,
+        // $.title_section,
+        // $.todo_section,
       )
     ),
 

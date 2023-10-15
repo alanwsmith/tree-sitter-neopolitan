@@ -13,14 +13,6 @@
           {
             "type": "SYMBOL",
             "name": "p_section"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "title_section"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "todo_section"
           }
         ]
       }

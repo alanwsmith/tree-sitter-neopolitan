@@ -17,10 +17,9 @@ List Section - One Item
     (list_item
       (list_dash)
       (whitespace)
-      (paragraph_body
-        (word
-          (initial_word_chars
-            (non_lt_char))
+      (paragraph
+        (paragraph_first_word
+          (non_lt_char)
           (following_word_chars))
         (wordbreak
           (whitespace))
@@ -29,7 +28,7 @@ List Section - One Item
             (non_lt_char))
           (following_word_chars))
         (wordbreak
-          (newline)))
-      (newline))))
+          (newline))
+      (newline)))))
           
           
