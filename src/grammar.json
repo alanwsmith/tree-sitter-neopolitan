@@ -2,20 +2,33 @@
   "name": "Neopolitan",
   "rules": {
     "source_file": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "list_section"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "p_section"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "list_section"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "p_section"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "title_section"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "todo_section"
+              }
+            ]
           }
-        ]
-      }
+        }
+      ]
     },
     "dashes": {
       "type": "PATTERN",
@@ -116,13 +129,13 @@
       "type": "PATTERN",
       "value": "[^ \\n\\t]+"
     },
+    "newline": {
+      "type": "PATTERN",
+      "value": " *\\n"
+    },
     "non_lt_char": {
       "type": "PATTERN",
       "value": "[^< \\n\\t]"
-    },
-    "optional_nb_whitespace": {
-      "type": "PATTERN",
-      "value": "[ \\t]*"
     },
     "p_section": {
       "type": "SEQ",
@@ -222,10 +235,6 @@
         }
       ]
     },
-    "newline": {
-      "type": "PATTERN",
-      "value": " *\\n"
-    },
     "title_section": {
       "type": "PREC_LEFT",
       "value": 5,
@@ -256,8 +265,11 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "paragraph"
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "paragraph"
+                }
               },
               {
                 "type": "BLANK"
@@ -289,10 +301,6 @@
         {
           "type": "SYMBOL",
           "name": "todo_left_bracket"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "optional_nb_whitespace"
         },
         {
           "type": "SYMBOL",

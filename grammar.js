@@ -1,13 +1,16 @@
 module.exports = grammar({
   name: 'Neopolitan',
   rules: {
-    source_file: $ => repeat1(
-      choice(
-        $.list_section,
-        $.p_section,
-        // $.title_section,
-        // $.todo_section,
-      )
+    source_file: $ => seq(
+      repeat1(
+        choice(
+          $.list_section,
+          $.p_section,
+          $.title_section,
+           $.todo_section,
+        )
+      ),
+      // $.rest,
     ),
 
     dashes: _ => /-- +/,
@@ -38,9 +41,11 @@ module.exports = grammar({
 
     following_word_chars: _ => /[^ \n\t]+/,
 
+    newline: _ => / *\n/,
+
     non_lt_char: _ => /[^< \n\t]/,
 
-    optional_nb_whitespace: _ => /[ \t]*/,
+    // optional_nb_whitespace: _ => /[ \t]*/,
 
     p_section: $ => seq(
       $.dashes,
@@ -80,7 +85,9 @@ module.exports = grammar({
       $.following_word_chars,
     ),
 
-    newline: _ => / *\n/,
+
+    // rest: $ => /.*/,
+
 
     title_section: $ => prec.left(
       5,
@@ -90,7 +97,7 @@ module.exports = grammar({
         $.newline,
         $.newline,
         $.headline,
-        optional($.paragraph),
+        optional(repeat1($.paragraph)),
       )
     ),
 
@@ -104,7 +111,6 @@ module.exports = grammar({
 
     empty_todo_bracket: $ => seq(
       $.todo_left_bracket, 
-      $.optional_nb_whitespace,
       $.todo_right_bracket, 
     ),
 
@@ -121,7 +127,8 @@ module.exports = grammar({
       ),
       $.whitespace,
       repeat1(
-        seq($.paragraph_body, $.newline))
+        seq($.paragraph_body, $.newline)
+      )
     ),
 
     todo_section: $ => seq(
