@@ -1,8 +1,8 @@
 ================================================================================
-Attribute - Key Value - Single 
+SOLO Attribute - Boolean - Multiple 
 ================================================================================
 -- p
--- class: alfa
+-- autofocus
 
 delta echo
 
@@ -17,10 +17,7 @@ delta echo
     (attr
       (attr_dashes)
       (nb_whitespace)
-      (attr_key)
-      (attr_separator)
-      (nb_whitespace)
-      (attr_value)
+      (attr_bool)
       (newline))
     (newline)
     (paragraph

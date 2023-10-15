@@ -5,7 +5,10 @@ this is some stuff
 with some data
 
 -- p
+-- autofocus
+-- id: tango
 -- class: bravo
+-- some other thing 
 
 this is a test
 with some lines

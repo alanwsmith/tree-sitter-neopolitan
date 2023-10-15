@@ -1,3 +1,4 @@
+(attr_bool) @constant
 (attr_dashes) @constant
 (attr_key) @constructor
 (attr_separator) @constant

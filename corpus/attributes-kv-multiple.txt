@@ -1,8 +1,9 @@
 ================================================================================
-Attribute - Key Value - Single 
+Attribute - Key Value - Multiple 
 ================================================================================
 -- p
 -- class: alfa
+-- id: bravo 
 
 delta echo
 
@@ -14,6 +15,14 @@ delta echo
     (dashes)
     (p_section_token)
     (newline)
+    (attr
+      (attr_dashes)
+      (nb_whitespace)
+      (attr_key)
+      (attr_separator)
+      (nb_whitespace)
+      (attr_value)
+      (newline))
     (attr
       (attr_dashes)
       (nb_whitespace)

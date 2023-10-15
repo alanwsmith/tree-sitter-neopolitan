@@ -37,6 +37,28 @@
           "name": "nb_whitespace"
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "attr_bool"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "attr_kv_pair"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        }
+      ]
+    },
+    "attr_kv_pair": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "SYMBOL",
           "name": "attr_key"
         },
@@ -51,12 +73,12 @@
         {
           "type": "SYMBOL",
           "name": "attr_value"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "newline"
         }
       ]
+    },
+    "attr_bool": {
+      "type": "PATTERN",
+      "value": "[^:\\n]+"
     },
     "attr_dashes": {
       "type": "STRING",
@@ -64,7 +86,7 @@
     },
     "attr_key": {
       "type": "PATTERN",
-      "value": "[^:]+"
+      "value": "[^:\\n]+"
     },
     "attr_separator": {
       "type": "STRING",

@@ -10,20 +10,28 @@ module.exports = grammar({
       )
     ),
 
-
     attr: $ => seq(
-      $.attr_dashes, 
+      $.attr_dashes,
       $.nb_whitespace,
+      choice(
+        $.attr_bool,
+        $.attr_kv_pair,
+      ),
+      $.newline,
+    ),
+
+    attr_kv_pair: $ => seq(
       $.attr_key,
       $.attr_separator,
       $.nb_whitespace,
       $.attr_value,
-      $.newline,
     ),
+
+    attr_bool: _ => /[^:\n]+/,
 
     attr_dashes: _ => "--",
 
-    attr_key: _ => /[^:]+/,
+    attr_key: _ => /[^:\n]+/,
 
     attr_separator: _ => ":",
 
