@@ -210,6 +210,10 @@
       "required": true,
       "types": [
         {
+          "type": "attr",
+          "named": true
+        },
+        {
           "type": "list_item",
           "named": true
         },
@@ -375,6 +379,10 @@
       "required": true,
       "types": [
         {
+          "type": "attr",
+          "named": true
+        },
+        {
           "type": "headline",
           "named": true
         },
@@ -440,6 +448,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "attr",
+          "named": true
+        },
         {
           "type": "newline",
           "named": true

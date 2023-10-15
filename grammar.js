@@ -55,6 +55,7 @@ module.exports = grammar({
       $.section_dashes,
       $.list_section_token,
       $.newline,
+      optional(repeat1($.attr)),
       $.newline,
       repeat1($.list_item),
     ),
@@ -115,6 +116,7 @@ module.exports = grammar({
         $.section_dashes,
         $.title_section_token,
         $.newline,
+        optional(repeat1($.attr)),
         $.newline,
         $.headline,
         optional(repeat1($.paragraph)),
@@ -164,12 +166,12 @@ module.exports = grammar({
       $.section_dashes,
       $.todo_section_token,
       $.newline,
+      optional(repeat1($.attr)),
       $.newline,
       repeat1($.todo_item),
     ),
 
     todo_section_token: _ => "todo",
-
 
     word: $ => seq(
       $.initial_word_chars,
