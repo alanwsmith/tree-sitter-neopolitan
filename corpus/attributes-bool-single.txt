@@ -14,10 +14,9 @@ delta echo
     (section_dashes)
     (p_section_token)
     (newline)
-    (attr
+    (attr_bool
       (attr_dashes)
       (nb_whitespace)
-      (attr_bool)
       (newline))
     (newline)
     (paragraph

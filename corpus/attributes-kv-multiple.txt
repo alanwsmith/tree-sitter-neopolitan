@@ -1,5 +1,5 @@
 ================================================================================
-Attribute - Key Value - Multiple 
+SOLO Attribute - Key Value - Multiple 
 ================================================================================
 -- p
 -- class: alfa
@@ -15,23 +15,21 @@ delta echo
     (section_dashes)
     (p_section_token)
     (newline)
-    (attr
+    (attr_kv_pair
       (attr_dashes)
       (nb_whitespace)
-      (attr_kv_pair
-        (attr_key)
-        (attr_separator)
-        (nb_whitespace)
-        (attr_value))
+      (attr_key)
+      (attr_separator)
+      (nb_whitespace)
+      (attr_value)
       (newline))
-    (attr
+    (attr_kv_pair
       (attr_dashes)
       (nb_whitespace)
-      (attr_kv_pair
-        (attr_key)
-        (attr_separator)
-        (nb_whitespace)
-        (attr_value))
+      (attr_key)
+      (attr_separator)
+      (nb_whitespace)
+      (attr_value)
       (newline))
     (newline)
     (paragraph

@@ -29,7 +29,20 @@
         ]
       }
     },
-    "attr": {
+    "_attr": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "attr_bool"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "attr_kv_pair"
+        }
+      ]
+    },
+    "attr_kv_pair": {
       "type": "SEQ",
       "members": [
         {
@@ -40,28 +53,6 @@
           "type": "SYMBOL",
           "name": "nb_whitespace"
         },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "attr_bool"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "attr_kv_pair"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "newline"
-        }
-      ]
-    },
-    "attr_kv_pair": {
-      "type": "SEQ",
-      "members": [
         {
           "type": "SYMBOL",
           "name": "attr_key"
@@ -77,12 +68,33 @@
         {
           "type": "SYMBOL",
           "name": "attr_value"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
         }
       ]
     },
     "attr_bool": {
-      "type": "PATTERN",
-      "value": "[^:\\n]+"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "attr_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "nb_whitespace"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^:\\n]+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        }
+      ]
     },
     "attr_dashes": {
       "type": "STRING",
@@ -209,7 +221,7 @@
               "type": "REPEAT1",
               "content": {
                 "type": "SYMBOL",
-                "name": "attr"
+                "name": "_attr"
               }
             },
             {
@@ -285,7 +297,7 @@
               "type": "REPEAT1",
               "content": {
                 "type": "SYMBOL",
-                "name": "attr"
+                "name": "_attr"
               }
             },
             {
@@ -401,7 +413,7 @@
                 "type": "REPEAT1",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "attr"
+                  "name": "_attr"
                 }
               },
               {
@@ -566,7 +578,7 @@
               "type": "REPEAT1",
               "content": {
                 "type": "SYMBOL",
-                "name": "attr"
+                "name": "_attr"
               }
             },
             {

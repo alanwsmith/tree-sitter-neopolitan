@@ -11,24 +11,27 @@ module.exports = grammar({
       )
     ),
 
-    attr: $ => seq(
-      $.attr_dashes,
-      $.nb_whitespace,
-      choice(
+    _attr: $ => choice(
         $.attr_bool,
         $.attr_kv_pair,
-      ),
-      $.newline,
     ),
 
     attr_kv_pair: $ => seq(
+      $.attr_dashes,
+      $.nb_whitespace,
       $.attr_key,
       $.attr_separator,
       $.nb_whitespace,
       $.attr_value,
+      $.newline,
     ),
 
-    attr_bool: _ => /[^:\n]+/,
+    attr_bool: $ => seq(
+      $.attr_dashes,
+      $.nb_whitespace,
+      /[^:\n]+/,
+      $.newline,
+    ),
 
     attr_dashes: _ => "--",
 
@@ -69,7 +72,7 @@ module.exports = grammar({
       $.section_dashes,
       $.list_section_token,
       $.newline,
-      optional(repeat1($.attr)),
+      optional(repeat1($._attr)),
       $.newline,
       repeat1($.list_item),
     ),
@@ -90,7 +93,7 @@ module.exports = grammar({
       $.section_dashes,
       $.p_section_token,
       $.newline,
-      optional(repeat1($.attr)),
+      optional(repeat1($._attr)),
       $.newline,
       repeat1($.paragraph),
     ),
@@ -130,7 +133,7 @@ module.exports = grammar({
         $.section_dashes,
         $.title_section_token,
         $.newline,
-        optional(repeat1($.attr)),
+        optional(repeat1($._attr)),
         $.newline,
         $.headline,
         optional(repeat1($.paragraph)),
@@ -180,7 +183,7 @@ module.exports = grammar({
       $.section_dashes,
       $.todo_section_token,
       $.newline,
-      optional(repeat1($.attr)),
+      optional(repeat1($._attr)),
       $.newline,
       repeat1($.todo_item),
     ),
