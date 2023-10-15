@@ -1,5 +1,5 @@
 {
-  "name": "Neopolitan",
+  "name": "neopolitan",
   "rules": {
     "source_file": {
       "type": "REPEAT1",

@@ -1,5 +1,5 @@
 {
-  "name": "tree-sitter-neopolitan",
+  "name": "tree_sitter_neopolitan",
   "version": "1.0.0",
   "description": "A Tree-Sitter Parser For Neopolitan",
   "main": "bindings/node",
