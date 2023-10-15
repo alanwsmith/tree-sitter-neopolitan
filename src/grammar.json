@@ -2,33 +2,28 @@
   "name": "Neopolitan",
   "rules": {
     "source_file": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "list_section"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "p_section"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "title_section"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "todo_section"
-              }
-            ]
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "list_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "p_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "title_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "todo_section"
           }
-        }
-      ]
+        ]
+      }
     },
     "dashes": {
       "type": "PATTERN",

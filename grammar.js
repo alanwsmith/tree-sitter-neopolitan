@@ -1,17 +1,15 @@
 module.exports = grammar({
   name: 'Neopolitan',
   rules: {
-    source_file: $ => seq(
-      repeat1(
-        choice(
-          $.list_section,
-          $.p_section,
-          $.title_section,
-           $.todo_section,
-        )
-      ),
-      // $.rest,
+    source_file: $ => repeat1(
+      choice(
+        $.list_section,
+        $.p_section,
+        $.title_section,
+        $.todo_section,
+      )
     ),
+
 
     dashes: _ => /-- +/,
 
@@ -86,9 +84,6 @@ module.exports = grammar({
     ),
 
 
-    // rest: $ => /.*/,
-
-
     title_section: $ => prec.left(
       5,
       seq(
@@ -110,14 +105,14 @@ module.exports = grammar({
     todo_checkmark: _ => /[xX]/,
 
     empty_todo_bracket: $ => seq(
-      $.todo_left_bracket, 
-      $.todo_right_bracket, 
+      $.todo_left_bracket,
+      $.todo_right_bracket,
     ),
 
     completed_todo_bracket: $ => seq(
-      $.todo_left_bracket, 
+      $.todo_left_bracket,
       $.todo_checkmark,
-      $.todo_right_bracket, 
+      $.todo_right_bracket,
     ),
 
     todo_item: $ => seq(

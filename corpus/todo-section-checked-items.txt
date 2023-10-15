@@ -19,7 +19,6 @@ TODO Section - Checked Item
     (todo_item
       (empty_todo_bracket
         (todo_left_bracket)
-        (optional_nb_whitespace)
         (todo_right_bracket))
       (whitespace)
       (paragraph_body
