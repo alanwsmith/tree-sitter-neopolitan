@@ -12,7 +12,7 @@ List Section - Multiple Items
 
 (source_file
   (list_section
-    (dashes)
+    (section_dashes)
     (list_section_token)
     (newline)
     (newline)

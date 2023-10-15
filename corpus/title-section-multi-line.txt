@@ -12,7 +12,7 @@ Alfa bravo
 
 (source_file
   (title_section
-    (dashes)
+    (section_dashes)
     (title_section_token)
     (newline)
     (newline)

@@ -11,7 +11,7 @@ delta echo
 
 (source_file
   (p_section
-    (dashes)
+    (section_dashes)
     (p_section_token)
     (newline)
     (attr

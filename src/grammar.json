@@ -96,7 +96,7 @@
       "type": "PATTERN",
       "value": "[^\\n]+"
     },
-    "dashes": {
+    "section_dashes": {
       "type": "PATTERN",
       "value": "-- +"
     },
@@ -151,7 +151,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "dashes"
+          "name": "section_dashes"
         },
         {
           "type": "SYMBOL",
@@ -212,7 +212,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "dashes"
+          "name": "section_dashes"
         },
         {
           "type": "SYMBOL",
@@ -328,7 +328,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "dashes"
+            "name": "section_dashes"
           },
           {
             "type": "SYMBOL",
@@ -478,7 +478,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "dashes"
+          "name": "section_dashes"
         },
         {
           "type": "SYMBOL",

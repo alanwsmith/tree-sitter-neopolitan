@@ -10,7 +10,7 @@ List Section - One Item
 
 (source_file
   (list_section
-    (dashes)
+    (section_dashes)
     (list_section_token)
     (newline)
     (newline)

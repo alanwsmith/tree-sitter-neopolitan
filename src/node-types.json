@@ -210,10 +210,6 @@
       "required": true,
       "types": [
         {
-          "type": "dashes",
-          "named": true
-        },
-        {
           "type": "list_item",
           "named": true
         },
@@ -223,6 +219,10 @@
         },
         {
           "type": "newline",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
           "named": true
         }
       ]
@@ -256,10 +256,6 @@
           "named": true
         },
         {
-          "type": "dashes",
-          "named": true
-        },
-        {
           "type": "newline",
           "named": true
         },
@@ -269,6 +265,10 @@
         },
         {
           "type": "paragraph",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
           "named": true
         }
       ]
@@ -375,10 +375,6 @@
       "required": true,
       "types": [
         {
-          "type": "dashes",
-          "named": true
-        },
-        {
           "type": "headline",
           "named": true
         },
@@ -388,6 +384,10 @@
         },
         {
           "type": "paragraph",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
           "named": true
         },
         {
@@ -441,11 +441,11 @@
       "required": true,
       "types": [
         {
-          "type": "dashes",
+          "type": "newline",
           "named": true
         },
         {
-          "type": "newline",
+          "type": "section_dashes",
           "named": true
         },
         {
@@ -514,10 +514,6 @@
     "named": true
   },
   {
-    "type": "dashes",
-    "named": true
-  },
-  {
     "type": "following_word_chars",
     "named": true
   },
@@ -547,6 +543,10 @@
   },
   {
     "type": "p_section_token",
+    "named": true
+  },
+  {
+    "type": "section_dashes",
     "named": true
   },
   {

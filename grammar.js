@@ -37,7 +37,7 @@ module.exports = grammar({
 
     attr_value: _ => /[^\n]+/,
 
-    dashes: _ => /-- +/,
+    section_dashes: _ => /-- +/,
 
     headline: $ => alias($.paragraph, 'headline'),
 
@@ -52,7 +52,7 @@ module.exports = grammar({
     ),
 
     list_section: $ => seq(
-      $.dashes,
+      $.section_dashes,
       $.list_section_token,
       $.newline,
       $.newline,
@@ -72,7 +72,7 @@ module.exports = grammar({
     non_lt_char: _ => /[^< \n\t]/,
 
     p_section: $ => seq(
-      $.dashes,
+      $.section_dashes,
       $.p_section_token,
       $.newline,
       optional(repeat1($.attr)),
@@ -102,7 +102,6 @@ module.exports = grammar({
       seq($.word, $.wordbreak)
     )),
 
-
     // TODO: Switch to specific first
     // paragraph character
     paragraph_first_word: $ => seq(
@@ -113,7 +112,7 @@ module.exports = grammar({
     title_section: $ => prec.left(
       5,
       seq(
-        $.dashes,
+        $.section_dashes,
         $.title_section_token,
         $.newline,
         $.newline,
@@ -162,7 +161,7 @@ module.exports = grammar({
     ),
 
     todo_section: $ => seq(
-      $.dashes,
+      $.section_dashes,
       $.todo_section_token,
       $.newline,
       $.newline,

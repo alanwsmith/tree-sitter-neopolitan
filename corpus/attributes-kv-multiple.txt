@@ -12,24 +12,26 @@ delta echo
 
 (source_file
   (p_section
-    (dashes)
+    (section_dashes)
     (p_section_token)
     (newline)
     (attr
       (attr_dashes)
       (nb_whitespace)
-      (attr_key)
-      (attr_separator)
-      (nb_whitespace)
-      (attr_value)
+      (attr_kv_pair
+        (attr_key)
+        (attr_separator)
+        (nb_whitespace)
+        (attr_value))
       (newline))
     (attr
       (attr_dashes)
       (nb_whitespace)
-      (attr_key)
-      (attr_separator)
-      (nb_whitespace)
-      (attr_value)
+      (attr_kv_pair
+        (attr_key)
+        (attr_separator)
+        (nb_whitespace)
+        (attr_value))
       (newline))
     (newline)
     (paragraph
