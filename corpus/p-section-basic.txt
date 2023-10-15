@@ -20,13 +20,13 @@ delta echo
         (non_lt_char)
         (following_word_chars))
       (wordbreak
-        (whitespace))
+        (nb_whitespace))
       (word
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
       (wordbreak
-        (whitespace))
+        (nb_whitespace))
       (word
         (initial_word_chars
           (non_lt_char))
@@ -38,7 +38,7 @@ delta echo
           (non_lt_char))
         (following_word_chars))
       (wordbreak
-        (whitespace))
+        (nb_whitespace))
       (word
         (initial_word_chars
           (non_lt_char))

@@ -1,5 +1,5 @@
 ================================================================================
-SOLO TODO Section - In Progress Item
+TODO Section - In Progress Item
 ================================================================================
 -- todo 
 
@@ -20,14 +20,14 @@ SOLO TODO Section - In Progress Item
       (empty_todo_bracket
         (todo_left_bracket)
         (todo_right_bracket))
-      (whitespace)
+      (nb_whitespace)
       (paragraph_body
         (word
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
             (wordbreak
-              (whitespace))
+              (nb_whitespace))
           (word
             (initial_word_chars
               (non_lt_char))
@@ -40,14 +40,14 @@ SOLO TODO Section - In Progress Item
         (todo_left_bracket)
         (not_a_checkmark)
         (todo_right_bracket))
-      (whitespace)
+      (nb_whitespace)
       (paragraph_body
         (word
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
             (wordbreak
-              (whitespace))
+              (nb_whitespace))
           (word
             (initial_word_chars
               (non_lt_char))

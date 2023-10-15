@@ -25,6 +25,55 @@
         ]
       }
     },
+    "attr": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "attr_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "nb_whitespace"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "attr_key"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "attr_separator"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "nb_whitespace"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "attr_value"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        }
+      ]
+    },
+    "attr_dashes": {
+      "type": "STRING",
+      "value": "--"
+    },
+    "attr_key": {
+      "type": "PATTERN",
+      "value": "[^:]+"
+    },
+    "attr_separator": {
+      "type": "STRING",
+      "value": ":"
+    },
+    "attr_value": {
+      "type": "PATTERN",
+      "value": "[^\\n]+"
+    },
     "dashes": {
       "type": "PATTERN",
       "value": "-- +"
@@ -64,7 +113,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "whitespace"
+          "name": "nb_whitespace"
         },
         {
           "type": "REPEAT",
@@ -124,6 +173,10 @@
       "type": "PATTERN",
       "value": "[^ \\n\\t]+"
     },
+    "nb_whitespace": {
+      "type": "PATTERN",
+      "value": "[ \\t]+"
+    },
     "newline": {
       "type": "PATTERN",
       "value": " *\\n"
@@ -146,6 +199,21 @@
         {
           "type": "SYMBOL",
           "name": "newline"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "attr"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -363,7 +431,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "whitespace"
+          "name": "nb_whitespace"
         },
         {
           "type": "REPEAT1",
@@ -415,10 +483,6 @@
       "type": "STRING",
       "value": "todo"
     },
-    "whitespace": {
-      "type": "PATTERN",
-      "value": "[ \\t]+"
-    },
     "word": {
       "type": "SEQ",
       "members": [
@@ -437,7 +501,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "whitespace"
+          "name": "nb_whitespace"
         },
         {
           "type": "SYMBOL",

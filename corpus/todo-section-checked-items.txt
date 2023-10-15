@@ -20,14 +20,14 @@ TODO Section - Checked Item
       (empty_todo_bracket
         (todo_left_bracket)
         (todo_right_bracket))
-      (whitespace)
+      (nb_whitespace)
       (paragraph_body
         (word
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
             (wordbreak
-              (whitespace))
+              (nb_whitespace))
           (word
             (initial_word_chars
               (non_lt_char))
@@ -40,14 +40,14 @@ TODO Section - Checked Item
         (todo_left_bracket)
         (todo_checkmark)
         (todo_right_bracket))
-      (whitespace)
+      (nb_whitespace)
       (paragraph_body
         (word
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
             (wordbreak
-              (whitespace))
+              (nb_whitespace))
           (word
             (initial_word_chars
               (non_lt_char))

@@ -10,6 +10,25 @@ module.exports = grammar({
       )
     ),
 
+
+    attr: $ => seq(
+      $.attr_dashes, 
+      $.nb_whitespace,
+      $.attr_key,
+      $.attr_separator,
+      $.nb_whitespace,
+      $.attr_value,
+      $.newline,
+    ),
+
+    attr_dashes: _ => "--",
+
+    attr_key: _ => /[^:]+/,
+
+    attr_separator: _ => ":",
+
+    attr_value: _ => /[^\n]+/,
+
     dashes: _ => /-- +/,
 
     headline: $ => alias($.paragraph, 'headline'),
@@ -20,7 +39,7 @@ module.exports = grammar({
 
     list_item: $ => seq(
       $.list_dash,
-      $.whitespace,
+      $.nb_whitespace,
       repeat($.paragraph),
     ),
 
@@ -38,16 +57,17 @@ module.exports = grammar({
 
     following_word_chars: _ => /[^ \n\t]+/,
 
+    nb_whitespace: _ => /[ \t]+/,
+
     newline: _ => / *\n/,
 
     non_lt_char: _ => /[^< \n\t]/,
-
-    // optional_nb_whitespace: _ => /[ \t]*/,
 
     p_section: $ => seq(
       $.dashes,
       $.p_section_token,
       $.newline,
+      optional(repeat1($.attr)),
       $.newline,
       repeat1($.paragraph),
     ),
@@ -127,7 +147,7 @@ module.exports = grammar({
         $.empty_todo_bracket,
         $.in_progress_todo_bracket,
       ),
-      $.whitespace,
+      $.nb_whitespace,
       repeat1(
         seq($.paragraph_body, $.newline)
       )
@@ -143,7 +163,6 @@ module.exports = grammar({
 
     todo_section_token: _ => "todo",
 
-    whitespace: _ => /[ \t]+/,
 
     word: $ => seq(
       $.initial_word_chars,
@@ -151,7 +170,7 @@ module.exports = grammar({
     ),
 
     wordbreak: $ => choice(
-      $.whitespace,
+      $.nb_whitespace,
       $.newline,
     ),
   },

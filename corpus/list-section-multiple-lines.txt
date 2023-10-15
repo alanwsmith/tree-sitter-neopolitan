@@ -18,13 +18,13 @@ romeo whiskey
     (newline)
     (list_item
       (list_dash)
-      (whitespace)
+      (nb_whitespace)
       (paragraph
         (paragraph_first_word
           (non_lt_char)
           (following_word_chars))
         (wordbreak
-          (whitespace))
+          (nb_whitespace))
         (word
           (initial_word_chars
             (non_lt_char))
@@ -37,7 +37,7 @@ romeo whiskey
           (non_lt_char)
           (following_word_chars))
         (wordbreak
-          (whitespace))
+          (nb_whitespace))
         (word
           (initial_word_chars
             (non_lt_char))
