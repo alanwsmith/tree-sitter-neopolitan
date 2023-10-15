@@ -9,7 +9,161 @@ to add a `parser-directories`` array item to point to the
 dev location (e.g. `/Users/alan/workshop/tree-sitter-neopolitan/src``)
 
 
+-- h3
+
+Sections To Do
+
+-- todo
+
+(these lines don't work for now)
+
+[] Add scriptsrc
+
+[] <<link|aside|/pages/neo-sections-aside--2sicsw5n/index.html>> 
+
+[] <<link|blockquote|/pages/neo-sections-blockquote--2rzx0ncy/index.html>> 
+
+[] <<link|bookmark|/pages/neo-sections-bookmark--2tsbpmdz/index.html>>
+
+[] <<link|categories|/pages/neo-sections-categories--2tsgeqiy/index.html>>
+
+[] <<link|checklist|/pages/neo-sections-checklist--2tr5lyeh/index.html>>
+
+[] <<link|code|/pages/neo-sections-code--2trnbldk/index.html>>
+
+[] <<link|endarticle|/pages/neo-sections-endarticle--2tr3drgp/index.html>>
+
+[] <<link|endcode|/pages/neo-sections-endcode--2tn5kwz9/index.html>>
+
+[] <<link|enddiv|/pages/neo-sections-enddiv--2tpqrbsp/index.html>>
+
+[] <<link|endhtml|/pages/neo-sections-endhtml--2tr5llpd/index.html>>
+
+[] <<link|endpre|/pages/neo-sections-endpre--2tr664ap/index.html>>
+
+[] <<link|endresults|/pages/neo-sections-endresults--2tprkzhl/index.html>>
+
+[] <<link|endscript|/pages/neo-sections-endscript--2tr8b9h8/index.html>>
+
+[] <<link|endsection|/pages/neo-sections-endsection--2tr6uxfs/index.html>>
+
+[] <<link|endtldr|/pages/neo-sections-endtldr--2tr72dq3/index.html>>
+
+[] <<link|footnote|/pages/neo-sections-footnote--2virnqft/index.html>>
+
+[] <<link|h1|/pages/neo-sections-h1--2sz6vak9/index.html>>
+
+[] <<link|h2|/pages/neo-sections-h2--2tp5urmb/index.html>>
+
+[] <<link|h3|/pages/neo-sections-h3--2tp7w6hz/index.html>>
+
+[] <<link|h4|/pages/neo-sections-h4--2tp7gpkz/index.html>>
+
+[] <<link|h5|/pages/neo-sections-h5--2tp7mhex/index.html>>
+
+[] <<link|h6|/pages/neo-sections-h6--2tp7sfd3/index.html>>
+
+[] <<link|hidden|/pages/neo-sections-hidden--2tso1rfz/index.html>>
+
+[] <<link|html|/pages/neo-sections-html--2trp8m8x/index.html>>
+
+[] <<link|hr|/pages/neo-sections-hr--2twvjkjl/index.html>>
+
+[] <<link|image|/pages/neo-sections-image--2syvoutz/index.html>>
+
+[] <<link|list|/pages/neo-sections-list--2sze3ncf/index.html>>
+
+[] <<link|metadata|/pages/neo-sections-metadata--2tsmqaax/index.html>>
+
+[] <<link|nav|/pages/neo-sections-nav--2tsdz44g/index.html>>
+
+[] <<link|note|/pages/neo-sections-note--2trdttvb/index.html>>
+
+[] <<link|notes|/pages/neo-sections-notes--2trihs8p/index.html>>
+
+[] <<link|olist|/pages/neo-sections-olist--2trivoq5/index.html>>
+
+[x] <<link|p|/pages/neo-sections-p--2rzk16vp/index.html>>
+
+[] <<link|pre|/pages/neo-sections-pre--2trq5wcf/index.html>>
+
+[] <<link|startarticle|/pages/neo-sections-startarticle--2ts5mvue/index.html>>
+
+[] <<link|startcode|/pages/neo-sections-startcode--2tpdkwoy/index.html>>
+
+[x] <<link|startcss|/pages/neo-sections-startcss--2tgglxrh/index.html>>
+
+[] <<link|startdiv|/pages/neo-sections-startdiv--2tprnuuo/index.html>>
+
+[] <<link|starthtml|/pages/neo-sections-starthtml--2ts4spxy/index.html>>
+
+[] <<link|startpre|/pages/neo-sections-startpre--2ts4lom6/index.html>>
+
+[] <<link|startresults|/pages/neo-sections-startresults--2tpsbfwo/index.html>>
+
+[] <<link|startscript|/pages/neo-sections-startscript--2ts3xkez/index.html>>
+
+[] <<link|startsection|/pages/neo-sections-startsection--2ts6fb3r/index.html>>
+
+[] <<link|starttldr|/pages/neo-sections-starttldr--2ts9mwb0/index.html>>
+
+[] <<link|subtitle|/pages/neo-sections-subtitle--2tsbab2q/index.html>>
+
+[x] <<link|title|/pages/neo-sections-title--2rzkdxwm/index.html>>
+
+[] <<link|todo|/pages/neo-sections-todo--2sjqce8e/index.html>>
+
+[] <<link|vimeo|/pages/neo-sections-vimeo--2trgakh0/index.html>>
+
+[] <<link|warning|/pages/neo-sections-warning--2trbuyrd/index.html>>
+
+[] <<link|warnings|/pages/neo-sections-warnings--2trdbi6a/index.html>>
+
+[] <<link|youtube|/pages/neo-sections-youtube--2tpwwvsz/index.html>>
 
 
+-- h2
+
+Next Phase
+
+-- list 
+
+- audio
+
+- blurb
+
+- canvas
+
+- data
+
+- details
+
+- dlist
+
+- ext (external process)
+
+- groups
+
+- head
+
+- images
+
+- include
+
+- iref
+
+- menu
+
+- object
+
+- ref
+
+- table
+
+- tabs
+
+- textarea
+
+- widget
 
 

@@ -8,6 +8,10 @@
         "members": [
           {
             "type": "SYMBOL",
+            "name": "list_section"
+          },
+          {
+            "type": "SYMBOL",
             "name": "p_section"
           },
           {
@@ -42,6 +46,60 @@
           "name": "lt_with_non_lt_char"
         }
       ]
+    },
+    "list_dash": {
+      "type": "STRING",
+      "value": "-"
+    },
+    "list_item": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "list_dash"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "whitespace"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paragraph_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        }
+      ]
+    },
+    "list_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "list_section_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "list_item"
+        }
+      ]
+    },
+    "list_section_token": {
+      "type": "PATTERN",
+      "value": "list *"
     },
     "lt_with_non_lt_char": {
       "type": "SEQ",
@@ -84,8 +142,11 @@
           "name": "newline"
         },
         {
-          "type": "SYMBOL",
-          "name": "paragraph"
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph"
+          }
         }
       ]
     },
@@ -125,6 +186,22 @@
           "name": "newline"
         }
       ]
+    },
+    "paragraph_body": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "word"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "wordbreak"
+          }
+        ]
+      }
     },
     "paragraph_first_word": {
       "type": "SEQ",

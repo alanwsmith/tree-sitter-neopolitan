@@ -46,6 +46,60 @@
     }
   },
   {
+    "type": "list_item",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "list_dash",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "paragraph_body",
+          "named": true
+        },
+        {
+          "type": "whitespace",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "list_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "dashes",
+          "named": true
+        },
+        {
+          "type": "list_item",
+          "named": true
+        },
+        {
+          "type": "list_section_token",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "lt_with_non_lt_char",
     "named": true,
     "fields": {},
@@ -115,6 +169,25 @@
     }
   },
   {
+    "type": "paragraph_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "word",
+          "named": true
+        },
+        {
+          "type": "wordbreak",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "paragraph_first_word",
     "named": true,
     "fields": {},
@@ -141,6 +214,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "list_section",
+          "named": true
+        },
         {
           "type": "p_section",
           "named": true
@@ -231,6 +308,14 @@
   },
   {
     "type": "following_word_chars",
+    "named": true
+  },
+  {
+    "type": "list_dash",
+    "named": true
+  },
+  {
+    "type": "list_section_token",
     "named": true
   },
   {

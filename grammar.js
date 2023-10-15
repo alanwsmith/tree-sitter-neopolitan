@@ -3,6 +3,7 @@ module.exports = grammar({
   rules: {
     source_file: $ => repeat1(
       choice(
+        $.list_section,
         $.p_section,
         $.title_section,
       )
@@ -17,6 +18,25 @@ module.exports = grammar({
 
     initial_word_chars: $ => choice($.non_lt_char, $.lt_with_non_lt_char),
 
+    list_dash: $ => "-",
+
+    list_item: $ => seq(
+      $.list_dash, 
+      $.whitespace,
+      $.paragraph_body,
+      $.newline
+    ),
+
+    list_section: $ => seq(
+      $.dashes,
+      $.list_section_token,
+      $.newline,
+      $.newline,
+      $.list_item,
+    ),
+
+    list_section_token: $ => /list */,
+
     lt_with_non_lt_char: $ => seq("<", $.non_lt_char),
 
     following_word_chars: _ => /[^ \n\t]+/,
@@ -28,11 +48,12 @@ module.exports = grammar({
       $.p_section_token,
       $.newline,
       $.newline,
-      $.paragraph,
+      repeat1($.paragraph),
     ),
 
     p_section_token: _ => /p */,
 
+    // TODO: split out to paragraph body 
     paragraph: $ => 
       seq(
         $.paragraph_first_word,
@@ -45,6 +66,13 @@ module.exports = grammar({
         ),
         $.newline,
     ),
+
+    // this is everything after
+    // the first word
+    paragraph_body: $ => repeat1(
+      seq($.word, $.wordbreak)
+    ),
+
 
     // TODO: Switch to specific first
     // paragraph character
