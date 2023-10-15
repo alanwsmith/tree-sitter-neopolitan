@@ -137,6 +137,33 @@
     }
   },
   {
+    "type": "html_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "html_body",
+          "named": true
+        },
+        {
+          "type": "html_section_token",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "in_progress_todo_bracket",
     "named": true,
     "fields": {},
@@ -352,6 +379,10 @@
       "required": true,
       "types": [
         {
+          "type": "html_section",
+          "named": true
+        },
+        {
           "type": "list_section",
           "named": true
         },
@@ -527,6 +558,14 @@
   },
   {
     "type": "following_word_chars",
+    "named": true
+  },
+  {
+    "type": "html_body",
+    "named": true
+  },
+  {
+    "type": "html_section_token",
     "named": true
   },
   {

@@ -4,6 +4,7 @@ module.exports = grammar({
     source_file: $ => repeat1(
       choice(
         $.list_section,
+        $.html_section,
         $.p_section,
         $.title_section,
         $.todo_section,
@@ -40,6 +41,19 @@ module.exports = grammar({
     section_dashes: _ => /-- +/,
 
     headline: $ => alias($.paragraph, 'headline'),
+
+    html_body: $ => /([^\n][^\n][^-][^-])+/,
+
+    html_section: $ => seq(
+      $.section_dashes,
+      $.html_section_token,
+      $.newline,
+      $.newline,
+      $.html_body,
+      $.newline,
+    ),
+
+    html_section_token: _ => /html */,
 
     initial_word_chars: $ => choice($.non_lt_char, $.lt_with_non_lt_char),
 

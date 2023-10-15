@@ -5,6 +5,11 @@ this is some stuff
 
 with some data
 
+-- html
+
+<a href="asdf">asdf</a>
+
+
 -- p
 -- autofocus
 -- id: tango
