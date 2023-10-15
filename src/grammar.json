@@ -120,10 +120,6 @@
       "type": "PATTERN",
       "value": "[^\\n]+"
     },
-    "code_body": {
-      "type": "PATTERN",
-      "value": "([^-][^-][^ ][^\\/])+"
-    },
     "code_end_section": {
       "type": "SEQ",
       "members": [
@@ -138,6 +134,21 @@
         {
           "type": "SYMBOL",
           "name": "code_section_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph"
+          }
         }
       ]
     },
@@ -167,10 +178,6 @@
         {
           "type": "SYMBOL",
           "name": "code_body"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "code_start_terminator"
         }
       ]
     },
@@ -706,7 +713,7 @@
   "externals": [
     {
       "type": "SYMBOL",
-      "name": "code_start_terminator"
+      "name": "code_body"
     }
   ],
   "inline": [],

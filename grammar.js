@@ -43,13 +43,15 @@ module.exports = grammar({
 
     attr_value: _ => /[^\n]+/,
 
-    code_body: _ => /([^-][^-][^ ][^\/])+/,
-
     code_end_section: $ => seq(
       $.section_dashes,
       $.section_start_end_token,
       $.code_section_token,
+      $.newline,
+      $.newline,
+      repeat1($.paragraph),
     ),
+
 
     code_start_section: $ => seq(
       $.section_dashes,
@@ -58,7 +60,6 @@ module.exports = grammar({
       $.newline,
       $.newline,
       $.code_body,
-      $.code_start_terminator,
     ),
 
     code_section_token: _ => "code",
@@ -217,6 +218,7 @@ module.exports = grammar({
       repeat1($.todo_item),
     ),
 
+
     todo_section_token: _ => "todo",
 
     word: $ => seq(
@@ -233,7 +235,7 @@ module.exports = grammar({
   extras: _ => [],
 
   externals: $ => [
-    $.code_start_terminator,
+    $.code_body,
   ],
 
 });

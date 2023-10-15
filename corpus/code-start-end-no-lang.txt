@@ -21,6 +21,23 @@ alfa bravo
     (newline)
     (code_body))
   (code_end_section
+    (section_dashes)
+    (section_start_end_token)
+    (code_section_token)
+    (newline)
+    (newline)
+    (paragraph
+      (paragraph_first_word
+        (non_lt_char)
+        (following_word_chars))
+      (nb_whitespace)
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
+      (newline)
+  (newline))))
+
 
 
 

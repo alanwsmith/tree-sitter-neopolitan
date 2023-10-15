@@ -75,6 +75,14 @@
           "named": true
         },
         {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "paragraph",
+          "named": true
+        },
+        {
           "type": "section_dashes",
           "named": true
         },
@@ -99,10 +107,6 @@
         },
         {
           "type": "code_section_token",
-          "named": true
-        },
-        {
-          "type": "code_start_terminator",
           "named": true
         },
         {
@@ -624,10 +628,6 @@
   },
   {
     "type": "code_section_token",
-    "named": true
-  },
-  {
-    "type": "code_start_terminator",
     "named": true
   },
   {

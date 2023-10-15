@@ -1,3 +1,3 @@
 #!/bin/bash
 
-watchexec --project-origin . -w example.neo -w grammar.js -w corpus -w queries "sleep 1 && date && tree-sitter highlight example.neo"
+watchexec --project-origin . -w src/scanner.cc -w example.neo -w grammar.js -w corpus -w queries "sleep 1 && /Users/alan/.cargo/bin/tree-sitter highlight example.neo && date"

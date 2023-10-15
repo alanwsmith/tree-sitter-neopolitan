@@ -3,6 +3,7 @@
 (attr_key) @neo_attr_key
 (attr_separator) @neo_attr_separator
 (attr_value) @neo_attr_value
+(code_body) @neo_section_token
 (html_section_token) @neo_section_token
 (list_dash) @neo_list_dash
 (list_section_token) @neo_section_token
