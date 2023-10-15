@@ -8,6 +8,14 @@
         "members": [
           {
             "type": "SYMBOL",
+            "name": "code_start_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "code_end_section"
+          },
+          {
+            "type": "SYMBOL",
             "name": "list_section"
           },
           {
@@ -112,9 +120,63 @@
       "type": "PATTERN",
       "value": "[^\\n]+"
     },
-    "section_dashes": {
+    "code_body": {
       "type": "PATTERN",
-      "value": "-- +"
+      "value": "([^-][^-][^ ][^\\/])+"
+    },
+    "code_end_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "section_start_end_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code_section_token"
+        }
+      ]
+    },
+    "code_start_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code_section_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "section_start_end_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code_start_terminator"
+        }
+      ]
+    },
+    "code_section_token": {
+      "type": "STRING",
+      "value": "code"
     },
     "headline": {
       "type": "ALIAS",
@@ -331,7 +393,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "wordbreak"
+          "name": "_wordbreak"
         },
         {
           "type": "REPEAT",
@@ -344,7 +406,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "wordbreak"
+                "name": "_wordbreak"
               }
             ]
           }
@@ -369,7 +431,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "wordbreak"
+              "name": "_wordbreak"
             }
           ]
         }
@@ -387,6 +449,14 @@
           "name": "following_word_chars"
         }
       ]
+    },
+    "section_dashes": {
+      "type": "PATTERN",
+      "value": "-- +"
+    },
+    "section_start_end_token": {
+      "type": "STRING",
+      "value": "/"
     },
     "title_section": {
       "type": "PREC_LEFT",
@@ -616,7 +686,7 @@
         }
       ]
     },
-    "wordbreak": {
+    "_wordbreak": {
       "type": "CHOICE",
       "members": [
         {
@@ -633,7 +703,12 @@
   "extras": [],
   "conflicts": [],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "code_start_terminator"
+    }
+  ],
   "inline": [],
   "supertypes": []
 }

@@ -3,6 +3,8 @@ module.exports = grammar({
   rules: {
     source_file: $ => repeat1(
       choice(
+        $.code_start_section,
+        $.code_end_section,
         $.list_section,
         $.html_section,
         $.p_section,
@@ -12,8 +14,8 @@ module.exports = grammar({
     ),
 
     _attr: $ => choice(
-        $.attr_bool,
-        $.attr_kv_pair,
+      $.attr_bool,
+      $.attr_kv_pair,
     ),
 
     attr_kv_pair: $ => seq(
@@ -41,11 +43,34 @@ module.exports = grammar({
 
     attr_value: _ => /[^\n]+/,
 
-    section_dashes: _ => /-- +/,
+    code_body: _ => /([^-][^-][^ ][^\/])+/,
+
+    code_end_section: $ => seq(
+      $.section_dashes,
+      $.section_start_end_token,
+      $.code_section_token,
+    ),
+
+    code_start_section: $ => seq(
+      $.section_dashes,
+      $.code_section_token,
+      $.section_start_end_token,
+      $.newline,
+      $.newline,
+      $.code_body,
+      $.code_start_terminator,
+    ),
+
+    code_section_token: _ => "code",
 
     headline: $ => alias($.paragraph, 'headline'),
 
-    html_body: $ => /([^\n][^\n][^-][^-])+/,
+    // NOTE: This doesn't really work. Need 
+    // to roll out to an external parser
+    // since tree-sitter doesn't support negative 
+    // look-ahead and I'm not sure how to 
+    // do the regex parse without it
+    html_body: _ => /([^\n][^\n][^-][^-])+/,
 
     html_section: $ => seq(
       $.section_dashes,
@@ -104,20 +129,20 @@ module.exports = grammar({
     paragraph: $ =>
       seq(
         $.paragraph_first_word,
-        $.wordbreak,
+        $._wordbreak,
         repeat(
           seq(
             $.word,
-            $.wordbreak,
+            $._wordbreak,
           ),
         ),
         $.newline,
       ),
 
-    // this is everything after
-    // the first word
+    // This is everything after
+    // The first word
     paragraph_body: $ => prec.left(repeat1(
-      seq($.word, $.wordbreak)
+      seq($.word, $._wordbreak)
     )),
 
     // TODO: Switch to specific first
@@ -126,6 +151,10 @@ module.exports = grammar({
       $.non_lt_char,
       $.following_word_chars,
     ),
+
+    section_dashes: _ => /-- +/,
+
+    section_start_end_token: _ => "/",
 
     title_section: $ => prec.left(
       5,
@@ -195,13 +224,17 @@ module.exports = grammar({
       $.following_word_chars
     ),
 
-    wordbreak: $ => choice(
+    _wordbreak: $ => choice(
       $.nb_whitespace,
       $.newline,
     ),
   },
 
-  extras: _ => []
+  extras: _ => [],
+
+  externals: $ => [
+    $.code_start_terminator,
+  ],
 
 });
 

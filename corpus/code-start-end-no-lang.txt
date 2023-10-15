@@ -1,0 +1,26 @@
+================================================================================
+SOLO Code Start End - No Language
+================================================================================
+-- code/
+
+delta echo
+
+-- /code
+
+alfa bravo
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (code_start_section
+    (section_dashes)
+    (code_section_token)
+    (section_start_end_token)
+    (newline)
+    (newline)
+    (code_body))
+  (code_end_section
+
+
+

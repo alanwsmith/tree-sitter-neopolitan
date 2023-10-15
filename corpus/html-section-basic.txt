@@ -29,8 +29,7 @@ etc...
       (paragraph_first_word
         (non_lt_char)
         (following_word_chars))
-      (wordbreak
-        (newline))
+      (newline)
     (newline))))
 
 

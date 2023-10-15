@@ -1,5 +1,5 @@
 ================================================================================
-SOLO Attribute - Key Value - Multiple 
+Attribute - Key Value - Multiple 
 ================================================================================
 -- p
 -- class: alfa
@@ -36,12 +36,10 @@ delta echo
       (paragraph_first_word
         (non_lt_char)
         (following_word_chars))
-      (wordbreak
-        (nb_whitespace))
+      (nb_whitespace)
       (word
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (wordbreak
-        (newline))
-      (newline))))
+      (newline)
+  (newline))))

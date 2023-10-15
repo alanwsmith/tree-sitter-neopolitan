@@ -4,12 +4,6 @@
 this is some stuff
 
 with some data
-
--- html
-
-<a href="asdf">ello, world</a>
-
-
 -- p
 -- autofocus
 -- id: tango
@@ -40,3 +34,23 @@ with more text
 [x] charlie delta
 
 [etc] romeo foxtrot
+
+
+-- html
+
+<a href="asdf">
+
+ello, world
+
+</a>
+
+
+
+-- code/
+
+some code
+
+-- /code
+
+
+
