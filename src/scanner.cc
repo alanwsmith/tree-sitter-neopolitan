@@ -161,11 +161,42 @@ static bool terminator(TSLexer *lexer, char *pattern) {
 
 bool find_token(TSLexer *lexer) {
   lexer->mark_end(lexer);
-  lexer->advance(lexer, false);
-  lexer->advance(lexer, false);
-  lexer->advance(lexer, false);
-  lexer->advance(lexer, false);
-  lexer->mark_end(lexer);
+
+  char patterns[2][5] = {"titl", "todo"};
+  TokenType tokens[2] = {TITLE_TOKEN, TODO_TOKEN};
+  bool matches[2] = {true, true};
+
+  int char_index;
+  // set the `<` to the same value as the
+  // second level of the patters[][#] to
+  // limit the movement to just the lenght
+  // of the parser. (Actually, probably need
+  // to add one to check for whitespace or
+  // newline to handle cases like `-- p` and
+  // whatever else starts with `-- p...` or
+  // some other letter
+  for (char_index = 0; char_index < 5; char_index++) {
+    int target_char = lexer->lookahead;
+    printf("Target Char: %d\n", target_char);
+    int pattern_index;
+    for (pattern_index = 0; pattern_index < 2; pattern_index++) {
+      if (matches[pattern_index]) {
+        int check_char = patterns[pattern_index][char_index];
+        printf("  Checking pattern %d for match: %d\n", pattern_index,
+               check_char);
+        if (check_char == target_char) {
+          // it's not efficient to set this here,
+          // but it's easier to rationalize
+          lexer->result_symbol = tokens[pattern_index];
+        } else {
+          matches[pattern_index] = false;
+        }
+      }
+    }
+    lexer->mark_end(lexer);
+    lexer->advance(lexer, false);
+  };
+
   lexer->result_symbol = TODO_TOKEN;
   return true;
 };
@@ -188,7 +219,8 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       lexer->result_symbol = SINGLE_SPACE;
       return is_single_space(lexer);
     };
-
+    // This is the new attempt to get section
+    // and container tokens
     if (valid_symbols[TITLE_TOKEN] || valid_symbols[TODO_TOKEN]) {
       bool response = find_token(lexer);
       return response;
