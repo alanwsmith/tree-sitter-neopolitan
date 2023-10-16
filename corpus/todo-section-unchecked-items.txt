@@ -3,7 +3,7 @@ SOLO TODO Section - Unchecked Items
 ================================================================================
 -- todo
 
-[] alfa charlie 
+[] alfa charlie
 
 [] bravo delta
 
@@ -33,7 +33,7 @@ SOLO TODO Section - Unchecked Items
               (non_lt_char))
           (following_word_chars))
             (newline))
-            (newline))
+          (newline))
     (todo_item
       (empty_todo_bracket
         (todo_left_bracket)
@@ -50,6 +50,7 @@ SOLO TODO Section - Unchecked Items
               (non_lt_char))
           (following_word_chars))
             (newline))
-        (newline))))
+      (newline))))
+
 
 

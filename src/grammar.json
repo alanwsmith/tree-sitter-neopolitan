@@ -821,6 +821,10 @@
     {
       "type": "SYMBOL",
       "name": "todo_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "error_sentinel"
     }
   ],
   "inline": [],

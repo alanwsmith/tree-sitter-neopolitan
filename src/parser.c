@@ -8,10 +8,10 @@
 #define LANGUAGE_VERSION 14
 #define STATE_COUNT 107
 #define LARGE_STATE_COUNT 2
-#define SYMBOL_COUNT 60
+#define SYMBOL_COUNT 61
 #define ALIAS_COUNT 1
-#define TOKEN_COUNT 26
-#define EXTERNAL_TOKEN_COUNT 6
+#define TOKEN_COUNT 27
+#define EXTERNAL_TOKEN_COUNT 7
 #define FIELD_COUNT 3
 #define MAX_ALIAS_SEQUENCE_LENGTH 8
 #define PRODUCTION_ID_COUNT 9
@@ -42,41 +42,42 @@ enum ts_symbol_identifiers {
   sym_single_space = 23,
   sym_title_token = 24,
   sym_todo_token = 25,
-  sym_source_file = 26,
-  sym__attr = 27,
-  sym_attr_kv_pair = 28,
-  sym_attr_bool = 29,
-  sym_attr_bool_value = 30,
-  sym_attr_key = 31,
-  sym_code_end_section = 32,
-  sym_code_start_section = 33,
-  sym_headline = 34,
-  sym_html_end_section = 35,
-  sym_html_start_section = 36,
-  sym_initial_word_chars = 37,
-  sym_list_item = 38,
-  sym_list_section = 39,
-  sym_lt_with_non_lt_char = 40,
-  sym_p_section = 41,
-  sym_paragraph = 42,
-  sym_paragraph_body = 43,
-  sym_paragraph_first_word = 44,
-  sym_title_section = 45,
-  sym_empty_todo_bracket = 46,
-  sym_completed_todo_bracket = 47,
-  sym_in_progress_todo_bracket = 48,
-  sym_todo_item = 49,
-  sym_todo_section = 50,
-  sym_word = 51,
-  sym__wordbreak = 52,
-  aux_sym_source_file_repeat1 = 53,
-  aux_sym_code_end_section_repeat1 = 54,
-  aux_sym_code_start_section_repeat1 = 55,
-  aux_sym_list_section_repeat1 = 56,
-  aux_sym_paragraph_repeat1 = 57,
-  aux_sym_todo_item_repeat1 = 58,
-  aux_sym_todo_section_repeat1 = 59,
-  anon_alias_sym_headline = 60,
+  sym_error_sentinel = 26,
+  sym_source_file = 27,
+  sym__attr = 28,
+  sym_attr_kv_pair = 29,
+  sym_attr_bool = 30,
+  sym_attr_bool_value = 31,
+  sym_attr_key = 32,
+  sym_code_end_section = 33,
+  sym_code_start_section = 34,
+  sym_headline = 35,
+  sym_html_end_section = 36,
+  sym_html_start_section = 37,
+  sym_initial_word_chars = 38,
+  sym_list_item = 39,
+  sym_list_section = 40,
+  sym_lt_with_non_lt_char = 41,
+  sym_p_section = 42,
+  sym_paragraph = 43,
+  sym_paragraph_body = 44,
+  sym_paragraph_first_word = 45,
+  sym_title_section = 46,
+  sym_empty_todo_bracket = 47,
+  sym_completed_todo_bracket = 48,
+  sym_in_progress_todo_bracket = 49,
+  sym_todo_item = 50,
+  sym_todo_section = 51,
+  sym_word = 52,
+  sym__wordbreak = 53,
+  aux_sym_source_file_repeat1 = 54,
+  aux_sym_code_end_section_repeat1 = 55,
+  aux_sym_code_start_section_repeat1 = 56,
+  aux_sym_list_section_repeat1 = 57,
+  aux_sym_paragraph_repeat1 = 58,
+  aux_sym_todo_item_repeat1 = 59,
+  aux_sym_todo_section_repeat1 = 60,
+  anon_alias_sym_headline = 61,
 };
 
 static const char * const ts_symbol_names[] = {
@@ -106,6 +107,7 @@ static const char * const ts_symbol_names[] = {
   [sym_single_space] = "single_space",
   [sym_title_token] = "title_token",
   [sym_todo_token] = "todo_token",
+  [sym_error_sentinel] = "error_sentinel",
   [sym_source_file] = "source_file",
   [sym__attr] = "_attr",
   [sym_attr_kv_pair] = "attr_kv_pair",
@@ -170,6 +172,7 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_single_space] = sym_single_space,
   [sym_title_token] = sym_title_token,
   [sym_todo_token] = sym_todo_token,
+  [sym_error_sentinel] = sym_error_sentinel,
   [sym_source_file] = sym_source_file,
   [sym__attr] = sym__attr,
   [sym_attr_kv_pair] = sym_attr_kv_pair,
@@ -309,6 +312,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = true,
   },
   [sym_todo_token] = {
+    .visible = true,
+    .named = true,
+  },
+  [sym_error_sentinel] = {
     .visible = true,
     .named = true,
   },
@@ -959,6 +966,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym_single_space] = ACTIONS(1),
     [sym_title_token] = ACTIONS(1),
     [sym_todo_token] = ACTIONS(1),
+    [sym_error_sentinel] = ACTIONS(1),
   },
   [1] = {
     [sym_source_file] = STATE(104),
@@ -2018,6 +2026,7 @@ enum ts_external_scanner_symbol_identifiers {
   ts_external_token_single_space = 3,
   ts_external_token_title_token = 4,
   ts_external_token_todo_token = 5,
+  ts_external_token_error_sentinel = 6,
 };
 
 static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
@@ -2027,6 +2036,7 @@ static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
   [ts_external_token_single_space] = sym_single_space,
   [ts_external_token_title_token] = sym_title_token,
   [ts_external_token_todo_token] = sym_todo_token,
+  [ts_external_token_error_sentinel] = sym_error_sentinel,
 };
 
 static const bool ts_external_scanner_states[7][EXTERNAL_TOKEN_COUNT] = {
@@ -2036,6 +2046,7 @@ static const bool ts_external_scanner_states[7][EXTERNAL_TOKEN_COUNT] = {
     [ts_external_token_single_space] = true,
     [ts_external_token_title_token] = true,
     [ts_external_token_todo_token] = true,
+    [ts_external_token_error_sentinel] = true,
   },
   [2] = {
     [ts_external_token_section_dashes] = true,

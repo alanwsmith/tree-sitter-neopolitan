@@ -251,6 +251,7 @@ module.exports = grammar({
     $.single_space,
     $.title_token,
     $.todo_token,
+    $.error_sentinel,
   ],
 
 });

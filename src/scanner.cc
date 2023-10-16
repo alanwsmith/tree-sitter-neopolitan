@@ -9,10 +9,16 @@ enum TokenType {
   SINGLE_SPACE,
   TITLE_TOKEN,
   TODO_TOKEN,
+  ERROR_SENTINEL,
 };
 
 struct Scanner {
   Scanner() {}
+};
+
+struct MatchDetails {
+  bool found_match;
+  int end_position;
 };
 
 extern "C" {
@@ -116,6 +122,7 @@ static bool is_exact_match(TSLexer *lexer, char *pattern) {
   for (tracker = 0; tracker < len; tracker++) {
     int lexer_char = lexer->lookahead;
     int test_char = char_ints[tracker];
+    printf("(%d %d) ", lexer_char, test_char);
     if (lexer_char != test_char) {
       return false;
     }
@@ -154,26 +161,82 @@ static bool terminator(TSLexer *lexer, char *pattern) {
 
 bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
                                                   const bool *valid_symbols) {
-  if (valid_symbols[CODE_START_TERMINATOR]) {
-    lexer->result_symbol = CODE_START_TERMINATOR;
-    char code_end[9] = "-- /code";
-    return terminator(lexer, code_end);
-  } else if (valid_symbols[HTML_START_TERMINATOR]) {
-    lexer->result_symbol = HTML_START_TERMINATOR;
-    char html_end[9] = "-- /html";
-    return terminator(lexer, html_end);
-  } else if (valid_symbols[SECTION_DASHES]) {
-    lexer->result_symbol = SECTION_DASHES;
-    return is_section_dashes(lexer);
-  } else if (valid_symbols[SINGLE_SPACE]) {
-    lexer->result_symbol = SINGLE_SPACE;
-    return is_single_space(lexer);
-    // } else if (valid_symbols[TITLE_TOKEN] || valid_symbols[TODO_TOKEN]) {
-  } else if (valid_symbols[TODO_TOKEN]) {
-    lexer->result_symbol = TODO_TOKEN;
-    char pattern[5] = "todo";
-    return is_exact_match(lexer, pattern);
+  // not sure if this will end up being needed
+  lexer->mark_end(lexer);
+
+  if (!valid_symbols[ERROR_SENTINEL]) {
+    if (valid_symbols[CODE_START_TERMINATOR]) {
+      lexer->result_symbol = CODE_START_TERMINATOR;
+      char code_end[9] = "-- /code";
+      return terminator(lexer, code_end);
+    } else if (valid_symbols[HTML_START_TERMINATOR]) {
+      lexer->result_symbol = HTML_START_TERMINATOR;
+      char html_end[9] = "-- /html";
+      return terminator(lexer, html_end);
+    } else if (valid_symbols[SECTION_DASHES]) {
+      lexer->result_symbol = SECTION_DASHES;
+      return is_section_dashes(lexer);
+    } else if (valid_symbols[SINGLE_SPACE]) {
+      lexer->result_symbol = SINGLE_SPACE;
+      return is_single_space(lexer);
+    } else if (valid_symbols[TITLE_TOKEN]) {
+      lexer->result_symbol = TITLE_TOKEN;
+      char pattern[6] = "title";
+      return is_exact_match(lexer, pattern);
+    } else if (valid_symbols[TODO_TOKEN]) {
+      lexer->result_symbol = TODO_TOKEN;
+      char pattern[5] = "todo";
+      return is_exact_match(lexer, pattern);
+    };
   };
+
+  /* // The lexer can only move forward but the lexer */
+  /* // can't back up and there doesn't seem to be a */
+  /* // way to search for just one thing so this grabs */
+  /* // the entire file so it can be used repeatedly */
+  /* // */
+  /* // ACTUALLY: I don't think this will work. I don't */
+  /* // think there's a way to mark the proper */
+  /* // end point with this approach either */
+  /* // */
+  /* // make a huge array to hopefully */
+  /* // store everythig */
+  /* int char_cache[100000]; */
+  /* int load_index = 0; */
+  /* while (lexer->eof(lexer) == false) { */
+  /*   char_cache[load_index] = lexer->lookahead; */
+  /*   lexer->advance(lexer, false); */
+  /*   load_index++; */
+  /* } */
+  /* // Create the struct to figure out the status */
+  /* MatchDetails match_details = MatchDetails(); */
+
+  // hack handle todo
+
+  /* if (valid_symbols[CODE_START_TERMINATOR]) { */
+  /*   lexer->result_symbol = CODE_START_TERMINATOR; */
+  /*   char code_end[9] = "-- /code"; */
+  /*   return terminator(lexer, code_end); */
+  /* } else if (valid_symbols[HTML_START_TERMINATOR]) { */
+  /*   lexer->result_symbol = HTML_START_TERMINATOR; */
+  /*   char html_end[9] = "-- /html"; */
+  /*   return terminator(lexer, html_end); */
+  /* } else if (valid_symbols[SECTION_DASHES]) { */
+  /*   lexer->result_symbol = SECTION_DASHES; */
+  /*   return is_section_dashes(lexer); */
+  /* } else if (valid_symbols[SINGLE_SPACE]) { */
+  /*   lexer->result_symbol = SINGLE_SPACE; */
+  /*   return is_single_space(lexer); */
+  /* } else if (valid_symbols[TITLE_TOKEN]) { */
+  /*   lexer->result_symbol = TITLE_TOKEN; */
+  /*   char pattern[6] = "title"; */
+  /*   return is_exact_match(lexer, pattern); */
+  /* } else if (valid_symbols[TODO_TOKEN]) { */
+  /*   lexer->result_symbol = TODO_TOKEN; */
+  /*   char pattern[5] = "todo"; */
+  /*   return is_exact_match(lexer, pattern); */
+  /* }; */
+
   return false;
 };
 };
