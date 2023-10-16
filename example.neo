@@ -53,7 +53,9 @@ with more text
 
 -- code/
 
-println!("asdf");
+fn main(source: &str) {
+  println!("asdf");
+}
 
 -- /code
 
@@ -70,6 +72,15 @@ this needs to be here right now
 -- /html
 
 This is after the html section
+
+-- html
+
+<p>alfa bravo</p>
+
+
+-- p
+
+This is more text
 
 
 

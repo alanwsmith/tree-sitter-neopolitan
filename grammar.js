@@ -58,6 +58,7 @@ module.exports = grammar({
       $.code_section_token,
       $.section_start_end_token,
       $.newline,
+      optional(repeat1($._attr)),
       $.newline,
       $.code_body,
     ),

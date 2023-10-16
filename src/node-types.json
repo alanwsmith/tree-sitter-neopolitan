@@ -102,6 +102,14 @@
       "required": true,
       "types": [
         {
+          "type": "attr_bool",
+          "named": true
+        },
+        {
+          "type": "attr_kv_pair",
+          "named": true
+        },
+        {
           "type": "code_body",
           "named": true
         },
