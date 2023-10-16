@@ -34,72 +34,82 @@ void tree_sitter_neopolitan_external_scanner_deserialize(void *payload,
                                                          unsigned length){};
 
 static bool terminator(TSLexer *lexer, char *pattern) {
-  printf("HERE-");
   lexer->mark_end(lexer);
   int char_ints[9];
-
   size_t len = strlen(pattern);
-
-  printf("THERE-");
-  // printf("%lu", len);
 
   int char_count;
 
   for (char_count = 0; char_count <= len; char_count++) {
     char_ints[char_count] = pattern[char_count];
-    // printf("%d", pattern[char_count]);
   };
 
-  printf("%d", char_ints[3]);
-
+  int tracker = 0;
   while (lexer->eof(lexer) == false) {
-    // this is for code_start_end blocks
-    if (lexer->lookahead == 45) {
+    if (lexer->lookahead == char_ints[tracker]) {
+      tracker += 1;
       lexer->advance(lexer, false);
-      if (lexer->lookahead == 45) {
-        lexer->advance(lexer, false);
-        if (lexer->lookahead == 32) {
-          lexer->advance(lexer, false);
-          if (lexer->lookahead == 47) {
-            lexer->advance(lexer, false);
-            if (lexer->lookahead == 99) {
-              lexer->advance(lexer, false);
-              if (lexer->lookahead == 111) {
-                lexer->advance(lexer, false);
-                if (lexer->lookahead == 100) {
-                  lexer->advance(lexer, false);
-                  if (lexer->lookahead == 101) {
-                    lexer->advance(lexer, false);
-                    return true;
-                  } else {
-                    lexer->mark_end(lexer);
-                  }
-                } else {
-                  lexer->mark_end(lexer);
-                }
-              } else {
-                lexer->mark_end(lexer);
-              }
-            } else {
-              lexer->mark_end(lexer);
-            }
-          } else {
-            lexer->mark_end(lexer);
-          }
-        } else {
-          lexer->mark_end(lexer);
-        }
-      } else {
-        lexer->mark_end(lexer);
-      }
+      if (tracker == len) {
+        return true;
+      };
     } else {
+      tracker = 0;
+      lexer->advance(lexer, false);
       lexer->mark_end(lexer);
     };
-    lexer->advance(lexer, false);
-    lexer->mark_end(lexer);
-  };
+  }
+
   return false;
-}
+
+  /* while (lexer->eof(lexer) == false) { */
+  /*   // this is for code_start_end blocks */
+  /*   if (lexer->lookahead == 45) { */
+  /*     lexer->advance(lexer, false); */
+  /*     if (lexer->lookahead == 45) { */
+  /*       lexer->advance(lexer, false); */
+  /*       if (lexer->lookahead == 32) { */
+  /*         lexer->advance(lexer, false); */
+  /*         if (lexer->lookahead == 47) { */
+  /*           lexer->advance(lexer, false); */
+  /*           if (lexer->lookahead == 99) { */
+  /*             lexer->advance(lexer, false); */
+  /*             if (lexer->lookahead == 111) { */
+  /*               lexer->advance(lexer, false); */
+  /*               if (lexer->lookahead == 100) { */
+  /*                 lexer->advance(lexer, false); */
+  /*                 if (lexer->lookahead == 101) { */
+  /*                   lexer->advance(lexer, false); */
+  /*                   return true; */
+  /*                 } else { */
+  /*                   lexer->mark_end(lexer); */
+  /*                 } */
+  /*               } else { */
+  /*                 lexer->mark_end(lexer); */
+  /*               } */
+  /*             } else { */
+  /*               lexer->mark_end(lexer); */
+  /*             } */
+  /*           } else { */
+  /*             lexer->mark_end(lexer); */
+  /*           } */
+  /*         } else { */
+  /*           lexer->mark_end(lexer); */
+  /*         } */
+  /*       } else { */
+  /*         lexer->mark_end(lexer); */
+  /*       } */
+  /*     } else { */
+  /*       lexer->mark_end(lexer); */
+  /*     } */
+  /*   } else { */
+  /*     lexer->mark_end(lexer); */
+  /*   }; */
+  /*   lexer->advance(lexer, false); */
+  /*   lexer->mark_end(lexer); */
+  /* }; */
+
+  // return false;
+};
 
 bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
                                                   const bool *valid_symbols) {

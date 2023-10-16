@@ -30,9 +30,9 @@ class Lexer():
 
 
 def terminator(lexer, pattern):
-    lexer.mark_end()
-    chars = [ord(char) for char in pattern]
-    tracker = 0
+    lexer.mark_end()  # done
+    chars = [ord(char) for char in pattern]  # done
+    tracker = 0  # done
     while not lexer.eof():
         if lexer.lookahead() == chars[tracker]:
             tracker += 1
