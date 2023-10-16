@@ -4,10 +4,11 @@ module.exports = grammar({
     source_file: $ =>
       repeat1(
         choice(
-          $.code_start_section,
-          $.code_end_section,
+          // $.code_container_start,
+          // $.code_container_end,
           // $.html_container_start,
           // $.html_container_end,
+          $.code_section,
           $.html_section,
           $.list_section,
           $.p_section,
@@ -48,28 +49,37 @@ module.exports = grammar({
 
     attr_value: _ => /[^\n]+/,
 
-    code_end_section: $ => seq(
-      $.section_dashes,
-      $.single_space,
-      $.section_start_end_token,
-      $.code_section_token,
-      $.newline,
-      $.newline,
-      repeat1($.paragraph),
-    ),
+    // code_end_section: $ => seq(
+    //   $.section_dashes,
+    //   $.single_space,
+    //   $.section_start_end_token,
+    //   $.code_section_token,
+    //   $.newline,
+    //   $.newline,
+    //   repeat1($.paragraph),
+    // ),
 
-    code_start_section: $ => seq(
+    // code_start_section: $ => seq(
+    //   $.section_dashes,
+    //   $.single_space,
+    //   $.code_section_token,
+    //   $.section_start_end_token,
+    //   $.newline,
+    //   optional(repeat1($._attr)),
+    //   $.newline,
+    //   field('code_body', $.code_body),
+    // ),
+
+    code_section: $ => seq(
       $.section_dashes,
       $.single_space,
-      $.code_section_token,
-      $.section_start_end_token,
+      $.code_token,
       $.newline,
       optional(repeat1($._attr)),
       $.newline,
-      field('code_body', $.code_body),
+      field("code_section_body", $.code_section_body),
+      $.newline,
     ),
-
-    code_section_token: _ => "code",
 
     headline: $ => alias($.paragraph, 'headline'),
 
@@ -249,7 +259,8 @@ module.exports = grammar({
   extras: _ => [],
 
   externals: $ => [
-    $.code_body,
+    $.code_section_body,
+    $.code_token,
     $.html_container_body,
     $.html_section_body,
     $.html_token,

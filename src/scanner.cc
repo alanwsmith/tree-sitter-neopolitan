@@ -3,7 +3,8 @@
 #include <tree_sitter/parser.h>
 
 enum TokenType {
-  CODE_BODY_TERMINATOR,
+  CODE_SECTION_BODY,
+  CODE_TOKEN,
   HTML_BODY_TERMINATOR,
   HTML_SECTION_BODY,
   HTML_TOKEN,
@@ -126,7 +127,7 @@ static bool is_exact_match(TSLexer *lexer, char *pattern) {
   for (tracker = 0; tracker < len; tracker++) {
     int lexer_char = lexer->lookahead;
     int test_char = char_ints[tracker];
-    printf("(%d %d) ", lexer_char, test_char);
+    // printf("(%d %d) ", lexer_char, test_char);
     if (lexer_char != test_char) {
       return false;
     }
@@ -181,10 +182,10 @@ static bool find_token(TSLexer *lexer) {
   // 11. Update grammer.js
   // 12. Update highlights.js
 
-  char patterns[5][6] = {"html", "list", "p", "title", "todo"};
-  TokenType tokens[5] = {HTML_TOKEN, LIST_TOKEN, P_TOKEN, TITLE_TOKEN,
-                         TODO_TOKEN};
-  bool matches[5] = {true, true, true, true, true};
+  char patterns[6][6] = {"code", "html", "list", "p", "title", "todo"};
+  TokenType tokens[6] = {CODE_TOKEN, HTML_TOKEN,  LIST_TOKEN,
+                         P_TOKEN,    TITLE_TOKEN, TODO_TOKEN};
+  bool matches[6] = {true, true, true, true, true, true};
 
   int char_index;
   for (char_index = 0; char_index < 6; char_index++) {
@@ -194,7 +195,7 @@ static bool find_token(TSLexer *lexer) {
     // hit the end so return
     if (target_char == 10 || target_char == 32) {
       int match_walker;
-      for (match_walker = 0; match_walker < 5; match_walker++) {
+      for (match_walker = 0; match_walker < 6; match_walker++) {
         // printf("  Checking in with %d\n", match_walker);
         if (matches[match_walker]) {
           // printf("  Send it\n");
@@ -208,7 +209,7 @@ static bool find_token(TSLexer *lexer) {
 
     int pattern_index;
     // TODO: Set this to automatically pull the length of the array
-    for (pattern_index = 0; pattern_index < 5; pattern_index++) {
+    for (pattern_index = 0; pattern_index < 6; pattern_index++) {
       if (matches[pattern_index]) {
         // printf("THING: %d - %d - %d - %d\n", pattern_index, char_index,
         //      target_char, patterns[pattern_index][char_index]);
@@ -230,6 +231,27 @@ static bool find_token(TSLexer *lexer) {
   return false;
 };
 
+// TODO: Combine this with html and pre and anything
+// else that needs it.
+//
+// TODO: Handle if this hits the end of a file
+//
+static bool is_code_section_body(TSLexer *lexer) {
+  while (lexer->eof(lexer) == false) {
+    int active_char = lexer->lookahead;
+    // printf("%d\n", active_char);
+    if (active_char == 10) {
+      char end_pattern[4] = "-- ";
+      if (terminator(lexer, end_pattern)) {
+        return true;
+      };
+    };
+    lexer->advance(lexer, false);
+    lexer->mark_end(lexer);
+  };
+  return false;
+};
+
 static bool is_html_section_body(TSLexer *lexer) {
   // printf("HEREREWERER\n");
   while (lexer->eof(lexer) == false) {
@@ -245,9 +267,9 @@ static bool is_html_section_body(TSLexer *lexer) {
     };
     lexer->advance(lexer, false);
     lexer->mark_end(lexer);
-  }
+  };
   return false;
-}
+};
 
 bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
                                                   const bool *valid_symbols) {
@@ -256,10 +278,14 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
   // update result_symbol if there's a match.
 
   if (!valid_symbols[ERROR_SENTINEL]) {
-    if (valid_symbols[CODE_BODY_TERMINATOR]) {
-      lexer->result_symbol = CODE_BODY_TERMINATOR;
-      char code_end[9] = "-- /code";
-      return terminator(lexer, code_end);
+    if (valid_symbols[CODE_SECTION_BODY]) {
+      if (is_code_section_body(lexer)) {
+        // printf("HHHHHHHHHHHHHHHH\n");
+        lexer->result_symbol = CODE_SECTION_BODY;
+        return true;
+      } else {
+        return false;
+      }
     } else if (valid_symbols[HTML_SECTION_BODY]) {
       lexer->result_symbol = HTML_SECTION_BODY;
       return is_html_section_body(lexer);
@@ -278,9 +304,9 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
     };
     // This is the new attempt to get section
     // and container tokens. NOTE SURE IF THE check
-    if (valid_symbols[HTML_TOKEN] || valid_symbols[LIST_TOKEN] ||
-        valid_symbols[P_TOKEN] || valid_symbols[TITLE_TOKEN] ||
-        valid_symbols[TODO_TOKEN]) {
+    if (valid_symbols[CODE_TOKEN] || valid_symbols[HTML_TOKEN] ||
+        valid_symbols[LIST_TOKEN] || valid_symbols[P_TOKEN] ||
+        valid_symbols[TITLE_TOKEN] || valid_symbols[TODO_TOKEN]) {
       bool response = find_token(lexer);
       return response;
     }

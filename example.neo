@@ -4,7 +4,15 @@ This is some stuff
 
 This is the second line of the headline
 
--- htmll
+-- code
+-- rust
+
+fn main() {
+  println!("asdf");
+}
+
+
+-- html
 
 <div class="alfa">basic HTML</div>
 

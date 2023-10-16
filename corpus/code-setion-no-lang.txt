@@ -1,0 +1,40 @@
+================================================================================
+SOLO Code Section - Basic
+================================================================================
+-- code
+
+print("non-highlighted code")
+
+-- p
+
+Something else
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (code_section
+    (section_dashes)
+    (single_space)
+    (code_token)
+    (newline)
+    (newline)
+    (code_section_body)
+    (newline))
+  (p_section
+    (section_dashes)
+    (single_space)
+    (p_token)
+    (newline)
+    (newline)
+    (paragraph
+      (paragraph_first_word
+        (non_lt_char)
+        (following_word_chars))
+      (nb_whitespace)
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
+      (newline)
+      (newline))))

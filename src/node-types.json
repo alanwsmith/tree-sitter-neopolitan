@@ -79,42 +79,7 @@
     }
   },
   {
-    "type": "code_end_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "code_section_token",
-          "named": true
-        },
-        {
-          "type": "newline",
-          "named": true
-        },
-        {
-          "type": "paragraph",
-          "named": true
-        },
-        {
-          "type": "section_dashes",
-          "named": true
-        },
-        {
-          "type": "section_start_end_token",
-          "named": true
-        },
-        {
-          "type": "single_space",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "code_start_section",
+    "type": "code_section",
     "named": true,
     "fields": {
       "attr_bool": {
@@ -127,12 +92,12 @@
           }
         ]
       },
-      "code_body": {
+      "code_section_body": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "code_body",
+            "type": "code_section_body",
             "named": true
           }
         ]
@@ -147,7 +112,7 @@
           "named": true
         },
         {
-          "type": "code_section_token",
+          "type": "code_token",
           "named": true
         },
         {
@@ -156,10 +121,6 @@
         },
         {
           "type": "section_dashes",
-          "named": true
-        },
-        {
-          "type": "section_start_end_token",
           "named": true
         },
         {
@@ -534,11 +495,7 @@
       "required": true,
       "types": [
         {
-          "type": "code_end_section",
-          "named": true
-        },
-        {
-          "type": "code_start_section",
+          "type": "code_section",
           "named": true
         },
         {
@@ -731,11 +688,11 @@
     "named": true
   },
   {
-    "type": "code_body",
+    "type": "code_section_body",
     "named": true
   },
   {
-    "type": "code_section_token",
+    "type": "code_token",
     "named": true
   },
   {
@@ -780,10 +737,6 @@
   },
   {
     "type": "section_dashes",
-    "named": true
-  },
-  {
-    "type": "section_start_end_token",
     "named": true
   },
   {

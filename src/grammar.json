@@ -8,11 +8,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "code_start_section"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "code_end_section"
+            "name": "code_section"
           },
           {
             "type": "SYMBOL",
@@ -132,7 +128,7 @@
       "type": "PATTERN",
       "value": "[^\\n]+"
     },
-    "code_end_section": {
+    "code_section": {
       "type": "SEQ",
       "members": [
         {
@@ -145,47 +141,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "section_start_end_token"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "code_section_token"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "newline"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "newline"
-        },
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "paragraph"
-          }
-        }
-      ]
-    },
-    "code_start_section": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "section_dashes"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "single_space"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "code_section_token"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "section_start_end_token"
+          "name": "code_token"
         },
         {
           "type": "SYMBOL",
@@ -212,17 +168,17 @@
         },
         {
           "type": "FIELD",
-          "name": "code_body",
+          "name": "code_section_body",
           "content": {
             "type": "SYMBOL",
-            "name": "code_body"
+            "name": "code_section_body"
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
         }
       ]
-    },
-    "code_section_token": {
-      "type": "STRING",
-      "value": "code"
     },
     "headline": {
       "type": "ALIAS",
@@ -759,7 +715,11 @@
   "externals": [
     {
       "type": "SYMBOL",
-      "name": "code_body"
+      "name": "code_section_body"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "code_token"
     },
     {
       "type": "SYMBOL",
