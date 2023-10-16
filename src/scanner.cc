@@ -162,7 +162,7 @@ static bool terminator(TSLexer *lexer, char *pattern) {
 bool find_token(TSLexer *lexer) {
   lexer->mark_end(lexer);
 
-  char patterns[2][5] = {"titl", "todo"};
+  char patterns[2][6] = {"title", "todo"};
   TokenType tokens[2] = {TITLE_TOKEN, TODO_TOKEN};
   bool matches[2] = {true, true};
   int current_match;
@@ -176,12 +176,12 @@ bool find_token(TSLexer *lexer) {
   // whatever else starts with `-- p...` or
   // some other letter
   int char_index;
-  for (char_index = 0; char_index < 5; char_index++) {
+  for (char_index = 0; char_index < 6; char_index++) {
     int target_char = lexer->lookahead;
     printf("Target Char: %d\n", target_char);
 
     // hit the end
-    if (target_char == 10) {
+    if (target_char == 10 || target_char == 32) {
       return true;
     }
     int pattern_index;
