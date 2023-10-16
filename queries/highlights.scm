@@ -17,5 +17,5 @@
 (todo_checkmark) @neo_checkbox_checkmark
 (todo_left_bracket) @neo_checkbox_bracket
 (todo_right_bracket) @neo_checkbox_bracket
-(todo_section_token) @neo_section_token
+(todo_token) @neo_section_token
 (word) @neo_paragraph_nth_word

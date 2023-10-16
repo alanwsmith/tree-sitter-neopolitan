@@ -1,7 +1,9 @@
 module.exports = grammar({
   name: 'neopolitan',
   rules: {
-    source_file: $ => repeat1(
+    source_file: $ => prec.left(
+      10, 
+      repeat1(
       choice(
         $.code_start_section,
         $.code_end_section,
@@ -11,6 +13,7 @@ module.exports = grammar({
         $.p_section,
         $.title_section,
         $.todo_section,
+      )
       )
     ),
 
@@ -170,9 +173,7 @@ module.exports = grammar({
 
     section_start_end_token: _ => "/",
 
-    title_section: $ => prec.left(
-      5,
-      seq(
+    title_section: $ => seq(
         $.section_dashes,
         $.single_space,
         $.title_token,
@@ -181,7 +182,6 @@ module.exports = grammar({
         $.newline,
         $.headline,
         optional(repeat1($.paragraph)),
-      )
     ),
 
     todo_left_bracket: _ => "[",
@@ -224,15 +224,12 @@ module.exports = grammar({
     todo_section: $ => seq(
       $.section_dashes,
       $.single_space,
-      $.todo_section_token,
+      $.todo_token,
       $.newline,
       optional(repeat1($._attr)),
       $.newline,
       repeat1($.todo_item),
     ),
-
-
-    todo_section_token: _ => "todo",
 
     word: $ => seq(
       $.initial_word_chars,
@@ -253,6 +250,7 @@ module.exports = grammar({
     $.section_dashes,
     $.single_space,
     $.title_token,
+    $.todo_token,
   ],
 
 });

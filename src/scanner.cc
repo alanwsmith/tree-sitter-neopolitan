@@ -7,7 +7,8 @@ enum TokenType {
   HTML_START_TERMINATOR,
   SECTION_DASHES,
   SINGLE_SPACE,
-  TITLE_TOKEN
+  TITLE_TOKEN,
+  TODO_TOKEN,
 };
 
 struct Scanner {
@@ -62,18 +63,60 @@ static bool is_section_dashes(TSLexer *lexer) {
   };
 };
 
-static bool exact_matcher(TSLexer *lexer, char *pattern) {
+static bool token_matcher(TSLexer *lexer) {
+  // prevent the lexer from moving until
+  // a match is found
+  lexer->mark_end(lexer);
+  // define the patters and enums
+  char patterns[2][20] = {"title", "todo"};
+  TokenType token_enums[2] = {TITLE_TOKEN, TODO_TOKEN};
+  // Load a set of characters so you can
+  // replay it (since the lexer can't back up)
+  int lexer_chars[20];
+  int lexer_load_index;
+  for (lexer_load_index = 0; lexer_load_index < 20; lexer_load_index++) {
+    lexer_chars[lexer_load_index] = lexer->lookahead;
+    lexer->advance(lexer, false);
+  }
+  int pattern_index;
+  for (pattern_index = 0; pattern_index < 2; pattern_index++) {
+    bool found_token = true;
+    size_t len = strlen(patterns[pattern_index]);
+    int tracker;
+    for (tracker = 0; tracker < len; tracker++) {
+      if (lexer_chars[tracker] != patterns[pattern_index][tracker]) {
+        found_token = false;
+      }
+    }
+    if (found_token) {
+      // move the playhead forward
+      int move_count;
+      for (move_count = tracker; move_count > 0; move_count--) {
+        lexer->advance(lexer, false);
+        lexer->mark_end(lexer);
+      }
+      lexer->result_symbol = token_enums[pattern_index];
+      return true;
+    };
+  };
+  return false;
+}
+
+static bool is_exact_match(TSLexer *lexer, char *pattern) {
+  lexer->mark_end(lexer);
   // switch from letters to unicode codepoints
   size_t len = strlen(pattern);
   int char_ints[len];
   int char_count;
-  for (char_count = 0; char_count <= len; char_count++) {
+  for (char_count = 0; char_count < len; char_count++) {
     char_ints[char_count] = pattern[char_count];
   };
   // do the search
   int tracker;
   for (tracker = 0; tracker < len; tracker++) {
-    if (lexer->lookahead != char_ints[tracker]) {
+    int lexer_char = lexer->lookahead;
+    int test_char = char_ints[tracker];
+    if (lexer_char != test_char) {
       return false;
     }
     lexer->advance(lexer, false);
@@ -125,10 +168,11 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
   } else if (valid_symbols[SINGLE_SPACE]) {
     lexer->result_symbol = SINGLE_SPACE;
     return is_single_space(lexer);
-  } else if (valid_symbols[TITLE_TOKEN]) {
-    lexer->result_symbol = TITLE_TOKEN;
-    char pattern[6] = "title";
-    return exact_matcher(lexer, pattern);
+    // } else if (valid_symbols[TITLE_TOKEN] || valid_symbols[TODO_TOKEN]) {
+  } else if (valid_symbols[TODO_TOKEN]) {
+    lexer->result_symbol = TODO_TOKEN;
+    char pattern[5] = "todo";
+    return is_exact_match(lexer, pattern);
   };
   return false;
 };
