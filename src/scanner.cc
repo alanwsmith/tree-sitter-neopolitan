@@ -34,20 +34,23 @@ void tree_sitter_neopolitan_external_scanner_deserialize(void *payload,
                                                          unsigned length){};
 
 static bool terminator(TSLexer *lexer, char *pattern) {
-  printf("HERE");
+  printf("HERE-");
   lexer->mark_end(lexer);
   int char_ints[9];
 
   size_t len = strlen(pattern);
 
-  printf("THERE");
-  printf("%lu", len);
+  printf("THERE-");
+  // printf("%lu", len);
 
   int char_count;
 
   for (char_count = 0; char_count <= len; char_count++) {
-    printf(".");
+    char_ints[char_count] = pattern[char_count];
+    // printf("%d", pattern[char_count]);
   };
+
+  printf("%d", char_ints[3]);
 
   while (lexer->eof(lexer) == false) {
     // this is for code_start_end blocks
