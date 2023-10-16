@@ -6,21 +6,31 @@ from io import StringIO
 
 
 class Lexer():
-    def __init__(self, str):
-        self.str = str
+    def __init__(self):
+        self.str = ""
         self._cursor = 0
 
     def cursor(self):
         return self._cursor
 
+    def move_forward(self):
+        self._cursor += 1
+
 
 class ClassTest(unittest.TestCase):
+
     def setUp(self):
-        global lexer
-        lexer = Lexer("alfa -- bravo charlie")
+        global l
+        l = Lexer()
 
     def test_inital_position(self):
-        self.assertEqual(lexer.cursor(), 0)
+        l.str = "alfa"
+        self.assertEqual(l.cursor(), 0)
+
+    def test_move_forward(self):
+        l.str = "alfa"
+        l.move_forward()
+        self.assertEqual(l.cursor(), 1)
 
 
 if __name__ == '__main__':
