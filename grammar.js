@@ -91,14 +91,6 @@ module.exports = grammar({
       $.html_body,
     ),
 
-    // html_start_section: $ => seq(
-    //   $.section_dashes,
-    //   $.html_section_token,
-    //   $.newline,
-    //   $.newline,
-    //   $.html_body,
-    // ),
-
     html_section_token: _ => "html",
 
     initial_word_chars: $ => choice($.non_lt_char, $.lt_with_non_lt_char),
@@ -191,9 +183,6 @@ module.exports = grammar({
         optional(repeat1($.paragraph)),
       )
     ),
-
-    // deprecated: remove when title_section is working
-    // title_section_token: _ => "title",
 
     todo_left_bracket: _ => "[",
 
