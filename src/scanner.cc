@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <tree_sitter/parser.h>
 
 enum TokenType {
@@ -34,6 +35,19 @@ void tree_sitter_neopolitan_external_scanner_deserialize(void *payload,
 
 static bool terminator(TSLexer *lexer, char *pattern) {
   printf("HERE");
+  lexer->mark_end(lexer);
+  int char_ints[9];
+
+  size_t len = strlen(pattern);
+
+  printf("THERE");
+  printf("%lu", len);
+
+  int char_count;
+
+  for (char_count = 0; char_count <= len; char_count++) {
+    printf(".");
+  };
 
   while (lexer->eof(lexer) == false) {
     // this is for code_start_end blocks
