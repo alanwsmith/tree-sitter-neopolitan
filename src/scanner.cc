@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <tree_sitter/parser.h>
 
 enum TokenType {
@@ -31,44 +32,8 @@ void tree_sitter_neopolitan_external_scanner_deserialize(void *payload,
                                                          const char *buffer,
                                                          unsigned length){};
 
-static bool is_end_of_code_start_end_block(TSLexer *lexer) {
-
-  lexer->mark_end(lexer);
-  while (lexer->eof(lexer) == false) {
-    lexer->advance(lexer, false);
-    // this is for code_start_end blocks
-    if (lexer->lookahead == 45) {
-      lexer->advance(lexer, false);
-      if (lexer->lookahead == 45) {
-        lexer->advance(lexer, false);
-        if (lexer->lookahead == 32) {
-          lexer->advance(lexer, false);
-          if (lexer->lookahead == 47) {
-            lexer->advance(lexer, false);
-            if (lexer->lookahead == 99) {
-              lexer->advance(lexer, false);
-              if (lexer->lookahead == 111) {
-                lexer->advance(lexer, false);
-                if (lexer->lookahead == 100) {
-                  lexer->advance(lexer, false);
-                  if (lexer->lookahead == 101) {
-                    lexer->advance(lexer, false);
-                    return true;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  return false;
-};
-
-bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
-                                                  const bool *valid_symbols) {
+static bool terminator(TSLexer *lexer, char *pattern) {
+  printf("HERE");
 
   while (lexer->eof(lexer) == false) {
     // this is for code_start_end blocks
@@ -117,5 +82,12 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
     lexer->mark_end(lexer);
   };
   return false;
+}
+
+bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
+                                                  const bool *valid_symbols) {
+
+  char code_end[9] = "-- /code";
+  return terminator(lexer, code_end);
 };
 }
