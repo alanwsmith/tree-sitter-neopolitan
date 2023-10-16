@@ -37,7 +37,6 @@ static bool terminator(TSLexer *lexer, char *pattern) {
   lexer->mark_end(lexer);
   int char_ints[9];
   size_t len = strlen(pattern);
-
   int char_count;
 
   for (char_count = 0; char_count <= len; char_count++) {
@@ -60,55 +59,6 @@ static bool terminator(TSLexer *lexer, char *pattern) {
   }
 
   return false;
-
-  /* while (lexer->eof(lexer) == false) { */
-  /*   // this is for code_start_end blocks */
-  /*   if (lexer->lookahead == 45) { */
-  /*     lexer->advance(lexer, false); */
-  /*     if (lexer->lookahead == 45) { */
-  /*       lexer->advance(lexer, false); */
-  /*       if (lexer->lookahead == 32) { */
-  /*         lexer->advance(lexer, false); */
-  /*         if (lexer->lookahead == 47) { */
-  /*           lexer->advance(lexer, false); */
-  /*           if (lexer->lookahead == 99) { */
-  /*             lexer->advance(lexer, false); */
-  /*             if (lexer->lookahead == 111) { */
-  /*               lexer->advance(lexer, false); */
-  /*               if (lexer->lookahead == 100) { */
-  /*                 lexer->advance(lexer, false); */
-  /*                 if (lexer->lookahead == 101) { */
-  /*                   lexer->advance(lexer, false); */
-  /*                   return true; */
-  /*                 } else { */
-  /*                   lexer->mark_end(lexer); */
-  /*                 } */
-  /*               } else { */
-  /*                 lexer->mark_end(lexer); */
-  /*               } */
-  /*             } else { */
-  /*               lexer->mark_end(lexer); */
-  /*             } */
-  /*           } else { */
-  /*             lexer->mark_end(lexer); */
-  /*           } */
-  /*         } else { */
-  /*           lexer->mark_end(lexer); */
-  /*         } */
-  /*       } else { */
-  /*         lexer->mark_end(lexer); */
-  /*       } */
-  /*     } else { */
-  /*       lexer->mark_end(lexer); */
-  /*     } */
-  /*   } else { */
-  /*     lexer->mark_end(lexer); */
-  /*   }; */
-  /*   lexer->advance(lexer, false); */
-  /*   lexer->mark_end(lexer); */
-  /* }; */
-
-  // return false;
 };
 
 bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
