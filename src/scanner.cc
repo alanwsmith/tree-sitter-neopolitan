@@ -39,7 +39,6 @@ void tree_sitter_neopolitan_external_scanner_deserialize(void *payload,
 };
 
 static bool is_single_space(TSLexer *lexer) {
-  // NOTE: This is currently just a single whitespace
   int dash = ' ';
   if (lexer->lookahead == dash) {
     lexer->advance(lexer, false);
