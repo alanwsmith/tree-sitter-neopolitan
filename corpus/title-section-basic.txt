@@ -11,6 +11,7 @@ Basic Title Example
 (source_file
   (title_section
     (section_dashes)
+    (single_space)
     (title_section_token)
     (newline)
     (newline)

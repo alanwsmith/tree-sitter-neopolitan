@@ -175,7 +175,9 @@ module.exports = grammar({
     title_section: $ => prec.left(
       5,
       seq(
-        $.section_dashes,
+        // $.section_dashes,
+        $.dev_section_dashes,
+        $.single_space,
         $.title_section_token,
         $.newline,
         optional(repeat1($._attr)),
@@ -252,6 +254,9 @@ module.exports = grammar({
   externals: $ => [
     $.code_body,
     $.html_body,
+    //
+    $.dev_section_dashes,
+    $.single_space,
   ],
 
 });

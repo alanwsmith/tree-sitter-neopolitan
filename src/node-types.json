@@ -592,6 +592,10 @@
           "named": true
         },
         {
+          "type": "dev_section_dashes",
+          "named": true
+        },
+        {
           "type": "headline",
           "named": true
         },
@@ -604,7 +608,7 @@
           "named": true
         },
         {
-          "type": "section_dashes",
+          "type": "single_space",
           "named": true
         },
         {
@@ -735,6 +739,10 @@
     "named": true
   },
   {
+    "type": "dev_section_dashes",
+    "named": true
+  },
+  {
     "type": "following_word_chars",
     "named": true
   },
@@ -780,6 +788,10 @@
   },
   {
     "type": "section_start_end_token",
+    "named": true
+  },
+  {
+    "type": "single_space",
     "named": true
   },
   {

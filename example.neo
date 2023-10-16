@@ -1,27 +1,12 @@
--- code/
--- rust
-
-fn main() {
-  println!("asdrf");
-}
-
--- /code
-
 -- title
--- class: alfa
 
-this is some stuff
-
-and more stuff
-
-alfabravo charliedelta
-echo foxtrot
+This is some stuff
 
 -- p
 
-asdf
+this is some data for some thing that's the thing
 
--- p
+-- p 
 -- autofocus
 -- id: tango
 -- class: bravo
@@ -55,13 +40,10 @@ with more text
 -- html/
 
 <a href="asdf">
-
-<div>Ello, world</div>
-
+  <div>Ello, world</div>
 </a>
 
 -- /html
-
 
 This is after the html section
 
@@ -92,15 +74,23 @@ for whatever in range(0..12):
 
 -- /code
 
+-- code/
+-- python
 
--- html
+for whatever in range(0..12):
+  something = []
+  print("rust highlighted")
+
+-- /code
+
+this line has to be here for now
+
+-- html/
 
 <p>alfa bravo</p>
 
+-- /html
 
--- p
-
-This is more text
 
 
 

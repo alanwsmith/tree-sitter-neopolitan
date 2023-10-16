@@ -536,7 +536,11 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "section_dashes"
+            "name": "dev_section_dashes"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "single_space"
           },
           {
             "type": "SYMBOL",
@@ -781,6 +785,14 @@
     {
       "type": "SYMBOL",
       "name": "html_body"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "dev_section_dashes"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "single_space"
     }
   ],
   "inline": [],
