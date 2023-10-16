@@ -13,7 +13,7 @@
 (p_section_token) @neo_section_token
 (paragraph_first_word) @neo_paragraph_first_word
 (section_dashes) @neo_section_dashes
-(title_section_token) @neo_section_token
+(title_token) @neo_section_token
 (todo_checkmark) @neo_checkbox_checkmark
 (todo_left_bracket) @neo_checkbox_bracket
 (todo_right_bracket) @neo_checkbox_bracket

@@ -183,7 +183,7 @@ module.exports = grammar({
       seq(
         $.section_dashes,
         $.single_space,
-        $.title_section_token,
+        $.title_token,
         $.newline,
         optional(repeat1($._attr)),
         $.newline,
@@ -192,7 +192,8 @@ module.exports = grammar({
       )
     ),
 
-    title_section_token: _ => "title",
+    // deprecated: remove when title_section is working
+    // title_section_token: _ => "title",
 
     todo_left_bracket: _ => "[",
 
@@ -262,6 +263,7 @@ module.exports = grammar({
     $.html_body,
     $.section_dashes,
     $.single_space,
+    $.title_token,
   ],
 
 });

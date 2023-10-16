@@ -14,7 +14,7 @@ Alfa bravo
   (title_section
     (section_dashes)
     (single_space)
-    (title_section_token)
+    (title_token)
     (newline)
     (newline)
     (headline

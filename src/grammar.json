@@ -568,7 +568,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "title_section_token"
+            "name": "title_token"
           },
           {
             "type": "SYMBOL",
@@ -614,10 +614,6 @@
           }
         ]
       }
-    },
-    "title_section_token": {
-      "type": "STRING",
-      "value": "title"
     },
     "todo_left_bracket": {
       "type": "STRING",
@@ -821,6 +817,10 @@
     {
       "type": "SYMBOL",
       "name": "single_space"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "title_token"
     }
   ],
   "inline": [],

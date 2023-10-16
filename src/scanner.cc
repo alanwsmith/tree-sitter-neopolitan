@@ -7,6 +7,7 @@ enum TokenType {
   HTML_START_TERMINATOR,
   SECTION_DASHES,
   SINGLE_SPACE,
+  TITLE_TOKEN
 };
 
 struct Scanner {
@@ -61,14 +62,36 @@ static bool is_section_dashes(TSLexer *lexer) {
   };
 };
 
-static bool terminator(TSLexer *lexer, char *pattern) {
-  lexer->mark_end(lexer);
-  int char_ints[9];
+static bool exact_matcher(TSLexer *lexer, char *pattern) {
+  // switch from letters to unicode codepoints
   size_t len = strlen(pattern);
+  int char_ints[len];
   int char_count;
   for (char_count = 0; char_count <= len; char_count++) {
     char_ints[char_count] = pattern[char_count];
   };
+  // do the search
+  int tracker;
+  for (tracker = 0; tracker < len; tracker++) {
+    if (lexer->lookahead != char_ints[tracker]) {
+      return false;
+    }
+    lexer->advance(lexer, false);
+  }
+  lexer->mark_end(lexer);
+  return true;
+}
+
+static bool terminator(TSLexer *lexer, char *pattern) {
+  // switch from letters to unicode codepoints
+  lexer->mark_end(lexer);
+  size_t len = strlen(pattern);
+  int char_ints[len];
+  int char_count;
+  for (char_count = 0; char_count <= len; char_count++) {
+    char_ints[char_count] = pattern[char_count];
+  };
+  // do the search
   int tracker = 0;
   while (lexer->eof(lexer) == false) {
     if (lexer->lookahead == char_ints[tracker]) {
@@ -102,8 +125,11 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
   } else if (valid_symbols[SINGLE_SPACE]) {
     lexer->result_symbol = SINGLE_SPACE;
     return is_single_space(lexer);
+  } else if (valid_symbols[TITLE_TOKEN]) {
+    lexer->result_symbol = TITLE_TOKEN;
+    char pattern[6] = "title";
+    return exact_matcher(lexer, pattern);
   };
-
   return false;
 };
 };
