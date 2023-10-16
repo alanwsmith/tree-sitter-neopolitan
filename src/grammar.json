@@ -20,7 +20,11 @@
           },
           {
             "type": "SYMBOL",
-            "name": "html_section"
+            "name": "html_start_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "html_end_section"
           },
           {
             "type": "SYMBOL",
@@ -194,16 +198,16 @@
       "named": false,
       "value": "headline"
     },
-    "html_body": {
-      "type": "PATTERN",
-      "value": "([^\\n][^\\n][^-][^-])+"
-    },
-    "html_section": {
+    "html_end_section": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
           "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "section_start_end_token"
         },
         {
           "type": "SYMBOL",
@@ -218,18 +222,46 @@
           "name": "newline"
         },
         {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph"
+          }
+        }
+      ]
+    },
+    "html_start_section": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "SYMBOL",
-          "name": "html_body"
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "html_section_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "section_start_end_token"
         },
         {
           "type": "SYMBOL",
           "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "html_body"
         }
       ]
     },
     "html_section_token": {
-      "type": "PATTERN",
-      "value": "html *"
+      "type": "STRING",
+      "value": "html"
     },
     "initial_word_chars": {
       "type": "CHOICE",
@@ -714,6 +746,10 @@
     {
       "type": "SYMBOL",
       "name": "code_body"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "html_body"
     }
   ],
   "inline": [],

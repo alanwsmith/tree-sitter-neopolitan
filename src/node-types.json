@@ -194,7 +194,38 @@
     }
   },
   {
-    "type": "html_section",
+    "type": "html_end_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "html_section_token",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "paragraph",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
+          "named": true
+        },
+        {
+          "type": "section_start_end_token",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "html_start_section",
     "named": true,
     "fields": {},
     "children": {
@@ -215,6 +246,10 @@
         },
         {
           "type": "section_dashes",
+          "named": true
+        },
+        {
+          "type": "section_start_end_token",
           "named": true
         }
       ]
@@ -456,7 +491,11 @@
           "named": true
         },
         {
-          "type": "html_section",
+          "type": "html_end_section",
+          "named": true
+        },
+        {
+          "type": "html_start_section",
           "named": true
         },
         {

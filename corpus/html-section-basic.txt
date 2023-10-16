@@ -1,37 +1,44 @@
 ================================================================================
-HTML Section - Basic
+SOLO HTML Section - Basic
 ================================================================================
--- html
+-- html/
 
 <p>Hello, world</p>
 
--- p
+-- /html
 
-etc...
+Some more text
 
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (html_section
+  (html_start_section
     (section_dashes)
     (html_section_token)
+    (section_start_end_token)
     (newline)
     (newline)
-    (html_body)
-    (newline))
-  (p_section
+    (html_body))
+  (html_end_section
     (section_dashes)
-    (p_section_token)
+    (section_start_end_token)
+    (html_section_token)
     (newline)
     (newline)
     (paragraph
       (paragraph_first_word
         (non_lt_char)
         (following_word_chars))
+      (nb_whitespace)
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
+      (nb_whitespace)
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
       (newline)
-    (newline))))
-
-
-
-
+      (newline))))

@@ -4,6 +4,7 @@
 
 enum TokenType {
   CODE_START_TERMINATOR,
+  HTML_START_TERMINATOR,
 };
 
 struct Scanner {
@@ -64,7 +65,16 @@ static bool terminator(TSLexer *lexer, char *pattern) {
 bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
                                                   const bool *valid_symbols) {
 
-  char code_end[9] = "-- /code";
-  return terminator(lexer, code_end);
+  if (valid_symbols[CODE_START_TERMINATOR]) {
+    lexer->result_symbol = CODE_START_TERMINATOR;
+    char code_end[9] = "-- /code";
+    return terminator(lexer, code_end);
+  } else if (valid_symbols[HTML_START_TERMINATOR]) {
+    lexer->result_symbol = HTML_START_TERMINATOR;
+    char html_end[9] = "-- /html";
+    return terminator(lexer, html_end);
+  };
+
+  return false;
 };
-}
+};

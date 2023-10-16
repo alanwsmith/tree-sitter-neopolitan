@@ -6,7 +6,8 @@ module.exports = grammar({
         $.code_start_section,
         $.code_end_section,
         $.list_section,
-        $.html_section,
+        $.html_start_section,
+        $.html_end_section,
         $.p_section,
         $.title_section,
         $.todo_section,
@@ -65,23 +66,33 @@ module.exports = grammar({
 
     headline: $ => alias($.paragraph, 'headline'),
 
-    // NOTE: This doesn't really work. Need 
-    // to roll out to an external parser
-    // since tree-sitter doesn't support negative 
-    // look-ahead and I'm not sure how to 
-    // do the regex parse without it
-    html_body: _ => /([^\n][^\n][^-][^-])+/,
-
-    html_section: $ => seq(
+    html_end_section: $ => seq(
       $.section_dashes,
+      $.section_start_end_token,
       $.html_section_token,
       $.newline,
       $.newline,
-      $.html_body,
-      $.newline,
+      repeat1($.paragraph),
     ),
 
-    html_section_token: _ => /html */,
+    html_start_section: $ => seq(
+      $.section_dashes,
+      $.html_section_token,
+      $.section_start_end_token,
+      $.newline,
+      $.newline,
+      $.html_body,
+    ),
+
+    // html_start_section: $ => seq(
+    //   $.section_dashes,
+    //   $.html_section_token,
+    //   $.newline,
+    //   $.newline,
+    //   $.html_body,
+    // ),
+
+    html_section_token: _ => "html",
 
     initial_word_chars: $ => choice($.non_lt_char, $.lt_with_non_lt_char),
 
@@ -237,6 +248,7 @@ module.exports = grammar({
 
   externals: $ => [
     $.code_body,
+    $.html_body,
   ],
 
 });
