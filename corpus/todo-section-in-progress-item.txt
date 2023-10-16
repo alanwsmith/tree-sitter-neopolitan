@@ -1,7 +1,7 @@
 ================================================================================
-TODO Section - In Progress Item
+SOLO TODO Section - In Progress Item
 ================================================================================
--- todo 
+-- todo
 
 [] alfa charlie 
 
@@ -14,7 +14,7 @@ TODO Section - In Progress Item
   (todo_section
     (section_dashes)
     (single_space)
-    (todo_section_token)
+    (todo_token)
     (newline)
     (newline)
     (todo_item
