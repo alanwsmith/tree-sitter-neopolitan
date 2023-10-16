@@ -413,17 +413,36 @@
   {
     "type": "p_section",
     "named": true,
-    "fields": {},
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "attr_kv_pair",
+          "named": true
+        },
         {
           "type": "newline",
           "named": true
         },
         {
           "type": "p_token",
+          "named": true
+        },
+        {
+          "type": "paragraph",
           "named": true
         },
         {

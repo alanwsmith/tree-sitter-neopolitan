@@ -137,6 +137,7 @@ static bool is_exact_match(TSLexer *lexer, char *pattern) {
 }
 
 static bool terminator(TSLexer *lexer, char *pattern) {
+  lexer->mark_end(lexer);
   // switch from letters to unicode codepoints
   size_t len = strlen(pattern);
   int char_ints[len];
@@ -185,39 +186,40 @@ static bool find_token(TSLexer *lexer) {
                          TODO_TOKEN};
   bool matches[5] = {true, true, true, true, true};
 
-  int current_match = -1;
   int char_index;
   for (char_index = 0; char_index < 6; char_index++) {
-    lexer->mark_end(lexer);
     int target_char = lexer->lookahead;
     // printf("Target Char: %d\n", target_char);
 
     // hit the end so return
     if (target_char == 10 || target_char == 32) {
-      if (current_match >= 0) {
-        lexer->result_symbol = tokens[current_match];
-        return true;
-      } else {
-        return false;
-      }
+      int match_walker;
+      for (match_walker = 0; match_walker < 5; match_walker++) {
+        // printf("  Checking in with %d\n", match_walker);
+        if (matches[match_walker]) {
+          // printf("  Send it\n");
+          lexer->mark_end(lexer);
+          lexer->result_symbol = tokens[match_walker];
+          return true;
+        };
+      };
+      return false;
     };
 
     int pattern_index;
     // TODO: Set this to automatically pull the length of the array
     for (pattern_index = 0; pattern_index < 5; pattern_index++) {
       if (matches[pattern_index]) {
-        printf("THING: %d - %d - %d - %d\n", pattern_index, char_index,
-               target_char, patterns[pattern_index][char_index]);
+        // printf("THING: %d - %d - %d - %d\n", pattern_index, char_index,
+        //      target_char, patterns[pattern_index][char_index]);
         // if (patterns[pattern_index][char_index] != 0) {
         int check_char = patterns[pattern_index][char_index];
         //  printf("  Checking pattern %d for match: %d\n", pattern_index,
         //      check_char);
         if (check_char == target_char) {
-          current_match = pattern_index;
-          //  printf("    Match in");
-          // lexer->result_symbol = tokens[pattern_index];
+          // printf("    Match\n");
+          lexer->mark_end(lexer);
         } else {
-          current_match = -1;
           matches[pattern_index] = false;
         }
         // }

@@ -141,10 +141,9 @@ module.exports = grammar({
       $.single_space,
       $.p_token,
       $.newline,
-      // optional(repeat1($._attr)),
+      optional(repeat1($._attr)),
       $.newline,
-      // repeat1($.paragraph),
-      //$.newline,
+      repeat1($.paragraph),
     ),
 
     // TODO: split out to paragraph body 
