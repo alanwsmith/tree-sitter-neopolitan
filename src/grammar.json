@@ -360,7 +360,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "list_section_token"
+          "name": "list_token"
         },
         {
           "type": "SYMBOL",
@@ -393,10 +393,6 @@
           }
         }
       ]
-    },
-    "list_section_token": {
-      "type": "PATTERN",
-      "value": "list *"
     },
     "lt_with_non_lt_char": {
       "type": "SEQ",
@@ -801,6 +797,10 @@
     {
       "type": "SYMBOL",
       "name": "html_body"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "list_token"
     },
     {
       "type": "SYMBOL",

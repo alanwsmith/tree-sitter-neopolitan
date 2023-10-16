@@ -107,14 +107,12 @@ module.exports = grammar({
     list_section: $ => seq(
       $.section_dashes,
       $.single_space,
-      $.list_section_token,
+      $.list_token,
       $.newline,
       optional(repeat1($._attr)),
       $.newline,
       repeat1($.list_item),
     ),
-
-    list_section_token: _ => /list */,
 
     lt_with_non_lt_char: $ => seq("<", $.non_lt_char),
 
@@ -245,6 +243,7 @@ module.exports = grammar({
   externals: $ => [
     $.code_body,
     $.html_body,
+    $.list_token,
     $.section_dashes,
     $.single_space,
     $.title_token,

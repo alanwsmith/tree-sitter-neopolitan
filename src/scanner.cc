@@ -5,6 +5,7 @@
 enum TokenType {
   CODE_START_TERMINATOR,
   HTML_START_TERMINATOR,
+  LIST_TOKEN,
   SECTION_DASHES,
   SINGLE_SPACE,
   TITLE_TOKEN,
@@ -159,13 +160,25 @@ static bool terminator(TSLexer *lexer, char *pattern) {
   return false;
 };
 
-bool find_token(TSLexer *lexer) {
+static bool find_token(TSLexer *lexer) {
   lexer->mark_end(lexer);
 
-  char patterns[2][6] = {"title", "todo"};
-  TokenType tokens[2] = {TITLE_TOKEN, TODO_TOKEN};
-  bool matches[2] = {true, true};
-  int current_match;
+  // Adding a new one:
+  //
+  // 1. Increment `patterns[#]`
+  // 2. Adjust `patterns[][#]` to longest value
+  // 3. Add the new string to `patterns[]` alphabetically
+  // 4. Increment `tokens[#]`
+  // 5. Add the new enum to `tokens[]` alphabetically
+  // 6. Increment `matches[#]`
+  // 7. Add a new `true` to `matches[]`
+  // 8. Increment for(.. char_index ..)
+  // 9. Increment for(.. pattern_index ..)
+
+  char patterns[3][6] = {"list", "title", "todo"};
+  TokenType tokens[3] = {LIST_TOKEN, TITLE_TOKEN, TODO_TOKEN};
+  bool matches[3] = {true, true, true};
+  /* int current_match; */
 
   // set the `<` to the same value as the
   // second level of the patters[][#] to
@@ -184,15 +197,16 @@ bool find_token(TSLexer *lexer) {
     if (target_char == 10 || target_char == 32) {
       return true;
     }
+
     int pattern_index;
-    for (pattern_index = 0; pattern_index < 2; pattern_index++) {
+    for (pattern_index = 0; pattern_index < 3; pattern_index++) {
       if (matches[pattern_index]) {
         int check_char = patterns[pattern_index][char_index];
         printf("  Checking pattern %d for match: %d\n", pattern_index,
                check_char);
         if (check_char == target_char) {
           lexer->result_symbol = tokens[pattern_index];
-          current_match = pattern_index;
+          // current_match = pattern_index;
         } else {
           matches[pattern_index] = false;
         }

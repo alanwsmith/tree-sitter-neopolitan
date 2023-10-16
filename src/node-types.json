@@ -401,7 +401,7 @@
           "named": true
         },
         {
-          "type": "list_section_token",
+          "type": "list_token",
           "named": true
         },
         {
@@ -783,7 +783,7 @@
     "named": true
   },
   {
-    "type": "list_section_token",
+    "type": "list_token",
     "named": true
   },
   {

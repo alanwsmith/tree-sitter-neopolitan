@@ -7,7 +7,7 @@
 (code_section_token) @neo_section_token
 (section_start_end_token) @neo_section_start_end_token
 (list_dash) @neo_list_dash
-(list_section_token) @neo_section_token
+(list_token) @neo_section_token
 (nb_whitespace) @neo_nb_whitespace
 (not_a_checkmark) @neo_checkbox_in_progress
 (p_section_token) @neo_section_token

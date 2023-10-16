@@ -12,7 +12,7 @@ List Section - One Item
   (list_section
     (section_dashes)
     (single_space)
-    (list_section_token)
+    (list_token)
     (newline)
     (newline)
     (list_item
