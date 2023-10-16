@@ -48,6 +48,7 @@ module.exports = grammar({
 
     code_end_section: $ => seq(
       $.section_dashes,
+      $.single_space,
       $.section_start_end_token,
       $.code_section_token,
       $.newline,
@@ -57,6 +58,7 @@ module.exports = grammar({
 
     code_start_section: $ => seq(
       $.section_dashes,
+      $.single_space,
       $.code_section_token,
       $.section_start_end_token,
       $.newline,
@@ -71,6 +73,7 @@ module.exports = grammar({
 
     html_end_section: $ => seq(
       $.section_dashes,
+      $.single_space,
       $.section_start_end_token,
       $.html_section_token,
       $.newline,
@@ -80,6 +83,7 @@ module.exports = grammar({
 
     html_start_section: $ => seq(
       $.section_dashes,
+      $.single_space,
       $.html_section_token,
       $.section_start_end_token,
       $.newline,
@@ -109,6 +113,7 @@ module.exports = grammar({
 
     list_section: $ => seq(
       $.section_dashes,
+      $.single_space,
       $.list_section_token,
       $.newline,
       optional(repeat1($._attr)),
@@ -132,6 +137,7 @@ module.exports = grammar({
 
     p_section: $ => seq(
       $.section_dashes,
+      $.single_space,
       $.p_section_token,
       $.newline,
       optional(repeat1($._attr)),
@@ -175,8 +181,7 @@ module.exports = grammar({
     title_section: $ => prec.left(
       5,
       seq(
-        // $.section_dashes,
-        $.dev_section_dashes,
+        $.section_dashes,
         $.single_space,
         $.title_section_token,
         $.newline,
@@ -228,6 +233,7 @@ module.exports = grammar({
 
     todo_section: $ => seq(
       $.section_dashes,
+      $.single_space,
       $.todo_section_token,
       $.newline,
       optional(repeat1($._attr)),
@@ -254,8 +260,7 @@ module.exports = grammar({
   externals: $ => [
     $.code_body,
     $.html_body,
-    //
-    $.dev_section_dashes,
+    $.section_dashes,
     $.single_space,
   ],
 

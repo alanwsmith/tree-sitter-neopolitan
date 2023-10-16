@@ -13,6 +13,7 @@ delta echo
 (source_file
   (p_section
     (section_dashes)
+    (single_space)
     (p_section_token)
     (newline)
     (attr_kv_pair

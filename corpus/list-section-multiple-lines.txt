@@ -13,6 +13,7 @@ romeo whiskey
 (source_file
   (list_section
     (section_dashes)
+    (single_space)
     (list_section_token)
     (newline)
     (newline)

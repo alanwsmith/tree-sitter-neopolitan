@@ -15,6 +15,7 @@ Some more text
 (source_file
   (html_start_section
     (section_dashes)
+    (single_space)
     (html_section_token)
     (section_start_end_token)
     (newline)
@@ -22,6 +23,7 @@ Some more text
     (html_body))
   (html_end_section
     (section_dashes)
+    (single_space)
     (section_start_end_token)
     (html_section_token)
     (newline)

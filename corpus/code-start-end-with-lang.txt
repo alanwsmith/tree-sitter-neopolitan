@@ -16,6 +16,7 @@ kilo juliette
 (source_file
   (code_start_section
     (section_dashes)
+    (single_space)
     (code_section_token)
     (section_start_end_token)
     (newline)
@@ -28,6 +29,7 @@ kilo juliette
     (code_body))
   (code_end_section
     (section_dashes)
+    (single_space)
     (section_start_end_token)
     (code_section_token)
     (newline)

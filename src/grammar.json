@@ -145,6 +145,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
           "name": "section_start_end_token"
         },
         {
@@ -174,6 +178,10 @@
         {
           "type": "SYMBOL",
           "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
         },
         {
           "type": "SYMBOL",
@@ -238,6 +246,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
           "name": "section_start_end_token"
         },
         {
@@ -267,6 +279,10 @@
         {
           "type": "SYMBOL",
           "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
         },
         {
           "type": "SYMBOL",
@@ -337,6 +353,10 @@
         {
           "type": "SYMBOL",
           "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
         },
         {
           "type": "SYMBOL",
@@ -413,6 +433,10 @@
         {
           "type": "SYMBOL",
           "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
         },
         {
           "type": "SYMBOL",
@@ -536,7 +560,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "dev_section_dashes"
+            "name": "section_dashes"
           },
           {
             "type": "SYMBOL",
@@ -709,6 +733,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
           "name": "todo_section_token"
         },
         {
@@ -788,7 +816,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "dev_section_dashes"
+      "name": "section_dashes"
     },
     {
       "type": "SYMBOL",

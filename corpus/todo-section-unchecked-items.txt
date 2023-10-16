@@ -13,6 +13,7 @@ TODO Section - Unchecked Items
 (source_file
   (todo_section
     (section_dashes)
+    (single_space)
     (todo_section_token)
     (newline)
     (newline)
