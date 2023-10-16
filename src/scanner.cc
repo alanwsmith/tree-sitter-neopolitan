@@ -159,11 +159,19 @@ static bool terminator(TSLexer *lexer, char *pattern) {
   return false;
 };
 
+bool find_token(TSLexer *lexer) {
+  lexer->mark_end(lexer);
+  lexer->advance(lexer, false);
+  lexer->advance(lexer, false);
+  lexer->advance(lexer, false);
+  lexer->advance(lexer, false);
+  lexer->mark_end(lexer);
+  lexer->result_symbol = TODO_TOKEN;
+  return true;
+};
+
 bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
                                                   const bool *valid_symbols) {
-  // not sure if this will end up being needed
-  lexer->mark_end(lexer);
-
   if (!valid_symbols[ERROR_SENTINEL]) {
     if (valid_symbols[CODE_START_TERMINATOR]) {
       lexer->result_symbol = CODE_START_TERMINATOR;
@@ -179,15 +187,28 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
     } else if (valid_symbols[SINGLE_SPACE]) {
       lexer->result_symbol = SINGLE_SPACE;
       return is_single_space(lexer);
-    } else if (valid_symbols[TITLE_TOKEN]) {
-      lexer->result_symbol = TITLE_TOKEN;
-      char pattern[6] = "title";
-      return is_exact_match(lexer, pattern);
-    } else if (valid_symbols[TODO_TOKEN]) {
-      lexer->result_symbol = TODO_TOKEN;
-      char pattern[5] = "todo";
-      return is_exact_match(lexer, pattern);
     };
+
+    if (valid_symbols[TITLE_TOKEN] || valid_symbols[TODO_TOKEN]) {
+      bool response = find_token(lexer);
+      return response;
+    }
+
+    /* // Because the sections are on a repeat loop */
+    /* // with a choice any of the tokens can be */
+    /* // called and the first on checked moves */
+    /* // the playhead forward so the other ones */
+    /* // don't have a chance to match */
+    /* if (valid_symbols[TITLE_TOKEN]) { */
+    /*   lexer->result_symbol = TITLE_TOKEN; */
+    /*   char pattern[6] = "title"; */
+    /*   return is_exact_match(lexer, pattern); */
+    /* }; */
+    /* if (valid_symbols[TODO_TOKEN]) { */
+    /*   lexer->result_symbol = TODO_TOKEN; */
+    /*   char pattern[5] = "todo"; */
+    /*   return is_exact_match(lexer, pattern); */
+    /* }; */
   };
 
   /* // The lexer can only move forward but the lexer */

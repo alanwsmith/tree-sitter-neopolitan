@@ -2,47 +2,43 @@
   "name": "neopolitan",
   "rules": {
     "source_file": {
-      "type": "PREC_LEFT",
-      "value": 10,
+      "type": "REPEAT1",
       "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "code_start_section"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "code_end_section"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "list_section"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "html_start_section"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "html_end_section"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "p_section"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "title_section"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "todo_section"
-            }
-          ]
-        }
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "code_start_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "code_end_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "list_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "html_start_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "html_end_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "p_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "title_section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "todo_section"
+          }
+        ]
       }
     },
     "_attr": {

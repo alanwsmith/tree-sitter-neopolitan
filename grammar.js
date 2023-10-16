@@ -1,8 +1,7 @@
 module.exports = grammar({
   name: 'neopolitan',
   rules: {
-    source_file: $ => prec.left(
-      10, 
+    source_file: $ => 
       repeat1(
       choice(
         $.code_start_section,
@@ -13,7 +12,6 @@ module.exports = grammar({
         $.p_section,
         $.title_section,
         $.todo_section,
-      )
       )
     ),
 
