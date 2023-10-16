@@ -2,7 +2,18 @@
   {
     "type": "attr_bool",
     "named": true,
-    "fields": {},
+    "fields": {
+      "attr_bool_value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "attr_bool_value",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -21,6 +32,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "attr_bool_value",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "attr_key",
@@ -96,21 +112,34 @@
   {
     "type": "code_start_section",
     "named": true,
-    "fields": {},
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      },
+      "code_body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "code_body",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_bool",
-          "named": true
-        },
-        {
           "type": "attr_kv_pair",
-          "named": true
-        },
-        {
-          "type": "code_body",
           "named": true
         },
         {
@@ -331,15 +360,22 @@
   {
     "type": "list_section",
     "named": true,
-    "fields": {},
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "attr_bool",
-          "named": true
-        },
         {
           "type": "attr_kv_pair",
           "named": true
@@ -381,15 +417,22 @@
   {
     "type": "p_section",
     "named": true,
-    "fields": {},
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "attr_bool",
-          "named": true
-        },
         {
           "type": "attr_kv_pair",
           "named": true
@@ -528,15 +571,22 @@
   {
     "type": "title_section",
     "named": true,
-    "fields": {},
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "attr_bool",
-          "named": true
-        },
         {
           "type": "attr_kv_pair",
           "named": true
@@ -602,15 +652,22 @@
   {
     "type": "todo_section",
     "named": true,
-    "fields": {},
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "attr_bool",
-          "named": true
-        },
         {
           "type": "attr_kv_pair",
           "named": true

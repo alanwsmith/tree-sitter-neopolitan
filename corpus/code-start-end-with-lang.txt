@@ -22,6 +22,7 @@ kilo juliette
     (attr_bool
       (attr_dashes)
       (nb_whitespace)
+      (attr_bool_value)
       (newline))
     (newline)
     (code_body))

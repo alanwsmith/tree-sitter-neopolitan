@@ -15,7 +15,7 @@ module.exports = grammar({
     ),
 
     _attr: $ => choice(
-      $.attr_bool,
+      field("attr_bool", $.attr_bool),
       $.attr_kv_pair,
     ),
 
@@ -32,9 +32,11 @@ module.exports = grammar({
     attr_bool: $ => seq(
       $.attr_dashes,
       $.nb_whitespace,
-      /[^:\n]+/,
+      field('attr_bool_value', $.attr_bool_value),
       $.newline,
     ),
+
+    attr_bool_value: _ => /[^:\n]+/,
 
     attr_dashes: _ => "--",
 
@@ -60,7 +62,7 @@ module.exports = grammar({
       $.newline,
       optional(repeat1($._attr)),
       $.newline,
-      $.code_body,
+      field('code_body', $.code_body),
     ),
 
     code_section_token: _ => "code",

@@ -1,17 +1,18 @@
+-- code/
+-- rust
+
+fn main() {
+  println!("asdrf");
+}
+
+-- /code
+
 -- title
 -- class: alfa
 
 this is some stuff
 
 and more stuff
-
--- code/
-
-fn main() {
-  println!("Hello, neo");
-}
-
--- /code
 
 alfabravo charliedelta
 echo foxtrot
@@ -51,16 +52,6 @@ with more text
 
 [etc] romeo foxtrot
 
--- code/
-
-fn main(source: &str) {
-  println!("asdf");
-}
-
--- /code
-
-this needs to be here right now
-
 -- html/
 
 <a href="asdf">
@@ -71,7 +62,36 @@ this needs to be here right now
 
 -- /html
 
+
 This is after the html section
+
+-- code/
+-- rust 
+
+for whatever in range(0..12):
+  something = []
+  print("python highlighed")
+
+-- /code
+
+-- code/
+-- rust
+
+for whatever in range(0..12):
+  something = []
+  print("rust highlighted")
+
+-- /code
+
+-- code/
+-- javascript
+
+for whatever in range(0..12):
+  something = []
+  print("rust highlighted")
+
+-- /code
+
 
 -- html
 
