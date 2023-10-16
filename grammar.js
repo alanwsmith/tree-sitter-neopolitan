@@ -129,14 +129,12 @@ module.exports = grammar({
     p_section: $ => seq(
       $.section_dashes,
       $.single_space,
-      $.p_section_token,
+      $.p_token,
       $.newline,
       optional(repeat1($._attr)),
       $.newline,
       repeat1($.paragraph),
     ),
-
-    p_section_token: _ => /p */,
 
     // TODO: split out to paragraph body 
     paragraph: $ =>
@@ -244,6 +242,7 @@ module.exports = grammar({
     $.code_body,
     $.html_body,
     $.list_token,
+    $.p_token,
     $.section_dashes,
     $.single_space,
     $.title_token,

@@ -6,6 +6,7 @@ enum TokenType {
   CODE_START_TERMINATOR,
   HTML_START_TERMINATOR,
   LIST_TOKEN,
+  P_TOKEN,
   SECTION_DASHES,
   SINGLE_SPACE,
   TITLE_TOKEN,
@@ -174,10 +175,13 @@ static bool find_token(TSLexer *lexer) {
   // 7. Add a new `true` to `matches[]`
   // 8. Increment for(.. char_index ..)
   // 9. Increment for(.. pattern_index ..)
+  // 10. Add enum value at top alphabetically
+  // 11. Update grammer.js
+  // 12. Update highlights.js
 
-  char patterns[3][6] = {"list", "title", "todo"};
-  TokenType tokens[3] = {LIST_TOKEN, TITLE_TOKEN, TODO_TOKEN};
-  bool matches[3] = {true, true, true};
+  char patterns[4][6] = {"list", "p", "title", "todo"};
+  TokenType tokens[4] = {LIST_TOKEN, P_TOKEN, TITLE_TOKEN, TODO_TOKEN};
+  bool matches[4] = {true, true, true, true};
   /* int current_match; */
 
   // set the `<` to the same value as the
@@ -191,22 +195,22 @@ static bool find_token(TSLexer *lexer) {
   int char_index;
   for (char_index = 0; char_index < 6; char_index++) {
     int target_char = lexer->lookahead;
-    printf("Target Char: %d\n", target_char);
+    /* printf("Target Char: %d\n", target_char); */
 
-    // hit the end
+    // hit the end so return
     if (target_char == 10 || target_char == 32) {
       return true;
     }
 
     int pattern_index;
-    for (pattern_index = 0; pattern_index < 3; pattern_index++) {
+    for (pattern_index = 0; pattern_index < 4; pattern_index++) {
       if (matches[pattern_index]) {
         int check_char = patterns[pattern_index][char_index];
-        printf("  Checking pattern %d for match: %d\n", pattern_index,
-               check_char);
+        /* printf("  Checking pattern %d for match: %d\n", pattern_index, */
+        /*        check_char); */
         if (check_char == target_char) {
+          /* printf("    Match in"); */
           lexer->result_symbol = tokens[pattern_index];
-          // current_match = pattern_index;
         } else {
           matches[pattern_index] = false;
         }
@@ -237,8 +241,9 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       return is_single_space(lexer);
     };
     // This is the new attempt to get section
-    // and container tokens
-    if (valid_symbols[TITLE_TOKEN] || valid_symbols[TODO_TOKEN]) {
+    // and container tokens. NOTE SURE IF THE check
+    if (valid_symbols[TITLE_TOKEN] || valid_symbols[TODO_TOKEN] ||
+        valid_symbols[P_TOKEN]) {
       bool response = find_token(lexer);
       return response;
     }

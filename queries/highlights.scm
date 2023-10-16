@@ -10,7 +10,7 @@
 (list_token) @neo_section_token
 (nb_whitespace) @neo_nb_whitespace
 (not_a_checkmark) @neo_checkbox_in_progress
-(p_section_token) @neo_section_token
+(p_token) @neo_section_token
 (paragraph_first_word) @neo_paragraph_first_word
 (section_dashes) @neo_section_dashes
 (title_token) @neo_section_token

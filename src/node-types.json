@@ -462,7 +462,7 @@
           "named": true
         },
         {
-          "type": "p_section_token",
+          "type": "p_token",
           "named": true
         },
         {
@@ -803,7 +803,7 @@
     "named": true
   },
   {
-    "type": "p_section_token",
+    "type": "p_token",
     "named": true
   },
   {

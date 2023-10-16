@@ -14,7 +14,7 @@ delta echo
   (p_section
     (section_dashes)
     (single_space)
-    (p_section_token)
+    (p_token)
     (newline)
     (attr_kv_pair
       (attr_dashes)

@@ -436,7 +436,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "p_section_token"
+          "name": "p_token"
         },
         {
           "type": "SYMBOL",
@@ -469,10 +469,6 @@
           }
         }
       ]
-    },
-    "p_section_token": {
-      "type": "PATTERN",
-      "value": "p *"
     },
     "paragraph": {
       "type": "SEQ",
@@ -801,6 +797,10 @@
     {
       "type": "SYMBOL",
       "name": "list_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "p_token"
     },
     {
       "type": "SYMBOL",
