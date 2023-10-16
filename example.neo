@@ -2,9 +2,11 @@
 
 This is some stuff
 
--- p
+This is the second line of the headline
 
-this is some data for some thing that's the thing
+-- htmll
+
+<div class="alfa">basic HTML</div>
 
 -- p 
 -- autofocus
@@ -23,8 +25,6 @@ more text
 - delta echo
 
 - bravo kilo
-
-with more text
 
 -- todo
 -- class: alfa

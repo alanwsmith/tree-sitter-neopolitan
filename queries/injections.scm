@@ -1,4 +1,4 @@
-((html_body) @injection.content 
+((html_section_body) @injection.content 
  (#set! injection.language "html")
 )
 

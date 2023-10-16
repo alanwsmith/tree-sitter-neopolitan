@@ -1,19 +1,20 @@
 module.exports = grammar({
   name: 'neopolitan',
   rules: {
-    source_file: $ => 
+    source_file: $ =>
       repeat1(
-      choice(
-        $.code_start_section,
-        $.code_end_section,
-        $.list_section,
-        $.html_start_section,
-        $.html_end_section,
-        $.p_section,
-        $.title_section,
-        $.todo_section,
-      )
-    ),
+        choice(
+          $.code_start_section,
+          $.code_end_section,
+          // $.html_container_start,
+          // $.html_container_end,
+          $.html_section,
+          $.list_section,
+          $.p_section,
+          $.title_section,
+          $.todo_section,
+        )
+      ),
 
     _attr: $ => choice(
       field("attr_bool", $.attr_bool),
@@ -72,27 +73,36 @@ module.exports = grammar({
 
     headline: $ => alias($.paragraph, 'headline'),
 
-    html_end_section: $ => seq(
+    html_section: $ => seq(
       $.section_dashes,
       $.single_space,
-      $.section_start_end_token,
-      $.html_section_token,
+      $.html_token,
       $.newline,
+      optional(repeat1($._attr)),
       $.newline,
-      repeat1($.paragraph),
+      $.html_section_body,
+      $.newline,
     ),
 
-    html_start_section: $ => seq(
-      $.section_dashes,
-      $.single_space,
-      $.html_section_token,
-      $.section_start_end_token,
-      $.newline,
-      $.newline,
-      $.html_body,
-    ),
+    // html_container_end: $ => seq(
+    //   $.section_dashes,
+    //   $.single_space,
+    //   $.section_start_end_token,
+    //   $.html_token,
+    //   $.newline,
+    //   $.newline,
+    //   repeat1($.paragraph),
+    // ),
 
-    html_section_token: _ => "html",
+    // html_container_start: $ => seq(
+    //   $.section_dashes,
+    //   $.single_space,
+    //   $.html_token,
+    //   $.section_start_end_token,
+    //   $.newline,
+    //   $.newline,
+    //   $.html_body,
+    // ),
 
     initial_word_chars: $ => choice($.non_lt_char, $.lt_with_non_lt_char),
 
@@ -131,9 +141,10 @@ module.exports = grammar({
       $.single_space,
       $.p_token,
       $.newline,
-      optional(repeat1($._attr)),
+      // optional(repeat1($._attr)),
       $.newline,
-      repeat1($.paragraph),
+      // repeat1($.paragraph),
+      //$.newline,
     ),
 
     // TODO: split out to paragraph body 
@@ -168,14 +179,14 @@ module.exports = grammar({
     section_start_end_token: _ => "/",
 
     title_section: $ => seq(
-        $.section_dashes,
-        $.single_space,
-        $.title_token,
-        $.newline,
-        optional(repeat1($._attr)),
-        $.newline,
-        $.headline,
-        optional(repeat1($.paragraph)),
+      $.section_dashes,
+      $.single_space,
+      $.title_token,
+      $.newline,
+      optional(repeat1($._attr)),
+      $.newline,
+      $.headline,
+      optional(repeat1($.paragraph)),
     ),
 
     todo_left_bracket: _ => "[",
@@ -240,7 +251,9 @@ module.exports = grammar({
 
   externals: $ => [
     $.code_body,
-    $.html_body,
+    $.html_container_body,
+    $.html_section_body,
+    $.html_token,
     $.list_token,
     $.p_token,
     $.section_dashes,

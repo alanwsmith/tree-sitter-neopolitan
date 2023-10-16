@@ -239,54 +239,34 @@
     }
   },
   {
-    "type": "html_end_section",
+    "type": "html_section",
     "named": true,
-    "fields": {},
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "html_section_token",
+          "type": "attr_kv_pair",
           "named": true
         },
         {
-          "type": "newline",
+          "type": "html_section_body",
           "named": true
         },
         {
-          "type": "paragraph",
-          "named": true
-        },
-        {
-          "type": "section_dashes",
-          "named": true
-        },
-        {
-          "type": "section_start_end_token",
-          "named": true
-        },
-        {
-          "type": "single_space",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "html_start_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "html_body",
-          "named": true
-        },
-        {
-          "type": "html_section_token",
+          "type": "html_token",
           "named": true
         },
         {
@@ -295,10 +275,6 @@
         },
         {
           "type": "section_dashes",
-          "named": true
-        },
-        {
-          "type": "section_start_end_token",
           "named": true
         },
         {
@@ -437,36 +413,17 @@
   {
     "type": "p_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "attr_kv_pair",
-          "named": true
-        },
         {
           "type": "newline",
           "named": true
         },
         {
           "type": "p_token",
-          "named": true
-        },
-        {
-          "type": "paragraph",
           "named": true
         },
         {
@@ -566,11 +523,7 @@
           "named": true
         },
         {
-          "type": "html_end_section",
-          "named": true
-        },
-        {
-          "type": "html_start_section",
+          "type": "html_section",
           "named": true
         },
         {
@@ -771,11 +724,11 @@
     "named": true
   },
   {
-    "type": "html_body",
+    "type": "html_section_body",
     "named": true
   },
   {
-    "type": "html_section_token",
+    "type": "html_token",
     "named": true
   },
   {

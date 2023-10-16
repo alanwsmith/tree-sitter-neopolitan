@@ -3,8 +3,10 @@
 #include <tree_sitter/parser.h>
 
 enum TokenType {
-  CODE_START_TERMINATOR,
-  HTML_START_TERMINATOR,
+  CODE_BODY_TERMINATOR,
+  HTML_BODY_TERMINATOR,
+  HTML_SECTION_BODY,
+  HTML_TOKEN,
   LIST_TOKEN,
   P_TOKEN,
   SECTION_DASHES,
@@ -71,44 +73,44 @@ static bool is_section_dashes(TSLexer *lexer) {
   };
 };
 
-static bool token_matcher(TSLexer *lexer) {
-  // prevent the lexer from moving until
-  // a match is found
-  lexer->mark_end(lexer);
-  // define the patters and enums
-  char patterns[2][20] = {"title", "todo"};
-  TokenType token_enums[2] = {TITLE_TOKEN, TODO_TOKEN};
-  // Load a set of characters so you can
-  // replay it (since the lexer can't back up)
-  int lexer_chars[20];
-  int lexer_load_index;
-  for (lexer_load_index = 0; lexer_load_index < 20; lexer_load_index++) {
-    lexer_chars[lexer_load_index] = lexer->lookahead;
-    lexer->advance(lexer, false);
-  }
-  int pattern_index;
-  for (pattern_index = 0; pattern_index < 2; pattern_index++) {
-    bool found_token = true;
-    size_t len = strlen(patterns[pattern_index]);
-    int tracker;
-    for (tracker = 0; tracker < len; tracker++) {
-      if (lexer_chars[tracker] != patterns[pattern_index][tracker]) {
-        found_token = false;
-      }
-    }
-    if (found_token) {
-      // move the playhead forward
-      int move_count;
-      for (move_count = tracker; move_count > 0; move_count--) {
-        lexer->advance(lexer, false);
-        lexer->mark_end(lexer);
-      }
-      lexer->result_symbol = token_enums[pattern_index];
-      return true;
-    };
-  };
-  return false;
-}
+/* static bool token_matcher(TSLexer *lexer) { */
+/*   // prevent the lexer from moving until */
+/*   // a match is found */
+/*   lexer->mark_end(lexer); */
+/*   // define the patters and enums */
+/*   char patterns[2][20] = {"title", "todo"}; */
+/*   TokenType token_enums[2] = {TITLE_TOKEN, TODO_TOKEN}; */
+/*   // Load a set of characters so you can */
+/*   // replay it (since the lexer can't back up) */
+/*   int lexer_chars[20]; */
+/*   int lexer_load_index; */
+/*   for (lexer_load_index = 0; lexer_load_index < 20; lexer_load_index++) { */
+/*     lexer_chars[lexer_load_index] = lexer->lookahead; */
+/*     lexer->advance(lexer, false); */
+/*   } */
+/*   int pattern_index; */
+/*   for (pattern_index = 0; pattern_index < 2; pattern_index++) { */
+/*     bool found_token = true; */
+/*     size_t len = strlen(patterns[pattern_index]); */
+/*     int tracker; */
+/*     for (tracker = 0; tracker < len; tracker++) { */
+/*       if (lexer_chars[tracker] != patterns[pattern_index][tracker]) { */
+/*         found_token = false; */
+/*       } */
+/*     } */
+/*     if (found_token) { */
+/*       // move the playhead forward */
+/*       int move_count; */
+/*       for (move_count = tracker; move_count > 0; move_count--) { */
+/*         lexer->advance(lexer, false); */
+/*         lexer->mark_end(lexer); */
+/*       } */
+/*       lexer->result_symbol = token_enums[pattern_index]; */
+/*       return true; */
+/*     }; */
+/*   }; */
+/*   return false; */
+/* } */
 
 static bool is_exact_match(TSLexer *lexer, char *pattern) {
   lexer->mark_end(lexer);
@@ -136,7 +138,6 @@ static bool is_exact_match(TSLexer *lexer, char *pattern) {
 
 static bool terminator(TSLexer *lexer, char *pattern) {
   // switch from letters to unicode codepoints
-  lexer->mark_end(lexer);
   size_t len = strlen(pattern);
   int char_ints[len];
   int char_count;
@@ -154,8 +155,8 @@ static bool terminator(TSLexer *lexer, char *pattern) {
       };
     } else {
       tracker = 0;
-      lexer->advance(lexer, false);
       lexer->mark_end(lexer);
+      lexer->advance(lexer, false);
     };
   }
   return false;
@@ -179,58 +180,91 @@ static bool find_token(TSLexer *lexer) {
   // 11. Update grammer.js
   // 12. Update highlights.js
 
-  char patterns[4][6] = {"list", "p", "title", "todo"};
-  TokenType tokens[4] = {LIST_TOKEN, P_TOKEN, TITLE_TOKEN, TODO_TOKEN};
-  bool matches[4] = {true, true, true, true};
-  /* int current_match; */
+  char patterns[5][6] = {"html", "list", "p", "title", "todo"};
+  TokenType tokens[5] = {HTML_TOKEN, LIST_TOKEN, P_TOKEN, TITLE_TOKEN,
+                         TODO_TOKEN};
+  bool matches[5] = {true, true, true, true, true};
 
-  // set the `<` to the same value as the
-  // second level of the patters[][#] to
-  // limit the movement to just the lenght
-  // of the parser. (Actually, probably need
-  // to add one to check for whitespace or
-  // newline to handle cases like `-- p` and
-  // whatever else starts with `-- p...` or
-  // some other letter
+  int current_match = -1;
   int char_index;
   for (char_index = 0; char_index < 6; char_index++) {
+    lexer->mark_end(lexer);
     int target_char = lexer->lookahead;
-    /* printf("Target Char: %d\n", target_char); */
+    // printf("Target Char: %d\n", target_char);
 
     // hit the end so return
     if (target_char == 10 || target_char == 32) {
-      return true;
-    }
+      if (current_match >= 0) {
+        lexer->result_symbol = tokens[current_match];
+        return true;
+      } else {
+        return false;
+      }
+    };
 
     int pattern_index;
-    for (pattern_index = 0; pattern_index < 4; pattern_index++) {
+    // TODO: Set this to automatically pull the length of the array
+    for (pattern_index = 0; pattern_index < 5; pattern_index++) {
       if (matches[pattern_index]) {
+        printf("THING: %d - %d - %d - %d\n", pattern_index, char_index,
+               target_char, patterns[pattern_index][char_index]);
+        // if (patterns[pattern_index][char_index] != 0) {
         int check_char = patterns[pattern_index][char_index];
-        /* printf("  Checking pattern %d for match: %d\n", pattern_index, */
-        /*        check_char); */
+        //  printf("  Checking pattern %d for match: %d\n", pattern_index,
+        //      check_char);
         if (check_char == target_char) {
-          /* printf("    Match in"); */
-          lexer->result_symbol = tokens[pattern_index];
+          current_match = pattern_index;
+          //  printf("    Match in");
+          // lexer->result_symbol = tokens[pattern_index];
         } else {
+          current_match = -1;
           matches[pattern_index] = false;
         }
+        // }
       }
     }
     lexer->advance(lexer, false);
-    lexer->mark_end(lexer);
   };
   return false;
 };
 
+static bool is_html_section_body(TSLexer *lexer) {
+  // printf("HEREREWERER\n");
+  while (lexer->eof(lexer) == false) {
+    int active_char = lexer->lookahead;
+    // printf(" - %d\n", active_char);
+    if (active_char == 10) {
+      // no need to add "\n" here because you're
+      // already on the newline
+      char end_pattern[4] = "-- ";
+      if (terminator(lexer, end_pattern)) {
+        return true;
+      };
+    };
+    lexer->advance(lexer, false);
+    lexer->mark_end(lexer);
+  }
+  return false;
+}
+
 bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
                                                   const bool *valid_symbols) {
+
+  // NOTE: these really should be set to only
+  // update result_symbol if there's a match.
+
   if (!valid_symbols[ERROR_SENTINEL]) {
-    if (valid_symbols[CODE_START_TERMINATOR]) {
-      lexer->result_symbol = CODE_START_TERMINATOR;
+    if (valid_symbols[CODE_BODY_TERMINATOR]) {
+      lexer->result_symbol = CODE_BODY_TERMINATOR;
       char code_end[9] = "-- /code";
       return terminator(lexer, code_end);
-    } else if (valid_symbols[HTML_START_TERMINATOR]) {
-      lexer->result_symbol = HTML_START_TERMINATOR;
+    } else if (valid_symbols[HTML_SECTION_BODY]) {
+      lexer->result_symbol = HTML_SECTION_BODY;
+      return is_html_section_body(lexer);
+      // TODO: deprecate HTML_BODY_TERMINATOR once
+      // HTML_CONTAINER_BODY is in place
+    } else if (valid_symbols[HTML_BODY_TERMINATOR]) {
+      lexer->result_symbol = HTML_BODY_TERMINATOR;
       char html_end[9] = "-- /html";
       return terminator(lexer, html_end);
     } else if (valid_symbols[SECTION_DASHES]) {
@@ -242,8 +276,9 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
     };
     // This is the new attempt to get section
     // and container tokens. NOTE SURE IF THE check
-    if (valid_symbols[TITLE_TOKEN] || valid_symbols[TODO_TOKEN] ||
-        valid_symbols[P_TOKEN]) {
+    if (valid_symbols[HTML_TOKEN] || valid_symbols[LIST_TOKEN] ||
+        valid_symbols[P_TOKEN] || valid_symbols[TITLE_TOKEN] ||
+        valid_symbols[TODO_TOKEN]) {
       bool response = find_token(lexer);
       return response;
     }
