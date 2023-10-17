@@ -4,13 +4,14 @@ This is some stuff
 
 This is the second line of the headline
 
--- code
--- rust
+-- code/
+-- python
 
 fn main() {
   println!("asdf");
 }
 
+-- /code
 
 -- html
 
@@ -45,24 +46,11 @@ more text
 
 [etc] romeo foxtrot
 
--- html/
+-- p
 
-<a href="asdf">
-  <div>Ello, world</div>
-</a>
-
--- /html
+asdf
 
 This is after the html section
-
--- code/
--- rust 
-
-for whatever in range(0..12):
-  something = []
-  print("python highlighed")
-
--- /code
 
 -- code/
 -- rust
@@ -91,14 +79,11 @@ for whatever in range(0..12):
 
 -- /code
 
-this line has to be here for now
-
--- html/
+-- html
 
 <p>alfa bravo</p>
 
--- /html
-
+-- 
 
 
 

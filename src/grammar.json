@@ -8,6 +8,10 @@
         "members": [
           {
             "type": "SYMBOL",
+            "name": "code_container"
+          },
+          {
+            "type": "SYMBOL",
             "name": "code_section"
           },
           {
@@ -127,6 +131,86 @@
     "attr_value": {
       "type": "PATTERN",
       "value": "[^\\n]+"
+    },
+    "code_container": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "container_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_attr"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "FIELD",
+          "name": "code_container_body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "code_container_body"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "container_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        }
+      ]
     },
     "code_section": {
       "type": "SEQ",
@@ -715,11 +799,19 @@
   "externals": [
     {
       "type": "SYMBOL",
+      "name": "code_container_body"
+    },
+    {
+      "type": "SYMBOL",
       "name": "code_section_body"
     },
     {
       "type": "SYMBOL",
       "name": "code_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "container_token"
     },
     {
       "type": "SYMBOL",

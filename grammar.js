@@ -4,12 +4,10 @@ module.exports = grammar({
     source_file: $ =>
       repeat1(
         choice(
-          // $.code_container_start,
-          // $.code_container_end,
-          // $.html_container_start,
-          // $.html_container_end,
+          $.code_container,
           $.code_section,
           $.html_section,
+          // $.html_container,
           $.list_section,
           $.p_section,
           $.title_section,
@@ -69,6 +67,24 @@ module.exports = grammar({
     //   $.newline,
     //   field('code_body', $.code_body),
     // ),
+
+    code_container: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.code_token,
+      $.container_token,
+      $.newline,
+      optional(repeat1($._attr)),
+      $.newline,
+      field("code_container_body", $.code_container_body),
+      $.newline,
+      $.section_dashes,
+      $.single_space,
+      $.container_token,
+      $.code_token,
+      $.newline,
+      $.newline,
+    ),
 
     code_section: $ => seq(
       $.section_dashes,
@@ -259,8 +275,10 @@ module.exports = grammar({
   extras: _ => [],
 
   externals: $ => [
+    $.code_container_body,
     $.code_section_body,
     $.code_token,
+    $.container_token,
     $.html_container_body,
     $.html_section_body,
     $.html_token,

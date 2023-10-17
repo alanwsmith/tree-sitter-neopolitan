@@ -3,8 +3,10 @@
 #include <tree_sitter/parser.h>
 
 enum TokenType {
+  CODE_CONTAINER_BODY,
   CODE_SECTION_BODY,
   CODE_TOKEN,
+  CONTAINER_TOKEN,
   HTML_BODY_TERMINATOR,
   HTML_SECTION_BODY,
   HTML_TOKEN,
@@ -192,8 +194,9 @@ static bool find_token(TSLexer *lexer) {
     int target_char = lexer->lookahead;
     // printf("Target Char: %d\n", target_char);
 
-    // hit the end so return
-    if (target_char == 10 || target_char == 32) {
+    // hit the end so return (47 is for the dash
+    // which is the container token
+    if (target_char == 10 || target_char == 32 || target_char == 47) {
       int match_walker;
       for (match_walker = 0; match_walker < 6; match_walker++) {
         // printf("  Checking in with %d\n", match_walker);
@@ -271,6 +274,25 @@ static bool is_html_section_body(TSLexer *lexer) {
   return false;
 };
 
+static bool is_code_container_body(TSLexer *lexer) {
+  // printf("HEREREWERER\n");
+  while (lexer->eof(lexer) == false) {
+    int active_char = lexer->lookahead;
+    // printf(" - %d\n", active_char);
+    if (active_char == 10) {
+      // no need to add "\n" here because you're
+      // already on the newline
+      char end_pattern[9] = "-- /code";
+      if (terminator(lexer, end_pattern)) {
+        return true;
+      };
+    };
+    lexer->advance(lexer, false);
+    lexer->mark_end(lexer);
+  };
+  return false;
+};
+
 bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
                                                   const bool *valid_symbols) {
 
@@ -278,15 +300,36 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
   // update result_symbol if there's a match.
 
   if (!valid_symbols[ERROR_SENTINEL]) {
+
+    if (valid_symbols[CODE_CONTAINER_BODY]) {
+      if (is_code_container_body(lexer)) {
+        lexer->result_symbol = CODE_CONTAINER_BODY;
+        return true;
+      } else {
+        return false;
+      };
+    };
+
     if (valid_symbols[CODE_SECTION_BODY]) {
       if (is_code_section_body(lexer)) {
-        // printf("HHHHHHHHHHHHHHHH\n");
         lexer->result_symbol = CODE_SECTION_BODY;
         return true;
       } else {
         return false;
-      }
-    } else if (valid_symbols[HTML_SECTION_BODY]) {
+      };
+    };
+
+    if (valid_symbols[CONTAINER_TOKEN]) {
+      char pattern[] = "/";
+      if (is_exact_match(lexer, pattern)) {
+        lexer->result_symbol = CONTAINER_TOKEN;
+        return true;
+      } else {
+        return false;
+      };
+    };
+
+    if (valid_symbols[HTML_SECTION_BODY]) {
       lexer->result_symbol = HTML_SECTION_BODY;
       return is_html_section_body(lexer);
       // TODO: deprecate HTML_BODY_TERMINATOR once
