@@ -6,8 +6,8 @@ module.exports = grammar({
         choice(
           $.code_container,
           $.code_section,
+          $.html_container,
           $.html_section,
-          // $.html_container,
           $.list_section,
           $.p_section,
           $.title_section,
@@ -98,6 +98,24 @@ module.exports = grammar({
     ),
 
     headline: $ => alias($.paragraph, 'headline'),
+
+    html_container: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.html_token,
+      $.container_token,
+      $.newline,
+      optional(repeat1($._attr)),
+      $.newline,
+      $.html_container_body,
+      $.newline,
+      $.section_dashes,
+      $.single_space,
+      $.container_token,
+      $.html_token,
+      $.newline,
+      $.newline,
+    ),
 
     html_section: $ => seq(
       $.section_dashes,
@@ -200,8 +218,6 @@ module.exports = grammar({
     ),
 
     section_dashes: _ => /-- +/,
-
-    section_start_end_token: _ => "/",
 
     title_section: $ => seq(
       $.section_dashes,

@@ -4,18 +4,12 @@ This is some stuff
 
 This is the second line of the headline
 
--- code/
--- python
+-- code
+-- rust
 
 fn main() {
   println!("asdf");
 }
-
--- /code
-
--- html
-
-<div class="alfa">basic HTML</div>
 
 -- p 
 -- autofocus
@@ -23,10 +17,16 @@ fn main() {
 -- class: bravo
 -- some other thing
 
-this is some test
-with some lines
 
-more text
+This is some test just to test how things
+look with a little more realistic filler
+content. 
+
+Yeah, we'll just keep going for a bit. Of
+course, there's way more going on in this
+than would be in a normal post. But some
+things will have this much code in it.
+
 
 -- list
 -- class: alfa
@@ -44,46 +44,42 @@ more text
 
 [x] charlie delta
 
-[etc] romeo foxtrot
+[x] romeo foxtrot
 
 -- p
 
-asdf
+This next section has the same
+python code sample highlighted
+by a few different languages.
+It's to confirm that the colors
+are different.
 
-This is after the html section
-
--- code/
--- rust
-
-for whatever in range(0..12):
-  something = []
-  print("rust highlighted")
-
--- /code
-
--- code/
--- javascript
-
-for whatever in range(0..12):
-  something = []
-  print("rust highlighted")
-
--- /code
-
--- code/
+-- code
 -- python
 
 for whatever in range(0..12):
   something = []
   print("rust highlighted")
 
--- /code
+-- code
+-- javascript
+
+for whatever in range(0..12):
+  something = []
+  print("rust highlighted")
+
+-- code
+-- rust
+
+for whatever in range(0..12):
+  something = []
+  print("rust highlighted")
 
 -- html
 
 <p>alfa bravo</p>
 
--- 
-
+-- cagegories
+-- some: thing
 
 

@@ -16,6 +16,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "html_container"
+          },
+          {
+            "type": "SYMBOL",
             "name": "html_section"
           },
           {
@@ -272,6 +276,82 @@
       },
       "named": false,
       "value": "headline"
+    },
+    "html_container": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "html_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "container_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_attr"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "html_container_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "container_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "html_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        }
+      ]
     },
     "html_section": {
       "type": "SEQ",
@@ -550,10 +630,6 @@
     "section_dashes": {
       "type": "PATTERN",
       "value": "-- +"
-    },
-    "section_start_end_token": {
-      "type": "STRING",
-      "value": "/"
     },
     "title_section": {
       "type": "SEQ",

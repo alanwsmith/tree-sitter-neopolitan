@@ -1,6 +1,3 @@
-((html_section_body) @injection.content 
- (#set! injection.language "html"))
-
 ((code_section
     attr_bool: 
       (attr_bool
@@ -16,3 +13,8 @@
           (attr_bool_value) @injection.language)
     code_container_body: (code_container_body) @injection.content))
 
+((html_container_body) @injection.content 
+ (#set! injection.language "html"))
+
+((html_section_body) @injection.content 
+ (#set! injection.language "html"))

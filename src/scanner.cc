@@ -7,7 +7,7 @@ enum TokenType {
   CODE_SECTION_BODY,
   CODE_TOKEN,
   CONTAINER_TOKEN,
-  HTML_BODY_TERMINATOR,
+  HTML_CONTAINER_BODY,
   HTML_SECTION_BODY,
   HTML_TOKEN,
   LIST_TOKEN,
@@ -329,16 +329,20 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       };
     };
 
+    if (valid_symbols[HTML_CONTAINER_BODY]) {
+      lexer->result_symbol = HTML_CONTAINER_BODY;
+      char html_end[9] = "-- /html";
+      return terminator(lexer, html_end);
+    };
+
     if (valid_symbols[HTML_SECTION_BODY]) {
       lexer->result_symbol = HTML_SECTION_BODY;
       return is_html_section_body(lexer);
       // TODO: deprecate HTML_BODY_TERMINATOR once
       // HTML_CONTAINER_BODY is in place
-    } else if (valid_symbols[HTML_BODY_TERMINATOR]) {
-      lexer->result_symbol = HTML_BODY_TERMINATOR;
-      char html_end[9] = "-- /html";
-      return terminator(lexer, html_end);
-    } else if (valid_symbols[SECTION_DASHES]) {
+    };
+
+    if (valid_symbols[SECTION_DASHES]) {
       lexer->result_symbol = SECTION_DASHES;
       return is_section_dashes(lexer);
     } else if (valid_symbols[SINGLE_SPACE]) {

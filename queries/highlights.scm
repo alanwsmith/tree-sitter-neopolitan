@@ -3,9 +3,9 @@
 (attr_key) @neo_attr_key
 (attr_separator) @neo_attr_separator
 (attr_value) @neo_attr_value
-(html_token) @neo_section_token
 (code_token) @neo_section_token
-(section_start_end_token) @neo_section_start_end_token
+(container_token) @neo_section_start_end_token
+(html_token) @neo_section_token
 (list_dash) @neo_list_dash
 (list_token) @neo_section_token
 (nb_whitespace) @neo_nb_whitespace

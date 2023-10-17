@@ -1,43 +1,30 @@
 ================================================================================
-SOLO HTML Section - Basic
+SOLO HTML Container - Basic
 ================================================================================
--- html
+-- html/
 
 <p>
   Hello, world
 </p>
 
--- p
-
-Other Text
+-- /html
 
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (html_section
+  (html_container
     (section_dashes)
     (single_space)
     (html_token)
+    (container_token)
     (newline)
     (newline)
-    (html_section_body)
-    (newline))
-  (p_section
+    (html_container_body)
+    (newline)
     (section_dashes)
     (single_space)
-    (p_token)
+    (container_token)
+    (html_token)
     (newline)
-    (newline)
-    (paragraph
-      (paragraph_first_word
-        (non_lt_char)
-        (following_word_chars))
-      (nb_whitespace)
-      (word
-        (initial_word_chars
-          (non_lt_char))
-        (following_word_chars))
-      (newline)
-    (newline))))
-
+    (newline)))
