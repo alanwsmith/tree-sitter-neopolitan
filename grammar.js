@@ -69,7 +69,7 @@ module.exports = grammar({
       $.code_token,
       $.newline,
       $.newline,
-      optional($.empty_space),
+      // optional($.empty_space),
       // TODO: Add parsing for following 
       // paragraphs here
     ),
@@ -97,7 +97,7 @@ module.exports = grammar({
       $.newline,
       $.headline,
       optional(repeat1($.paragraph)),
-      optional($.empty_space),
+      // optional($.empty_space),
     ),
 
     h2_section: $ => seq(
@@ -109,7 +109,7 @@ module.exports = grammar({
       $.newline,
       $.headline,
       optional(repeat1($.paragraph)),
-      optional($.empty_space),
+      // optional($.empty_space),
     ),
 
     h3_section: $ => seq(
@@ -121,7 +121,7 @@ module.exports = grammar({
       $.newline,
       $.headline,
       optional(repeat1($.paragraph)),
-      optional($.empty_space),
+      // optional($.empty_space),
     ),
 
     h4_section: $ => seq(
@@ -133,7 +133,7 @@ module.exports = grammar({
       $.newline,
       $.headline,
       optional(repeat1($.paragraph)),
-      optional($.empty_space),
+      // optional($.empty_space),
     ),
 
     h5_section: $ => seq(
@@ -145,7 +145,7 @@ module.exports = grammar({
       $.newline,
       $.headline,
       optional(repeat1($.paragraph)),
-      optional($.empty_space),
+      // optional($.empty_space),
     ),
 
     h6_section: $ => seq(
@@ -157,7 +157,7 @@ module.exports = grammar({
       $.newline,
       $.headline,
       optional(repeat1($.paragraph)),
-      optional($.empty_space),
+      // optional($.empty_space),
     ),
 
     headline: $ => alias($.paragraph, 'headline'),
@@ -178,7 +178,7 @@ module.exports = grammar({
       $.html_token,
       $.newline,
       $.newline,
-      optional($.empty_space),
+      // optional($.empty_space),
       // TODO: Add parsing for following 
       // paragraphs here
     ),
@@ -238,7 +238,7 @@ module.exports = grammar({
       optional(repeat1($._attr)),
       $.newline,
       repeat1($.paragraph),
-      optional($.empty_space),
+      // optional($.empty_space),
     ),
 
     // TODO: split out to paragraph body 
@@ -279,7 +279,10 @@ module.exports = grammar({
       $.newline,
       $.headline,
       optional(repeat1($.paragraph)),
-      optional($.empty_space),
+      // this is requiring two empty lines
+      // right now. Will look at that at some 
+      // point
+      // optional($.empty_space),
     ),
 
     todo_left_bracket: _ => "[",

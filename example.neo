@@ -2,14 +2,16 @@
 
 Syntax Highlighting Check
 
+-- h2
+
+Some stuff
+
 -- code
 -- rust
 
 fn main() {
   println!("hello, syntax");
 }
-
-
 
 -- p
 
@@ -21,7 +23,6 @@ Yeah, we'll just keep going for a bit. Of
 course, there's way more going on in this
 than would be in a normal post. But some
 things will have this much code in it.
-
 
 -- list
 -- class: alfa

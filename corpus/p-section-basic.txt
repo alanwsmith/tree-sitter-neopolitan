@@ -7,8 +7,6 @@ alfa bravo charlie
 delta echo
 
 
-
-
 --------------------------------------------------------------------------------
 
 (source_file
@@ -43,5 +41,4 @@ delta echo
           (non_lt_char))
         (following_word_chars))
       (newline)
-      (newline))
-  (empty_space)))
+      (newline))))

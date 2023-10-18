@@ -120,10 +120,6 @@
           "named": true
         },
         {
-          "type": "empty_space",
-          "named": true
-        },
-        {
           "type": "newline",
           "named": true
         },
@@ -256,10 +252,6 @@
           "named": true
         },
         {
-          "type": "empty_space",
-          "named": true
-        },
-        {
           "type": "h1_token",
           "named": true
         },
@@ -307,10 +299,6 @@
       "types": [
         {
           "type": "attr_kv_pair",
-          "named": true
-        },
-        {
-          "type": "empty_space",
           "named": true
         },
         {
@@ -364,10 +352,6 @@
           "named": true
         },
         {
-          "type": "empty_space",
-          "named": true
-        },
-        {
           "type": "h3_token",
           "named": true
         },
@@ -415,10 +399,6 @@
       "types": [
         {
           "type": "attr_kv_pair",
-          "named": true
-        },
-        {
-          "type": "empty_space",
           "named": true
         },
         {
@@ -472,10 +452,6 @@
           "named": true
         },
         {
-          "type": "empty_space",
-          "named": true
-        },
-        {
           "type": "h5_token",
           "named": true
         },
@@ -523,10 +499,6 @@
       "types": [
         {
           "type": "attr_kv_pair",
-          "named": true
-        },
-        {
-          "type": "empty_space",
           "named": true
         },
         {
@@ -608,10 +580,6 @@
         },
         {
           "type": "container_token",
-          "named": true
-        },
-        {
-          "type": "empty_space",
           "named": true
         },
         {
@@ -843,10 +811,6 @@
           "named": true
         },
         {
-          "type": "empty_space",
-          "named": true
-        },
-        {
           "type": "newline",
           "named": true
         },
@@ -1026,10 +990,6 @@
       "types": [
         {
           "type": "attr_kv_pair",
-          "named": true
-        },
-        {
-          "type": "empty_space",
           "named": true
         },
         {

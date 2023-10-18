@@ -30,5 +30,4 @@ Basic Title Example
           (non_lt_char))
         (following_word_chars))
       (newline)
-      (newline))
-    (empty_space)))
+      (newline))))
