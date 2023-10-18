@@ -9,6 +9,11 @@ enum TokenType {
   CONTAINER_TOKEN,
   EMPTY_SPACE,
   H1_TOKEN,
+  H2_TOKEN,
+  H3_TOKEN,
+  H4_TOKEN,
+  H5_TOKEN,
+  H6_TOKEN,
   HTML_CONTAINER_BODY,
   HTML_SECTION_BODY,
   HTML_TOKEN,
@@ -173,26 +178,27 @@ static bool find_token(TSLexer *lexer) {
 
   // Adding a new one:
   //
-  // 1. Increment `patterns[#]`
-  // 2. Adjust `patterns[][#]` to longest value
+  // 1. Increment `items`
+  // 2. Adjust `patterns[][#]` to longest string lenght
   // 3. Add the new string to `patterns[]` alphabetically
-  // 4. Increment `tokens[#]`
-  // 5. Add the new enum to `tokens[]` alphabetically
-  // 6. Increment `matches[#]`
-  // 7. Add a new `true` to `matches[]`
-  // 8. Increment for(.. char_index ..)
-  // 9. Increment for(.. pattern_index ..)
-  // 10. Add enum value at top alphabetically
-  // 11. Update grammer.js
-  // 12. Update highlights.js
+  // 4. Add the new enum to `tokens[]` alphabetically
+  // 5. Add a new `true` to `matches[]`
+  // 6. Add enum value at top alphabetically
+  // 7. Update grammer.js
+  // 8. Update highlights.js
 
-  char patterns[7][6] = {"code", "h1", "html", "list", "p", "title", "todo"};
-  TokenType tokens[7] = {CODE_TOKEN, H1_TOKEN,    HTML_TOKEN, LIST_TOKEN,
-                         P_TOKEN,    TITLE_TOKEN, TODO_TOKEN};
-  bool matches[7] = {true, true, true, true, true, true, true};
+  const int items = 12;
+
+  char patterns[items][6] = {"code", "h1",   "h2",   "h3", "h4",    "h5",
+                             "h6",   "html", "list", "p",  "title", "todo"};
+  TokenType tokens[items] = {CODE_TOKEN, H1_TOKEN, H2_TOKEN,    H3_TOKEN,
+                             H4_TOKEN,   H5_TOKEN, H6_TOKEN,    HTML_TOKEN,
+                             LIST_TOKEN, P_TOKEN,  TITLE_TOKEN, TODO_TOKEN};
+  bool matches[items] = {true, true, true, true, true, true,
+                         true, true, true, true, true, true};
 
   int char_index;
-  for (char_index = 0; char_index < 7; char_index++) {
+  for (char_index = 0; char_index < items; char_index++) {
     int target_char = lexer->lookahead;
     // printf("Target Char: %d\n", target_char);
 
@@ -200,7 +206,7 @@ static bool find_token(TSLexer *lexer) {
     // which is the container token
     if (target_char == 10 || target_char == 32 || target_char == 47) {
       int match_walker;
-      for (match_walker = 0; match_walker < 7; match_walker++) {
+      for (match_walker = 0; match_walker < items; match_walker++) {
         // printf("  Checking in with %d\n", match_walker);
         if (matches[match_walker]) {
           // printf("  Send it\n");
@@ -214,7 +220,7 @@ static bool find_token(TSLexer *lexer) {
 
     int pattern_index;
     // TODO: Set this to automatically pull the length of the array
-    for (pattern_index = 0; pattern_index < 6; pattern_index++) {
+    for (pattern_index = 0; pattern_index < items; pattern_index++) {
       if (matches[pattern_index]) {
         // printf("THING: %d - %d - %d - %d\n", pattern_index, char_index,
         //      target_char, patterns[pattern_index][char_index]);
@@ -378,9 +384,11 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
     // This is the new attempt to get section
     // and container tokens. NOTE SURE IF THE check
     if (valid_symbols[CODE_TOKEN] || valid_symbols[HTML_TOKEN] ||
-        valid_symbols[H1_TOKEN] || valid_symbols[LIST_TOKEN] ||
-        valid_symbols[P_TOKEN] || valid_symbols[TITLE_TOKEN] ||
-        valid_symbols[TODO_TOKEN]) {
+        valid_symbols[H1_TOKEN] || valid_symbols[H2_TOKEN] ||
+        valid_symbols[H3_TOKEN] || valid_symbols[H4_TOKEN] ||
+        valid_symbols[H5_TOKEN] || valid_symbols[H6_TOKEN] ||
+        valid_symbols[LIST_TOKEN] || valid_symbols[P_TOKEN] ||
+        valid_symbols[TITLE_TOKEN] || valid_symbols[TODO_TOKEN]) {
       bool response = find_token(lexer);
       return response;
     }
