@@ -16,6 +16,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "css_section"
+          },
+          {
+            "type": "SYMBOL",
             "name": "h1_section"
           },
           {
@@ -292,6 +296,58 @@
           "content": {
             "type": "SYMBOL",
             "name": "code_section_body"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        }
+      ]
+    },
+    "css_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "css_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_attr"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "FIELD",
+          "name": "css_section_body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "css_section_body"
           }
         },
         {
@@ -1437,6 +1493,14 @@
     {
       "type": "SYMBOL",
       "name": "container_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "css_section_body"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "css_token"
     },
     {
       "type": "SYMBOL",

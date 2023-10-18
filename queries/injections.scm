@@ -12,6 +12,10 @@
           (attr_bool_value) @injection.language)
     code_container_body: (code_container_body) @injection.content))
 
+
+((css_section_body) @injection.content 
+ (#set! injection.language "css"))
+
 ((html_container_body) @injection.content 
  (#set! injection.language "html"))
 

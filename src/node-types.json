@@ -210,6 +210,58 @@
     }
   },
   {
+    "type": "css_section",
+    "named": true,
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      },
+      "css_section_body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "css_section_body",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_kv_pair",
+          "named": true
+        },
+        {
+          "type": "css_token",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
+          "named": true
+        },
+        {
+          "type": "single_space",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "empty_todo_bracket",
     "named": true,
     "fields": {},
@@ -971,6 +1023,10 @@
           "named": true
         },
         {
+          "type": "css_section",
+          "named": true
+        },
+        {
           "type": "h1_section",
           "named": true
         },
@@ -1263,6 +1319,14 @@
   },
   {
     "type": "container_token",
+    "named": true
+  },
+  {
+    "type": "css_section_body",
+    "named": true
+  },
+  {
+    "type": "css_token",
     "named": true
   },
   {

@@ -7,6 +7,8 @@ enum TokenType {
   CODE_SECTION_BODY,
   CODE_TOKEN,
   CONTAINER_TOKEN,
+  CSS_SECTION_BODY,
+  CSS_TOKEN,
   EMPTY_SPACE,
   H1_TOKEN,
   H2_TOKEN,
@@ -190,16 +192,16 @@ static bool find_token(TSLexer *lexer) {
   // 7. Update grammer.js
   // 8. Update highlights.js
 
-  const int items = 14;
+  const int items = 15;
 
-  char patterns[items][7] = {"code",   "h1",    "h2",   "h3",   "h4",
-                             "h5",     "h6",    "html", "list", "p",
-                             "script", "title", "tldr", "todo"};
-  TokenType tokens[items] = {CODE_TOKEN, H1_TOKEN,  H2_TOKEN,     H3_TOKEN,
-                             H4_TOKEN,   H5_TOKEN,  H6_TOKEN,     HTML_TOKEN,
-                             LIST_TOKEN, P_TOKEN,   SCRIPT_TOKEN, TITLE_TOKEN,
-                             TLDR_TOKEN, TODO_TOKEN};
-  bool matches[items] = {true, true, true, true, true, true, true,
+  char patterns[items][7] = {"code", "css",    "h1",    "h2",   "h3",
+                             "h4",   "h5",     "h6",    "html", "list",
+                             "p",    "script", "title", "tldr", "todo"};
+  TokenType tokens[items] = {CODE_TOKEN,  CSS_TOKEN,  H1_TOKEN,  H2_TOKEN,
+                             H3_TOKEN,    H4_TOKEN,   H5_TOKEN,  H6_TOKEN,
+                             HTML_TOKEN,  LIST_TOKEN, P_TOKEN,   SCRIPT_TOKEN,
+                             TITLE_TOKEN, TLDR_TOKEN, TODO_TOKEN};
+  bool matches[items] = {true, true, true, true, true, true, true, true,
                          true, true, true, true, true, true, true};
 
   int char_index;
@@ -372,6 +374,15 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       };
     };
 
+    if (valid_symbols[CSS_SECTION_BODY]) {
+      if (is_any_code_section_body(lexer)) {
+        lexer->result_symbol = CSS_SECTION_BODY;
+        return true;
+      } else {
+        return false;
+      };
+    };
+
     if (valid_symbols[HTML_CONTAINER_BODY]) {
       lexer->result_symbol = HTML_CONTAINER_BODY;
       char html_end[9] = "-- /html";
@@ -411,13 +422,14 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       return is_single_space(lexer);
     };
 
-    if (valid_symbols[CODE_TOKEN] || valid_symbols[HTML_TOKEN] ||
-        valid_symbols[H1_TOKEN] || valid_symbols[H2_TOKEN] ||
-        valid_symbols[H3_TOKEN] || valid_symbols[H4_TOKEN] ||
-        valid_symbols[H5_TOKEN] || valid_symbols[H6_TOKEN] ||
-        valid_symbols[LIST_TOKEN] || valid_symbols[P_TOKEN] ||
-        valid_symbols[SCRIPT_TOKEN] || valid_symbols[TITLE_TOKEN] ||
-        valid_symbols[TLDR_TOKEN] || valid_symbols[TODO_TOKEN]) {
+    if (valid_symbols[CODE_TOKEN] || valid_symbols[CSS_TOKEN] ||
+        valid_symbols[HTML_TOKEN] || valid_symbols[H1_TOKEN] ||
+        valid_symbols[H2_TOKEN] || valid_symbols[H3_TOKEN] ||
+        valid_symbols[H4_TOKEN] || valid_symbols[H5_TOKEN] ||
+        valid_symbols[H6_TOKEN] || valid_symbols[LIST_TOKEN] ||
+        valid_symbols[P_TOKEN] || valid_symbols[SCRIPT_TOKEN] ||
+        valid_symbols[TITLE_TOKEN] || valid_symbols[TLDR_TOKEN] ||
+        valid_symbols[TODO_TOKEN]) {
       bool response = find_token(lexer);
       return response;
     }
