@@ -1,42 +1,104 @@
 -- title
--- class: alfa
 
-this is some stuff
+Tree-Sitter Syntax Highlighting Check
 
-with some data
+This is a test to see how the syntax highlighting is 
+shaping up in nvim-treesitter.
 
 -- html
+-- template: showbelow
 
-<a href="asdf">ello, world</a>
+<div class="alfa">
+  This outputs the HTML directly as well as creating a 
+  code block showing the source below it
+</div>
+
+-- p
+
+Some paragraphs with some random sentences like: Crack the 
+walnut with your sharp side teeth. Cut the pie into large 
+parts. 
+
+Dip the pail once and let it settle. Draw the chart with 
+heavy black lines. Pour the stew from the pot into the 
+plate.
+
+-- code
+-- rust
+
+fn main() {
+  println!("hello, syntax");
+}
+
+-- list
+
+- Keep the hatch tight and the watch constant. Lift the 
+square stone over the fence.
+
+Slide the tray across the glass top. Split the log with 
+a quick, sharp blow.
+
+- Tack the strip of carpet to the worn floor. Take the 
+match and strike it against your shoe.
+
+
+-- todo
+
+[] this item hasn't been done yet 
+
+[x] this one is complete 
+
+[in progress] still working on this 
+
+
+-- metadata
+-- date: 2023-10-18 01:05:11
+-- id: 2wvgcris
+-- site: aws
+-- template: post
+-- status: unpublished
+
+
+
+
+
 
 
 -- p
--- autofocus
--- id: tango
--- class: bravo
--- some other thing 
 
-this is a test
-with some lines
+This next section has the same
+python code sample highlighted
+by a few different languages.
+It's to confirm that the colors
+are different.
 
-more text
+-- code
+-- python
 
--- list
--- class: alfa
+for whatever in range(0..12):
+  something = []
+  print("rust highlighted")
 
-- delta echo
 
-- bravo kilo
+-- code
+-- javascript
 
-with more text
+for whatever in range(0..12):
+  something = []
+  print("rust highlighted")
 
--- todo
--- class: alfa
 
-[] sierra tango
+-- code
+-- rust
 
-[] echo whiskey
+for whatever in range(0..12):
+  something = []
+  print("rust highlighted")
 
-[x] charlie delta
+-- html
 
-[etc] romeo foxtrot
+<p>alfa bravo</p>
+
+
+-- categories
+-- some: thing

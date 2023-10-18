@@ -1,19 +1,17 @@
 ================================================================================
-Attribute - Key Value - Single 
+SOLO Metadata Section - Basic
 ================================================================================
--- p
--- class: alfa
-
-delta echo
+-- metadata
+-- class: foxtrot
 
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (p_section
+  (metadata_section
     (section_dashes)
     (single_space)
-    (p_token)
+    (metadata_token)
     (newline)
     (attr_kv_pair
       (attr_dashes)
@@ -23,15 +21,4 @@ delta echo
       (nb_whitespace)
       (attr_value)
       (newline))
-    (newline)
-    (paragraph
-      (paragraph_first_word
-        (non_lt_char)
-        (following_word_chars))
-      (nb_whitespace)
-      (word
-        (initial_word_chars
-          (non_lt_char))
-        (following_word_chars))
-      (newline)
-      (newline))))
+    (newline)))

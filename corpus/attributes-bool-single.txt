@@ -12,24 +12,23 @@ delta echo
 (source_file
   (p_section
     (section_dashes)
-    (p_section_token)
+    (single_space)
+    (p_token)
     (newline)
-    (attr
+    (attr_bool
       (attr_dashes)
       (nb_whitespace)
-      (attr_bool)
+      (attr_bool_value)
       (newline))
     (newline)
     (paragraph
       (paragraph_first_word
         (non_lt_char)
         (following_word_chars))
-      (wordbreak
-        (nb_whitespace))
+      (nb_whitespace)
       (word
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (wordbreak
-        (newline))
+      (newline)
       (newline))))

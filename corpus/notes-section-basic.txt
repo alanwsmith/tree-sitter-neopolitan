@@ -1,18 +1,20 @@
 ================================================================================
-List Section - One Item
+Notes Section - Multiple Items
 ================================================================================
--- list
+-- notes
 
-- whiskey alfa
+- papa charlie
+
+- victor kilo 
 
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (list_section
+  (notes_section
     (section_dashes)
     (single_space)
-    (list_token)
+    (notes_token)
     (newline)
     (newline)
     (list_item
@@ -20,7 +22,21 @@ List Section - One Item
       (nb_whitespace)
       (paragraph
         (paragraph_first_word
-          (non_lt_char)
+            (non_lt_char)
+          (following_word_chars))
+        (nb_whitespace)
+        (word
+          (initial_word_chars
+            (non_lt_char))
+          (following_word_chars))
+        (newline)
+      (newline)))
+    (list_item
+      (list_dash)
+      (nb_whitespace)
+      (paragraph
+        (paragraph_first_word
+            (non_lt_char)
           (following_word_chars))
         (nb_whitespace)
         (word
@@ -30,5 +46,3 @@ List Section - One Item
         (newline)
         (newline)))
       (empty_space)))
-          
-          

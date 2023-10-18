@@ -1,28 +1,42 @@
 ================================================================================
-Title Section - Basic
+Code Start End - With Language
 ================================================================================
--- title
- 
-Basic Title Example
+-- code/
+-- python
+
+print("foxtrot delta")
+
+-- /code
+
+kilo juliette
 
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (title_section
+  (code_start_section
     (section_dashes)
     (single_space)
-    (title_token)
+    (code_section_token)
+    (section_start_end_token)
+    (newline)
+    (attr_bool
+      (attr_dashes)
+      (nb_whitespace)
+      (attr_bool_value)
+      (newline))
+    (newline)
+    (code_body))
+  (code_end_section
+    (section_dashes)
+    (single_space)
+    (section_start_end_token)
+    (code_section_token)
     (newline)
     (newline)
-    (headline
+    (paragraph
       (paragraph_first_word
         (non_lt_char)
-        (following_word_chars))
-      (nb_whitespace)
-      (word
-        (initial_word_chars
-          (non_lt_char))
         (following_word_chars))
       (nb_whitespace)
       (word

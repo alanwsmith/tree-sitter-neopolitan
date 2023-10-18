@@ -1,11 +1,14 @@
 ================================================================================
 TODO Section - Checked Item
 ================================================================================
--- todo 
+-- todo
 
 [] alfa charlie 
 
 [x] bravo delta
+
+
+
 
 
 --------------------------------------------------------------------------------
@@ -13,7 +16,8 @@ TODO Section - Checked Item
 (source_file
   (todo_section
     (section_dashes)
-    (todo_section_token)
+    (single_space)
+    (todo_token)
     (newline)
     (newline)
     (todo_item
@@ -26,14 +30,12 @@ TODO Section - Checked Item
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
-            (wordbreak
-              (nb_whitespace))
+            (nb_whitespace)
           (word
             (initial_word_chars
               (non_lt_char))
           (following_word_chars))
-            (wordbreak
-              (newline)))
+            (newline))
             (newline))
     (todo_item
       (completed_todo_bracket
@@ -46,14 +48,13 @@ TODO Section - Checked Item
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
-            (wordbreak
-              (nb_whitespace))
+            (nb_whitespace)
           (word
             (initial_word_chars
               (non_lt_char))
           (following_word_chars))
-            (wordbreak
-              (newline)))
-        (newline))))
+            (newline))
+        (newline))
+      (empty_space)))
 
 

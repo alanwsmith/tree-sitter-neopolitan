@@ -13,7 +13,8 @@ List Section - Multiple Items
 (source_file
   (list_section
     (section_dashes)
-    (list_section_token)
+    (single_space)
+    (list_token)
     (newline)
     (newline)
     (list_item
@@ -23,14 +24,12 @@ List Section - Multiple Items
         (paragraph_first_word
             (non_lt_char)
           (following_word_chars))
-        (wordbreak
-          (nb_whitespace))
+        (nb_whitespace)
         (word
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
-        (wordbreak
-          (newline))
+        (newline)
       (newline)))
     (list_item
       (list_dash)
@@ -39,12 +38,11 @@ List Section - Multiple Items
         (paragraph_first_word
             (non_lt_char)
           (following_word_chars))
-        (wordbreak
-          (nb_whitespace))
+        (nb_whitespace)
         (word
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
-        (wordbreak
-          (newline))
-      (newline)))))
+        (newline)
+        (newline)))
+      (empty_space)))

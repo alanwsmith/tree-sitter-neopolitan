@@ -1,25 +1,36 @@
 ================================================================================
-Title Section - Basic
+Ref Section - Basic
 ================================================================================
--- title
- 
-Basic Title Example
+-- ref
+
+alfa bravo charlie
+delta echo
 
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (title_section
+  (ref_section
     (section_dashes)
     (single_space)
-    (title_token)
+    (ref_token)
     (newline)
     (newline)
-    (headline
+    (paragraph
       (paragraph_first_word
         (non_lt_char)
         (following_word_chars))
       (nb_whitespace)
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
+      (nb_whitespace)
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
+      (newline)
       (word
         (initial_word_chars
           (non_lt_char))

@@ -1,18 +1,20 @@
 ================================================================================
-Title Section - Basic
+H3 Section - Multi-line
 ================================================================================
--- title
+-- h4
  
-Basic Title Example
+Multi line Example
+
+Alfa bravo
 
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (title_section
+  (h4_section
     (section_dashes)
     (single_space)
-    (title_token)
+    (h4_token)
     (newline)
     (newline)
     (headline
@@ -23,6 +25,17 @@ Basic Title Example
       (word
         (initial_word_chars
           (non_lt_char))
+        (following_word_chars))
+      (nb_whitespace)
+      (word
+        (initial_word_chars
+          (non_lt_char))
+        (following_word_chars))
+      (newline)
+      (newline))
+    (paragraph
+      (paragraph_first_word
+        (non_lt_char)
         (following_word_chars))
       (nb_whitespace)
       (word

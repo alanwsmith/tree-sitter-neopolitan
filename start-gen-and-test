@@ -1,3 +1,3 @@
 #!/bin/bash
 
-watchexec --project-origin . -w grammar.js -w corpus -w queries ./gen-and-test
+watchexec --project-origin . -w grammar.js -w corpus -w queries -w src/scanner.cc ./gen-and-test

@@ -1,21 +1,24 @@
 ================================================================================
-Title Section - Basic
+TL;DR Container - Basic
 ================================================================================
--- title
- 
-Basic Title Example
+-- tldr/
+
+print("non-highlighted code")
+
+-- /tldr
 
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (title_section
+  (tldr_container
     (section_dashes)
     (single_space)
-    (title_token)
+    (tldr_token)
+    (container_token)
     (newline)
     (newline)
-    (headline
+    (paragraph
       (paragraph_first_word
         (non_lt_char)
         (following_word_chars))
@@ -24,10 +27,12 @@ Basic Title Example
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (nb_whitespace)
-      (word
-        (initial_word_chars
-          (non_lt_char))
-        (following_word_chars))
       (newline)
-      (newline))))
+      (newline))
+    (section_dashes)
+    (single_space)
+    (container_token)
+    (tldr_token)
+    (newline)
+    (newline)))
+
