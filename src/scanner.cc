@@ -20,7 +20,9 @@ enum TokenType {
   HTML_SECTION_BODY,
   HTML_TOKEN,
   LIST_TOKEN,
+  NOTES_TOKEN,
   P_TOKEN,
+  REF_TOKEN,
   SCRIPT_SECTION_BODY,
   SCRIPT_TOKEN,
   SECTION_DASHES,
@@ -88,45 +90,6 @@ static bool is_section_dashes(TSLexer *lexer) {
   };
 };
 
-/* static bool token_matcher(TSLexer *lexer) { */
-/*   // prevent the lexer from moving until */
-/*   // a match is found */
-/*   lexer->mark_end(lexer); */
-/*   // define the patters and enums */
-/*   char patterns[2][20] = {"title", "todo"}; */
-/*   TokenType token_enums[2] = {TITLE_TOKEN, TODO_TOKEN}; */
-/*   // Load a set of characters so you can */
-/*   // replay it (since the lexer can't back up) */
-/*   int lexer_chars[20]; */
-/*   int lexer_load_index; */
-/*   for (lexer_load_index = 0; lexer_load_index < 20; lexer_load_index++) { */
-/*     lexer_chars[lexer_load_index] = lexer->lookahead; */
-/*     lexer->advance(lexer, false); */
-/*   } */
-/*   int pattern_index; */
-/*   for (pattern_index = 0; pattern_index < 2; pattern_index++) { */
-/*     bool found_token = true; */
-/*     size_t len = strlen(patterns[pattern_index]); */
-/*     int tracker; */
-/*     for (tracker = 0; tracker < len; tracker++) { */
-/*       if (lexer_chars[tracker] != patterns[pattern_index][tracker]) { */
-/*         found_token = false; */
-/*       } */
-/*     } */
-/*     if (found_token) { */
-/*       // move the playhead forward */
-/*       int move_count; */
-/*       for (move_count = tracker; move_count > 0; move_count--) { */
-/*         lexer->advance(lexer, false); */
-/*         lexer->mark_end(lexer); */
-/*       } */
-/*       lexer->result_symbol = token_enums[pattern_index]; */
-/*       return true; */
-/*     }; */
-/*   }; */
-/*   return false; */
-/* } */
-
 static bool is_exact_match(TSLexer *lexer, char *pattern) {
   lexer->mark_end(lexer);
   // switch from letters to unicode codepoints
@@ -192,17 +155,17 @@ static bool find_token(TSLexer *lexer) {
   // 7. Update grammer.js
   // 8. Update highlights.js
 
-  const int items = 15;
+  const int items = 17;
 
-  char patterns[items][7] = {"code", "css",    "h1",    "h2",   "h3",
-                             "h4",   "h5",     "h6",    "html", "list",
-                             "p",    "script", "title", "tldr", "todo"};
-  TokenType tokens[items] = {CODE_TOKEN,  CSS_TOKEN,  H1_TOKEN,  H2_TOKEN,
-                             H3_TOKEN,    H4_TOKEN,   H5_TOKEN,  H6_TOKEN,
-                             HTML_TOKEN,  LIST_TOKEN, P_TOKEN,   SCRIPT_TOKEN,
-                             TITLE_TOKEN, TLDR_TOKEN, TODO_TOKEN};
-  bool matches[items] = {true, true, true, true, true, true, true, true,
-                         true, true, true, true, true, true, true};
+  char patterns[items][7] = {"code", "css",    "h1",    "h2",   "h3",    "h4",
+                             "h5",   "h6",     "html",  "list", "notes", "p",
+                             "ref",  "script", "title", "tldr", "todo"};
+  TokenType tokens[items] = {
+      CODE_TOKEN, CSS_TOKEN,    H1_TOKEN,    H2_TOKEN,   H3_TOKEN,    H4_TOKEN,
+      H5_TOKEN,   H6_TOKEN,     HTML_TOKEN,  LIST_TOKEN, NOTES_TOKEN, P_TOKEN,
+      REF_TOKEN,  SCRIPT_TOKEN, TITLE_TOKEN, TLDR_TOKEN, TODO_TOKEN};
+  bool matches[items] = {true, true, true, true, true, true, true, true, true,
+                         true, true, true, true, true, true, true, true};
 
   int char_index;
   for (char_index = 0; char_index < items; char_index++) {
@@ -427,7 +390,8 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
         valid_symbols[H2_TOKEN] || valid_symbols[H3_TOKEN] ||
         valid_symbols[H4_TOKEN] || valid_symbols[H5_TOKEN] ||
         valid_symbols[H6_TOKEN] || valid_symbols[LIST_TOKEN] ||
-        valid_symbols[P_TOKEN] || valid_symbols[SCRIPT_TOKEN] ||
+        valid_symbols[NOTES_TOKEN] || valid_symbols[P_TOKEN] ||
+        valid_symbols[REF_TOKEN] || valid_symbols[SCRIPT_TOKEN] ||
         valid_symbols[TITLE_TOKEN] || valid_symbols[TLDR_TOKEN] ||
         valid_symbols[TODO_TOKEN]) {
       bool response = find_token(lexer);

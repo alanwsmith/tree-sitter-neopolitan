@@ -16,7 +16,9 @@ module.exports = grammar({
           $.html_container,
           $.html_section,
           $.list_section,
+          $.notes_section,
           $.p_section,
+          $.ref_section,
           $.script_section,
           $.title_section,
           $.tldr_container,
@@ -104,6 +106,8 @@ module.exports = grammar({
       // empty space gets pulled in by the scanner.
       // Doesn't look like that's an issue
     ),
+
+    following_word_chars: _ => /[^ \n\t]+/,
 
     h1_section: $ => seq(
       $.section_dashes,
@@ -237,7 +241,16 @@ module.exports = grammar({
 
     lt_with_non_lt_char: $ => seq("<", $.non_lt_char),
 
-    following_word_chars: _ => /[^ \n\t]+/,
+    notes_section: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.notes_token,
+      $.newline,
+      optional(repeat1($._attr)),
+      $.newline,
+      repeat1($.list_item),
+      optional($.empty_space),
+    ),
 
     nb_whitespace: _ => /[ \t]+/,
 
@@ -285,6 +298,16 @@ module.exports = grammar({
       $.following_word_chars,
     ),
 
+    ref_section: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.ref_token,
+      $.newline,
+      optional(repeat1($._attr)),
+      $.newline,
+      repeat1($.paragraph),
+      // optional($.empty_space),
+    ),
     script_section: $ => seq(
       $.section_dashes,
       $.single_space,
@@ -415,7 +438,9 @@ module.exports = grammar({
     $.html_section_body,
     $.html_token,
     $.list_token,
+    $.notes_token,
     $.p_token,
+    $.ref_token,
     $.script_section_body,
     $.script_token,
     $.section_dashes,

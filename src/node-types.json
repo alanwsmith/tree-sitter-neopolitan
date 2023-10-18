@@ -840,6 +840,56 @@
     }
   },
   {
+    "type": "notes_section",
+    "named": true,
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_kv_pair",
+          "named": true
+        },
+        {
+          "type": "empty_space",
+          "named": true
+        },
+        {
+          "type": "list_item",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "notes_token",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
+          "named": true
+        },
+        {
+          "type": "single_space",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "p_section",
     "named": true,
     "fields": {
@@ -955,6 +1005,52 @@
     }
   },
   {
+    "type": "ref_section",
+    "named": true,
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_kv_pair",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "paragraph",
+          "named": true
+        },
+        {
+          "type": "ref_token",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
+          "named": true
+        },
+        {
+          "type": "single_space",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "script_section",
     "named": true,
     "fields": {
@@ -1063,7 +1159,15 @@
           "named": true
         },
         {
+          "type": "notes_section",
+          "named": true
+        },
+        {
           "type": "p_section",
+          "named": true
+        },
+        {
+          "type": "ref_section",
           "named": true
         },
         {
@@ -1398,7 +1502,15 @@
     "named": true
   },
   {
+    "type": "notes_token",
+    "named": true
+  },
+  {
     "type": "p_token",
+    "named": true
+  },
+  {
+    "type": "ref_token",
     "named": true
   },
   {

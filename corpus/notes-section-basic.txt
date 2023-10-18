@@ -1,0 +1,48 @@
+================================================================================
+Notes Section - Multiple Items
+================================================================================
+-- notes
+
+- papa charlie
+
+- victor kilo 
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (notes_section
+    (section_dashes)
+    (single_space)
+    (notes_token)
+    (newline)
+    (newline)
+    (list_item
+      (list_dash)
+      (nb_whitespace)
+      (paragraph
+        (paragraph_first_word
+            (non_lt_char)
+          (following_word_chars))
+        (nb_whitespace)
+        (word
+          (initial_word_chars
+            (non_lt_char))
+          (following_word_chars))
+        (newline)
+      (newline)))
+    (list_item
+      (list_dash)
+      (nb_whitespace)
+      (paragraph
+        (paragraph_first_word
+            (non_lt_char)
+          (following_word_chars))
+        (nb_whitespace)
+        (word
+          (initial_word_chars
+            (non_lt_char))
+          (following_word_chars))
+        (newline)
+        (newline)))
+      (empty_space)))
