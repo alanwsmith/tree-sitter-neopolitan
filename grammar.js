@@ -6,6 +6,7 @@ module.exports = grammar({
         choice(
           $.code_container,
           $.code_section,
+          $.h1_section,
           $.html_container,
           $.html_section,
           $.list_section,
@@ -80,6 +81,18 @@ module.exports = grammar({
       // No need to add empty_space here. All the
       // empty space gets pulled in by the scanner.
       // Doesn't look like that's an issue
+    ),
+
+    h1_section: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.h1_token,
+      $.newline,
+      optional(repeat1($._attr)),
+      $.newline,
+      $.headline,
+      optional(repeat1($.paragraph)),
+      optional($.empty_space),
     ),
 
     headline: $ => alias($.paragraph, 'headline'),
@@ -271,6 +284,7 @@ module.exports = grammar({
     $.code_token,
     $.container_token,
     $.empty_space,
+    $.h1_token,
     $.html_container_body,
     $.html_section_body,
     $.html_token,

@@ -8,6 +8,7 @@ enum TokenType {
   CODE_TOKEN,
   CONTAINER_TOKEN,
   EMPTY_SPACE,
+  H1_TOKEN,
   HTML_CONTAINER_BODY,
   HTML_SECTION_BODY,
   HTML_TOKEN,
@@ -185,13 +186,13 @@ static bool find_token(TSLexer *lexer) {
   // 11. Update grammer.js
   // 12. Update highlights.js
 
-  char patterns[6][6] = {"code", "html", "list", "p", "title", "todo"};
-  TokenType tokens[6] = {CODE_TOKEN, HTML_TOKEN,  LIST_TOKEN,
+  char patterns[7][6] = {"code", "h1", "html", "list", "p", "title", "todo"};
+  TokenType tokens[7] = {CODE_TOKEN, H1_TOKEN,    HTML_TOKEN, LIST_TOKEN,
                          P_TOKEN,    TITLE_TOKEN, TODO_TOKEN};
-  bool matches[6] = {true, true, true, true, true, true};
+  bool matches[7] = {true, true, true, true, true, true, true};
 
   int char_index;
-  for (char_index = 0; char_index < 6; char_index++) {
+  for (char_index = 0; char_index < 7; char_index++) {
     int target_char = lexer->lookahead;
     // printf("Target Char: %d\n", target_char);
 
@@ -199,7 +200,7 @@ static bool find_token(TSLexer *lexer) {
     // which is the container token
     if (target_char == 10 || target_char == 32 || target_char == 47) {
       int match_walker;
-      for (match_walker = 0; match_walker < 6; match_walker++) {
+      for (match_walker = 0; match_walker < 7; match_walker++) {
         // printf("  Checking in with %d\n", match_walker);
         if (matches[match_walker]) {
           // printf("  Send it\n");
@@ -377,8 +378,9 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
     // This is the new attempt to get section
     // and container tokens. NOTE SURE IF THE check
     if (valid_symbols[CODE_TOKEN] || valid_symbols[HTML_TOKEN] ||
-        valid_symbols[LIST_TOKEN] || valid_symbols[P_TOKEN] ||
-        valid_symbols[TITLE_TOKEN] || valid_symbols[TODO_TOKEN]) {
+        valid_symbols[H1_TOKEN] || valid_symbols[LIST_TOKEN] ||
+        valid_symbols[P_TOKEN] || valid_symbols[TITLE_TOKEN] ||
+        valid_symbols[TODO_TOKEN]) {
       bool response = find_token(lexer);
       return response;
     }

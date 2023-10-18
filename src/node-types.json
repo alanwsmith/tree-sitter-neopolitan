@@ -233,6 +233,60 @@
     }
   },
   {
+    "type": "h1_section",
+    "named": true,
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_kv_pair",
+          "named": true
+        },
+        {
+          "type": "empty_space",
+          "named": true
+        },
+        {
+          "type": "h1_token",
+          "named": true
+        },
+        {
+          "type": "headline",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "paragraph",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
+          "named": true
+        },
+        {
+          "type": "single_space",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "headline",
     "named": true,
     "fields": {},
@@ -631,6 +685,10 @@
           "named": true
         },
         {
+          "type": "h1_section",
+          "named": true
+        },
+        {
           "type": "html_container",
           "named": true
         },
@@ -853,6 +911,10 @@
   },
   {
     "type": "following_word_chars",
+    "named": true
+  },
+  {
+    "type": "h1_token",
     "named": true
   },
   {
