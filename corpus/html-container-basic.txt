@@ -27,4 +27,5 @@ SOLO HTML Container - Basic
     (container_token)
     (html_token)
     (newline)
-    (newline)))
+    (newline)
+    (empty_space)))

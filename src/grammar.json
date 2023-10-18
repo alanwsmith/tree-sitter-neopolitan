@@ -215,8 +215,16 @@
           "name": "newline"
         },
         {
-          "type": "SYMBOL",
-          "name": "empty_space"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "empty_space"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -354,6 +362,18 @@
         {
           "type": "SYMBOL",
           "name": "newline"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "empty_space"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -396,8 +416,12 @@
           "name": "newline"
         },
         {
-          "type": "SYMBOL",
-          "name": "html_section_body"
+          "type": "FIELD",
+          "name": "html_section_body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "html_section_body"
+          }
         },
         {
           "type": "SYMBOL",
@@ -486,6 +510,18 @@
             "type": "SYMBOL",
             "name": "list_item"
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "empty_space"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -562,6 +598,18 @@
             "type": "SYMBOL",
             "name": "paragraph"
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "empty_space"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -693,8 +741,16 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "empty_space"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "empty_space"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -847,6 +903,18 @@
             "type": "SYMBOL",
             "name": "todo_item"
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "empty_space"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

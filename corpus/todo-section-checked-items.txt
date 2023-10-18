@@ -1,11 +1,14 @@
 ================================================================================
-TODO Section - Checked Item
+SOLO TODO Section - Checked Item
 ================================================================================
 -- todo
 
 [] alfa charlie 
 
 [x] bravo delta
+
+
+
 
 
 --------------------------------------------------------------------------------
@@ -51,6 +54,7 @@ TODO Section - Checked Item
               (non_lt_char))
           (following_word_chars))
             (newline))
-        (newline))))
+        (newline))
+      (empty_space)))
 
 

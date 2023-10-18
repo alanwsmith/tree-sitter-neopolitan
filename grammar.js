@@ -47,27 +47,6 @@ module.exports = grammar({
 
     attr_value: _ => /[^\n]+/,
 
-    // code_end_section: $ => seq(
-    //   $.section_dashes,
-    //   $.single_space,
-    //   $.section_start_end_token,
-    //   $.code_section_token,
-    //   $.newline,
-    //   $.newline,
-    //   repeat1($.paragraph),
-    // ),
-
-    // code_start_section: $ => seq(
-    //   $.section_dashes,
-    //   $.single_space,
-    //   $.code_section_token,
-    //   $.section_start_end_token,
-    //   $.newline,
-    //   optional(repeat1($._attr)),
-    //   $.newline,
-    //   field('code_body', $.code_body),
-    // ),
-
     code_container: $ => seq(
       $.section_dashes,
       $.single_space,
@@ -84,10 +63,9 @@ module.exports = grammar({
       $.code_token,
       $.newline,
       $.newline,
-      $.empty_space,
-
-
-
+      optional($.empty_space),
+      // TODO: Add parsing for following 
+      // paragraphs here
     ),
 
     code_section: $ => seq(
@@ -99,6 +77,9 @@ module.exports = grammar({
       $.newline,
       field("code_section_body", $.code_section_body),
       $.newline,
+      // No need to add empty_space here. All the
+      // empty space gets pulled in by the scanner.
+      // Doesn't look like that's an issue
     ),
 
     headline: $ => alias($.paragraph, 'headline'),
@@ -119,6 +100,9 @@ module.exports = grammar({
       $.html_token,
       $.newline,
       $.newline,
+      optional($.empty_space),
+      // TODO: Add parsing for following 
+      // paragraphs here
     ),
 
     html_section: $ => seq(
@@ -128,29 +112,12 @@ module.exports = grammar({
       $.newline,
       optional(repeat1($._attr)),
       $.newline,
-      $.html_section_body,
+      field('html_section_body', $.html_section_body),
       $.newline,
+      // No need to add empty_space here. All the
+      // empty space gets pulled in by the scanner.
+      // Doesn't look like that's an issue
     ),
-
-    // html_container_end: $ => seq(
-    //   $.section_dashes,
-    //   $.single_space,
-    //   $.section_start_end_token,
-    //   $.html_token,
-    //   $.newline,
-    //   $.newline,
-    //   repeat1($.paragraph),
-    // ),
-
-    // html_container_start: $ => seq(
-    //   $.section_dashes,
-    //   $.single_space,
-    //   $.html_token,
-    //   $.section_start_end_token,
-    //   $.newline,
-    //   $.newline,
-    //   $.html_body,
-    // ),
 
     initial_word_chars: $ => choice($.non_lt_char, $.lt_with_non_lt_char),
 
@@ -170,6 +137,7 @@ module.exports = grammar({
       optional(repeat1($._attr)),
       $.newline,
       repeat1($.list_item),
+      optional($.empty_space),
     ),
 
     lt_with_non_lt_char: $ => seq("<", $.non_lt_char),
@@ -192,6 +160,7 @@ module.exports = grammar({
       optional(repeat1($._attr)),
       $.newline,
       repeat1($.paragraph),
+      optional($.empty_space),
     ),
 
     // TODO: split out to paragraph body 
@@ -232,7 +201,7 @@ module.exports = grammar({
       $.newline,
       $.headline,
       optional(repeat1($.paragraph)),
-      $.empty_space,
+      optional($.empty_space),
     ),
 
     todo_left_bracket: _ => "[",
@@ -280,6 +249,7 @@ module.exports = grammar({
       optional(repeat1($._attr)),
       $.newline,
       repeat1($.todo_item),
+      optional($.empty_space),
     ),
 
     word: $ => seq(

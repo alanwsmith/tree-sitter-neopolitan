@@ -287,6 +287,10 @@
           "named": true
         },
         {
+          "type": "empty_space",
+          "named": true
+        },
+        {
           "type": "html_container_body",
           "named": true
         },
@@ -322,6 +326,16 @@
             "named": true
           }
         ]
+      },
+      "html_section_body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "html_section_body",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -330,10 +344,6 @@
       "types": [
         {
           "type": "attr_kv_pair",
-          "named": true
-        },
-        {
-          "type": "html_section_body",
           "named": true
         },
         {
@@ -444,6 +454,10 @@
           "named": true
         },
         {
+          "type": "empty_space",
+          "named": true
+        },
+        {
           "type": "list_item",
           "named": true
         },
@@ -502,6 +516,10 @@
       "types": [
         {
           "type": "attr_kv_pair",
+          "named": true
+        },
+        {
+          "type": "empty_space",
           "named": true
         },
         {
@@ -749,6 +767,10 @@
       "types": [
         {
           "type": "attr_kv_pair",
+          "named": true
+        },
+        {
+          "type": "empty_space",
           "named": true
         },
         {
