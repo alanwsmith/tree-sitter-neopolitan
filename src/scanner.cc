@@ -3,6 +3,7 @@
 #include <tree_sitter/parser.h>
 
 enum TokenType {
+  CATEGORIES_TOKEN,
   CODE_CONTAINER_BODY,
   CODE_SECTION_BODY,
   CODE_TOKEN,
@@ -20,6 +21,7 @@ enum TokenType {
   HTML_SECTION_BODY,
   HTML_TOKEN,
   LIST_TOKEN,
+  METADATA_TOKEN,
   NOTES_TOKEN,
   P_TOKEN,
   REF_TOKEN,
@@ -155,17 +157,20 @@ static bool find_token(TSLexer *lexer) {
   // 7. Update grammer.js
   // 8. Update highlights.js
 
-  const int items = 17;
+  const int items = 19;
 
-  char patterns[items][7] = {"code", "css",    "h1",    "h2",   "h3",    "h4",
-                             "h5",   "h6",     "html",  "list", "notes", "p",
-                             "ref",  "script", "title", "tldr", "todo"};
+  char patterns[items][11] = {"categories", "code",     "css",   "h1",  "h2",
+                              "h3",         "h4",       "h5",    "h6",  "html",
+                              "list",       "metadata", "notes", "p",   "ref",
+                              "script",     "title",    "tldr",  "todo"};
   TokenType tokens[items] = {
-      CODE_TOKEN, CSS_TOKEN,    H1_TOKEN,    H2_TOKEN,   H3_TOKEN,    H4_TOKEN,
-      H5_TOKEN,   H6_TOKEN,     HTML_TOKEN,  LIST_TOKEN, NOTES_TOKEN, P_TOKEN,
-      REF_TOKEN,  SCRIPT_TOKEN, TITLE_TOKEN, TLDR_TOKEN, TODO_TOKEN};
-  bool matches[items] = {true, true, true, true, true, true, true, true, true,
-                         true, true, true, true, true, true, true, true};
+      CATEGORIES_TOKEN, CODE_TOKEN,     CSS_TOKEN,   H1_TOKEN,  H2_TOKEN,
+      H3_TOKEN,         H4_TOKEN,       H5_TOKEN,    H6_TOKEN,  HTML_TOKEN,
+      LIST_TOKEN,       METADATA_TOKEN, NOTES_TOKEN, P_TOKEN,   REF_TOKEN,
+      SCRIPT_TOKEN,     TITLE_TOKEN,    TLDR_TOKEN,  TODO_TOKEN};
+  bool matches[items] = {true, true, true, true, true, true, true,
+                         true, true, true, true, true, true, true,
+                         true, true, true, true, true};
 
   int char_index;
   for (char_index = 0; char_index < items; char_index++) {
@@ -385,11 +390,12 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       return is_single_space(lexer);
     };
 
-    if (valid_symbols[CODE_TOKEN] || valid_symbols[CSS_TOKEN] ||
-        valid_symbols[HTML_TOKEN] || valid_symbols[H1_TOKEN] ||
-        valid_symbols[H2_TOKEN] || valid_symbols[H3_TOKEN] ||
-        valid_symbols[H4_TOKEN] || valid_symbols[H5_TOKEN] ||
-        valid_symbols[H6_TOKEN] || valid_symbols[LIST_TOKEN] ||
+    if (valid_symbols[CATEGORIES_TOKEN] || valid_symbols[CODE_TOKEN] ||
+        valid_symbols[CSS_TOKEN] || valid_symbols[HTML_TOKEN] ||
+        valid_symbols[H1_TOKEN] || valid_symbols[H2_TOKEN] ||
+        valid_symbols[H3_TOKEN] || valid_symbols[H4_TOKEN] ||
+        valid_symbols[H5_TOKEN] || valid_symbols[H6_TOKEN] ||
+        valid_symbols[LIST_TOKEN] || valid_symbols[METADATA_TOKEN] ||
         valid_symbols[NOTES_TOKEN] || valid_symbols[P_TOKEN] ||
         valid_symbols[REF_TOKEN] || valid_symbols[SCRIPT_TOKEN] ||
         valid_symbols[TITLE_TOKEN] || valid_symbols[TLDR_TOKEN] ||

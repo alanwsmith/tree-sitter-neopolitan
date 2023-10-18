@@ -4,6 +4,7 @@ module.exports = grammar({
     source_file: $ =>
       repeat1(
         choice(
+          $.categories_section,
           $.code_container,
           $.code_section,
           $.css_section,
@@ -16,6 +17,7 @@ module.exports = grammar({
           $.html_container,
           $.html_section,
           $.list_section,
+          $.metadata_section,
           $.notes_section,
           $.p_section,
           $.ref_section,
@@ -57,6 +59,16 @@ module.exports = grammar({
     attr_separator: _ => ":",
 
     attr_value: _ => /[^\n]+/,
+
+    categories_section: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.categories_token,
+      $.newline,
+      optional(repeat1($._attr)),
+      $.newline,
+      // optional($.empty_space),
+    ),
 
     code_container: $ => seq(
       $.section_dashes,
@@ -241,6 +253,16 @@ module.exports = grammar({
 
     lt_with_non_lt_char: $ => seq("<", $.non_lt_char),
 
+    metadata_section: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.metadata_token,
+      $.newline,
+      optional(repeat1($._attr)),
+      $.newline,
+      // optional($.empty_space),
+    ),
+
     notes_section: $ => seq(
       $.section_dashes,
       $.single_space,
@@ -308,6 +330,7 @@ module.exports = grammar({
       repeat1($.paragraph),
       // optional($.empty_space),
     ),
+
     script_section: $ => seq(
       $.section_dashes,
       $.single_space,
@@ -421,6 +444,7 @@ module.exports = grammar({
   extras: _ => [],
 
   externals: $ => [
+    $.categories_token,
     $.code_container_body,
     $.code_section_body,
     $.code_token,
@@ -438,6 +462,7 @@ module.exports = grammar({
     $.html_section_body,
     $.html_token,
     $.list_token,
+    $.metadata_token,
     $.notes_token,
     $.p_token,
     $.ref_token,

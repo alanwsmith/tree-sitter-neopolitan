@@ -1,10 +1,27 @@
 -- title
 
-Syntax Highlighting Check
+Tree-Sitter Syntax Highlighting Check
 
--- h2
+This is a test to see how the syntax highlighting is 
+shaping up in nvim-treesitter.
 
-Some stuff
+-- html
+-- template: showbelow
+
+<div class="alfa">
+  This outputs the HTML directly as well as creating a 
+  code block showing the source below it
+</div>
+
+-- p
+
+Some paragraphs with some random sentences like: Crack the 
+walnut with your sharp side teeth. Cut the pie into large 
+parts. 
+
+Dip the pail once and let it settle. Draw the chart with 
+heavy black lines. Pour the stew from the pot into the 
+plate.
 
 -- code
 -- rust
@@ -13,35 +30,38 @@ fn main() {
   println!("hello, syntax");
 }
 
--- p
-
-This is some test just to test how things
-look with a little more realistic filler
-content. 
-
-Yeah, we'll just keep going for a bit. Of
-course, there's way more going on in this
-than would be in a normal post. But some
-things will have this much code in it.
-
 -- list
--- class: alfa
 
-- delta echo
+- Keep the hatch tight and the watch constant. Lift the 
+square stone over the fence.
 
-- bravo kilo
+Slide the tray across the glass top. Split the log with 
+a quick, sharp blow.
+
+- Tack the strip of carpet to the worn floor. Take the 
+match and strike it against your shoe.
 
 
 -- todo
--- class: alfa
 
-[] sierra tango
+[] this item hasn't been done yet 
 
-[] echo whiskey
+[x] this one is complete 
 
-[x] charlie delta
+[in progress] still working on this 
 
-[x] romeo foxtrot
+
+-- metadata
+-- date: 2023-10-18 01:05:11
+-- id: 2wvgcris
+-- site: aws
+-- template: post
+-- status: unpublished
+
+
+
+
+
 
 
 -- p
@@ -80,8 +100,5 @@ for whatever in range(0..12):
 <p>alfa bravo</p>
 
 
-
--- cagegories
+-- categories
 -- some: thing
-
-

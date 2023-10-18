@@ -79,6 +79,48 @@
     }
   },
   {
+    "type": "categories_section",
+    "named": true,
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_kv_pair",
+          "named": true
+        },
+        {
+          "type": "categories_token",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
+          "named": true
+        },
+        {
+          "type": "single_space",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "code_container",
     "named": true,
     "fields": {
@@ -840,6 +882,48 @@
     }
   },
   {
+    "type": "metadata_section",
+    "named": true,
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_kv_pair",
+          "named": true
+        },
+        {
+          "type": "metadata_token",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
+          "named": true
+        },
+        {
+          "type": "single_space",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "notes_section",
     "named": true,
     "fields": {
@@ -1111,6 +1195,10 @@
       "required": true,
       "types": [
         {
+          "type": "categories_section",
+          "named": true
+        },
+        {
           "type": "code_container",
           "named": true
         },
@@ -1156,6 +1244,10 @@
         },
         {
           "type": "list_section",
+          "named": true
+        },
+        {
+          "type": "metadata_section",
           "named": true
         },
         {
@@ -1410,6 +1502,10 @@
     "named": true
   },
   {
+    "type": "categories_token",
+    "named": true
+  },
+  {
     "type": "code_container_body",
     "named": true
   },
@@ -1483,6 +1579,10 @@
   },
   {
     "type": "list_token",
+    "named": true
+  },
+  {
+    "type": "metadata_token",
     "named": true
   },
   {

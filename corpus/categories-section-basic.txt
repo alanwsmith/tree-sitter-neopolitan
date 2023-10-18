@@ -1,0 +1,24 @@
+================================================================================
+Categories Section - Basic
+================================================================================
+-- categories
+-- class: foxtrot
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (categories_section
+    (section_dashes)
+    (single_space)
+    (categories_token)
+    (newline)
+    (attr_kv_pair
+      (attr_dashes)
+      (nb_whitespace)
+      (attr_key)
+      (attr_separator)
+      (nb_whitespace)
+      (attr_value)
+      (newline))
+    (newline)))
