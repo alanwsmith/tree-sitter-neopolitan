@@ -19,6 +19,8 @@ enum TokenType {
   HTML_TOKEN,
   LIST_TOKEN,
   P_TOKEN,
+  SCRIPT_SECTION_BODY,
+  SCRIPT_TOKEN,
   SECTION_DASHES,
   SINGLE_SPACE,
   TITLE_TOKEN,
@@ -188,16 +190,17 @@ static bool find_token(TSLexer *lexer) {
   // 7. Update grammer.js
   // 8. Update highlights.js
 
-  const int items = 13;
+  const int items = 14;
 
-  char patterns[items][6] = {"code", "h1",   "h2", "h3",    "h4",   "h5",  "h6",
-                             "html", "list", "p",  "title", "tldr", "todo"};
-  TokenType tokens[items] = {CODE_TOKEN, H1_TOKEN, H2_TOKEN,    H3_TOKEN,
-                             H4_TOKEN,   H5_TOKEN, H6_TOKEN,    HTML_TOKEN,
-                             LIST_TOKEN, P_TOKEN,  TITLE_TOKEN, TLDR_TOKEN,
-                             TODO_TOKEN};
+  char patterns[items][7] = {"code",   "h1",    "h2",   "h3",   "h4",
+                             "h5",     "h6",    "html", "list", "p",
+                             "script", "title", "tldr", "todo"};
+  TokenType tokens[items] = {CODE_TOKEN, H1_TOKEN,  H2_TOKEN,     H3_TOKEN,
+                             H4_TOKEN,   H5_TOKEN,  H6_TOKEN,     HTML_TOKEN,
+                             LIST_TOKEN, P_TOKEN,   SCRIPT_TOKEN, TITLE_TOKEN,
+                             TLDR_TOKEN, TODO_TOKEN};
   bool matches[items] = {true, true, true, true, true, true, true,
-                         true, true, true, true, true, true};
+                         true, true, true, true, true, true, true};
 
   int char_index;
   for (char_index = 0; char_index < items; char_index++) {
@@ -253,6 +256,21 @@ static bool is_code_section_body(TSLexer *lexer) {
   while (lexer->eof(lexer) == false) {
     int active_char = lexer->lookahead;
     // printf("%d\n", active_char);
+    if (active_char == 10) {
+      char end_pattern[4] = "-- ";
+      if (terminator(lexer, end_pattern)) {
+        return true;
+      };
+    };
+    lexer->advance(lexer, false);
+    lexer->mark_end(lexer);
+  };
+  return false;
+};
+
+static bool is_any_code_section_body(TSLexer *lexer) {
+  while (lexer->eof(lexer) == false) {
+    int active_char = lexer->lookahead;
     if (active_char == 10) {
       char end_pattern[4] = "-- ";
       if (terminator(lexer, end_pattern)) {
@@ -376,6 +394,15 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       // HTML_CONTAINER_BODY is in place
     };
 
+    if (valid_symbols[SCRIPT_SECTION_BODY]) {
+      if (is_any_code_section_body(lexer)) {
+        lexer->result_symbol = SCRIPT_SECTION_BODY;
+        return true;
+      } else {
+        return false;
+      };
+    };
+
     if (valid_symbols[SECTION_DASHES]) {
       lexer->result_symbol = SECTION_DASHES;
       return is_section_dashes(lexer);
@@ -389,8 +416,8 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
         valid_symbols[H3_TOKEN] || valid_symbols[H4_TOKEN] ||
         valid_symbols[H5_TOKEN] || valid_symbols[H6_TOKEN] ||
         valid_symbols[LIST_TOKEN] || valid_symbols[P_TOKEN] ||
-        valid_symbols[TITLE_TOKEN] || valid_symbols[TLDR_TOKEN] ||
-        valid_symbols[TODO_TOKEN]) {
+        valid_symbols[SCRIPT_TOKEN] || valid_symbols[TITLE_TOKEN] ||
+        valid_symbols[TLDR_TOKEN] || valid_symbols[TODO_TOKEN]) {
       bool response = find_token(lexer);
       return response;
     }

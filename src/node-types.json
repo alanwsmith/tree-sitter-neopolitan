@@ -903,6 +903,58 @@
     }
   },
   {
+    "type": "script_section",
+    "named": true,
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      },
+      "script_section_body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "script_section_body",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_kv_pair",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "script_token",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
+          "named": true
+        },
+        {
+          "type": "single_space",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -956,6 +1008,10 @@
         },
         {
           "type": "p_section",
+          "named": true
+        },
+        {
+          "type": "script_section",
           "named": true
         },
         {
@@ -1279,6 +1335,14 @@
   },
   {
     "type": "p_token",
+    "named": true
+  },
+  {
+    "type": "script_section_body",
+    "named": true
+  },
+  {
+    "type": "script_token",
     "named": true
   },
   {

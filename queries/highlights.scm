@@ -18,6 +18,7 @@
 (not_a_checkmark) @neo_checkbox_in_progress
 (p_token) @neo_section_token
 (paragraph_first_word) @neo_paragraph_first_word
+(script_token) @neo_section_token
 (section_dashes) @neo_section_dashes
 (title_token) @neo_section_token
 (tldr_token) @neo_section_token

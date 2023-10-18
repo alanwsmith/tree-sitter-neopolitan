@@ -5,7 +5,6 @@
           (attr_bool_value) @injection.language)
     code_section_body: (code_section_body) @injection.content))
 
-
 ((code_container
     attr_bool: 
       (attr_bool
@@ -18,3 +17,6 @@
 
 ((html_section_body) @injection.content 
  (#set! injection.language "html"))
+
+((script_section_body) @injection.content 
+ (#set! injection.language "javascript"))

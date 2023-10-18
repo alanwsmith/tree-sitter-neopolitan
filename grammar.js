@@ -16,6 +16,7 @@ module.exports = grammar({
           $.html_section,
           $.list_section,
           $.p_section,
+          $.script_section,
           $.title_section,
           $.tldr_container,
           $.todo_section,
@@ -269,6 +270,20 @@ module.exports = grammar({
       $.following_word_chars,
     ),
 
+    script_section: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.script_token,
+      $.newline,
+      optional(repeat1($._attr)),
+      $.newline,
+      field("script_section_body", $.script_section_body),
+      $.newline,
+      // No need to add empty_space here. All the
+      // empty space gets pulled in by the scanner.
+      // Doesn't look like that's an issue
+    ),
+
     section_dashes: _ => /-- +/,
 
     title_section: $ => seq(
@@ -384,6 +399,8 @@ module.exports = grammar({
     $.html_token,
     $.list_token,
     $.p_token,
+    $.script_section_body,
+    $.script_token,
     $.section_dashes,
     $.single_space,
     $.title_token,
