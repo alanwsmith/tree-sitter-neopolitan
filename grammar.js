@@ -17,6 +17,7 @@ module.exports = grammar({
           $.list_section,
           $.p_section,
           $.title_section,
+          $.tldr_container,
           $.todo_section,
         )
       ),
@@ -285,6 +286,26 @@ module.exports = grammar({
       // optional($.empty_space),
     ),
 
+    tldr_container: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.tldr_token,
+      $.container_token,
+      $.newline,
+      optional(repeat1($._attr)),
+      $.newline,
+      // TODO: Update this to contain other
+      // sections as well as just 
+      // paragraphs
+      optional(repeat1($.paragraph)),
+      $.section_dashes,
+      $.single_space,
+      $.container_token,
+      $.tldr_token,
+      $.newline,
+      $.newline,
+    ),
+
     todo_left_bracket: _ => "[",
 
     todo_right_bracket: _ => "]",
@@ -366,6 +387,7 @@ module.exports = grammar({
     $.section_dashes,
     $.single_space,
     $.title_token,
+    $.tldr_token,
     $.todo_token,
     $.error_sentinel,
   ],

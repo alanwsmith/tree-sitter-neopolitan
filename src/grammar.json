@@ -60,6 +60,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "tldr_container"
+          },
+          {
+            "type": "SYMBOL",
             "name": "todo_section"
           }
         ]
@@ -1084,6 +1088,89 @@
         }
       ]
     },
+    "tldr_container": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tldr_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "container_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_attr"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "paragraph"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "container_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tldr_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
+        }
+      ]
+    },
     "todo_left_bracket": {
       "type": "STRING",
       "value": "["
@@ -1354,6 +1441,10 @@
     {
       "type": "SYMBOL",
       "name": "title_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "tldr_token"
     },
     {
       "type": "SYMBOL",

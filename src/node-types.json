@@ -963,6 +963,10 @@
           "named": true
         },
         {
+          "type": "tldr_container",
+          "named": true
+        },
+        {
           "type": "todo_section",
           "named": true
         }
@@ -1014,6 +1018,56 @@
         },
         {
           "type": "title_token",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tldr_container",
+    "named": true,
+    "fields": {
+      "attr_bool": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attr_bool",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_kv_pair",
+          "named": true
+        },
+        {
+          "type": "container_token",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "paragraph",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
+          "named": true
+        },
+        {
+          "type": "single_space",
+          "named": true
+        },
+        {
+          "type": "tldr_token",
           "named": true
         }
       ]
@@ -1237,6 +1291,10 @@
   },
   {
     "type": "title_token",
+    "named": true
+  },
+  {
+    "type": "tldr_token",
     "named": true
   },
   {
