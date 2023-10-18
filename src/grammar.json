@@ -213,6 +213,10 @@
         {
           "type": "SYMBOL",
           "name": "newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "empty_space"
         }
       ]
     },
@@ -687,6 +691,10 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "empty_space"
         }
       ]
     },
@@ -888,6 +896,10 @@
     {
       "type": "SYMBOL",
       "name": "container_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "empty_space"
     },
     {
       "type": "SYMBOL",

@@ -84,6 +84,10 @@ module.exports = grammar({
       $.code_token,
       $.newline,
       $.newline,
+      $.empty_space,
+
+
+
     ),
 
     code_section: $ => seq(
@@ -228,6 +232,7 @@ module.exports = grammar({
       $.newline,
       $.headline,
       optional(repeat1($.paragraph)),
+      $.empty_space,
     ),
 
     todo_left_bracket: _ => "[",
@@ -295,6 +300,7 @@ module.exports = grammar({
     $.code_section_body,
     $.code_token,
     $.container_token,
+    $.empty_space,
     $.html_container_body,
     $.html_section_body,
     $.html_token,

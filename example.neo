@@ -1,22 +1,17 @@
 -- title
 
-This is some stuff
-
-This is the second line of the headline
+Syntax Highlighting Check
 
 -- code
 -- rust
 
 fn main() {
-  println!("asdf");
+  println!("hello, syntax");
 }
 
--- p 
--- autofocus
--- id: tango
--- class: bravo
--- some other thing
 
+
+-- p
 
 This is some test just to test how things
 look with a little more realistic filler
@@ -78,6 +73,8 @@ for whatever in range(0..12):
 -- html
 
 <p>alfa bravo</p>
+
+
 
 -- cagegories
 -- some: thing

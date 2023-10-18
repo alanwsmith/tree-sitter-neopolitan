@@ -120,6 +120,10 @@
           "named": true
         },
         {
+          "type": "empty_space",
+          "named": true
+        },
+        {
           "type": "newline",
           "named": true
         },
@@ -659,6 +663,10 @@
           "named": true
         },
         {
+          "type": "empty_space",
+          "named": true
+        },
+        {
           "type": "headline",
           "named": true
         },
@@ -815,6 +823,10 @@
   },
   {
     "type": "container_token",
+    "named": true
+  },
+  {
+    "type": "empty_space",
     "named": true
   },
   {

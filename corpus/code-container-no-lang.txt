@@ -25,5 +25,6 @@ print("non-highlighted code")
     (container_token)
     (code_token)
     (newline)
-    (newline)))
+    (newline)
+    (empty_space)))
 

@@ -7,6 +7,7 @@ enum TokenType {
   CODE_SECTION_BODY,
   CODE_TOKEN,
   CONTAINER_TOKEN,
+  EMPTY_SPACE,
   HTML_CONTAINER_BODY,
   HTML_SECTION_BODY,
   HTML_TOKEN,
@@ -293,6 +294,21 @@ static bool is_code_container_body(TSLexer *lexer) {
   return false;
 };
 
+static bool is_empty_space(TSLexer *lexer) {
+  bool found_space = false;
+  while (lexer->eof(lexer) == false) {
+    int active_char = lexer->lookahead;
+    if (active_char != 10 && active_char != 32) {
+      return found_space;
+    } else {
+      found_space = true;
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+    }
+  };
+  return true;
+};
+
 bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
                                                   const bool *valid_symbols) {
 
@@ -333,6 +349,15 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       lexer->result_symbol = HTML_CONTAINER_BODY;
       char html_end[9] = "-- /html";
       return terminator(lexer, html_end);
+    };
+
+    if (valid_symbols[EMPTY_SPACE]) {
+      if (is_empty_space(lexer)) {
+        lexer->result_symbol = EMPTY_SPACE;
+        return true;
+      } else {
+        return false;
+      };
     };
 
     if (valid_symbols[HTML_SECTION_BODY]) {
