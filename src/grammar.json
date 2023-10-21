@@ -2,6 +2,10 @@
   "name": "neopolitan",
   "rules": {
     "source_file": {
+      "type": "SYMBOL",
+      "name": "neo_doc"
+    },
+    "neo_doc": {
       "type": "REPEAT1",
       "content": {
         "type": "CHOICE",

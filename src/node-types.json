@@ -753,6 +753,101 @@
     }
   },
   {
+    "type": "neo_doc",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "categories_section",
+          "named": true
+        },
+        {
+          "type": "code_section",
+          "named": true
+        },
+        {
+          "type": "css_section",
+          "named": true
+        },
+        {
+          "type": "h1_section",
+          "named": true
+        },
+        {
+          "type": "h2_section",
+          "named": true
+        },
+        {
+          "type": "h3_section",
+          "named": true
+        },
+        {
+          "type": "h4_section",
+          "named": true
+        },
+        {
+          "type": "h5_section",
+          "named": true
+        },
+        {
+          "type": "h6_section",
+          "named": true
+        },
+        {
+          "type": "html_container",
+          "named": true
+        },
+        {
+          "type": "html_section",
+          "named": true
+        },
+        {
+          "type": "list_section",
+          "named": true
+        },
+        {
+          "type": "metadata_section",
+          "named": true
+        },
+        {
+          "type": "notes_section",
+          "named": true
+        },
+        {
+          "type": "p_section",
+          "named": true
+        },
+        {
+          "type": "ref_section",
+          "named": true
+        },
+        {
+          "type": "results_container",
+          "named": true
+        },
+        {
+          "type": "script_section",
+          "named": true
+        },
+        {
+          "type": "title_section",
+          "named": true
+        },
+        {
+          "type": "tldr_container",
+          "named": true
+        },
+        {
+          "type": "todo_section",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "notes_section",
     "named": true,
     "fields": {},
@@ -1075,91 +1170,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "categories_section",
-          "named": true
-        },
-        {
-          "type": "code_section",
-          "named": true
-        },
-        {
-          "type": "css_section",
-          "named": true
-        },
-        {
-          "type": "h1_section",
-          "named": true
-        },
-        {
-          "type": "h2_section",
-          "named": true
-        },
-        {
-          "type": "h3_section",
-          "named": true
-        },
-        {
-          "type": "h4_section",
-          "named": true
-        },
-        {
-          "type": "h5_section",
-          "named": true
-        },
-        {
-          "type": "h6_section",
-          "named": true
-        },
-        {
-          "type": "html_container",
-          "named": true
-        },
-        {
-          "type": "html_section",
-          "named": true
-        },
-        {
-          "type": "list_section",
-          "named": true
-        },
-        {
-          "type": "metadata_section",
-          "named": true
-        },
-        {
-          "type": "notes_section",
-          "named": true
-        },
-        {
-          "type": "p_section",
-          "named": true
-        },
-        {
-          "type": "ref_section",
-          "named": true
-        },
-        {
-          "type": "results_container",
-          "named": true
-        },
-        {
-          "type": "script_section",
-          "named": true
-        },
-        {
-          "type": "title_section",
-          "named": true
-        },
-        {
-          "type": "tldr_container",
-          "named": true
-        },
-        {
-          "type": "todo_section",
+          "type": "neo_doc",
           "named": true
         }
       ]

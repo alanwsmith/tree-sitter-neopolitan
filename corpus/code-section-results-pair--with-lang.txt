@@ -14,31 +14,32 @@ hello
 --------------------------------------------------------------------------------
 
 (source_file
-  (code_section
-    (section_dashes)
-    (single_space)
-    (code_token)
-    (line_ending)
-    (attribute
-      (attr_dashes)
-      (nb_whitespace)
-      (boolean_attribute
-        (line_remainder))
-      (line_ending))
-    (code_section_body)
-    (any_whitespace_or_line_endings))
-  (results_container
-    (results_container_start_token
+  (neo_doc
+    (code_section
       (section_dashes)
       (single_space)
-      (results_token)
-      (container_token)
+      (code_token)
       (line_ending)
-      (line_ending))
-    (results_container_body)
-    (any_whitespace_or_line_endings)
-    (results_container_end_token
-      (section_dashes)
-      (single_space)
-      (container_token)
-      (results_token))))
+      (attribute
+        (attr_dashes)
+        (nb_whitespace)
+        (boolean_attribute
+          (line_remainder))
+        (line_ending))
+      (code_section_body)
+      (any_whitespace_or_line_endings))
+    (results_container
+      (results_container_start_token
+        (section_dashes)
+        (single_space)
+        (results_token)
+        (container_token)
+        (line_ending)
+        (line_ending))
+      (results_container_body)
+      (any_whitespace_or_line_endings)
+      (results_container_end_token
+        (section_dashes)
+        (single_space)
+        (container_token)
+        (results_token)))))

@@ -1,33 +1,35 @@
 module.exports = grammar({
   name: 'neopolitan',
   rules: {
-    source_file: $ =>
-      repeat1(
-        choice(
-          $.categories_section,
-          //$.code_container,
-          $.code_section,
-          $.css_section,
-          $.h1_section,
-          $.h2_section,
-          $.h3_section,
-          $.h4_section,
-          $.h5_section,
-          $.h6_section,
-          $.html_container,
-          $.html_section,
-          $.list_section,
-          $.metadata_section,
-          $.notes_section,
-          $.p_section,
-          $.ref_section,
-          $.results_container,
-          $.script_section,
-          $.title_section,
-          $.tldr_container,
-          $.todo_section,
-        )
-      ),
+    source_file: $ => $.neo_doc,
+
+    neo_doc: $ => repeat1(
+      choice(
+        $.categories_section,
+        //$.code_container,
+        $.code_section,
+        $.css_section,
+        $.h1_section,
+        $.h2_section,
+        $.h3_section,
+        $.h4_section,
+        $.h5_section,
+        $.h6_section,
+        $.html_container,
+        $.html_section,
+        $.list_section,
+        $.metadata_section,
+        $.notes_section,
+        $.p_section,
+        $.ref_section,
+        $.results_container,
+        $.script_section,
+        $.title_section,
+        $.tldr_container,
+        $.todo_section,
+      )
+    ),
+
 
     attribute: $ => seq(
       $.attr_dashes,
