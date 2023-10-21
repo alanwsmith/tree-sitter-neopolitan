@@ -354,15 +354,11 @@
           "name": "results_token"
         },
         {
-          "type": "SYMBOL",
-          "name": "line_ending"
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "any_whitespace_or_newlines"
+              "name": "line_ending"
             },
             {
               "type": "BLANK"
@@ -1182,6 +1178,10 @@
             "type": "SYMBOL",
             "name": "paragraph"
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
         }
       ]
     },
@@ -1410,6 +1410,10 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "newline"
         }
       ]
     },

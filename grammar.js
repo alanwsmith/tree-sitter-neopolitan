@@ -140,10 +140,8 @@ module.exports = grammar({
       $.single_space,
       $.container_token,
       $.results_token,
-      $.line_ending,
-      optional($.any_whitespace_or_newlines),
+      optional($.line_ending),
     ),
-
 
     css_section: $ => seq(
       $.section_dashes,
@@ -330,6 +328,7 @@ module.exports = grammar({
       optional(repeat1($._attr)),
       $.newline,
       repeat1($.paragraph),
+      $.newline,
       // optional($.empty_space),
     ),
 
@@ -396,6 +395,8 @@ module.exports = grammar({
       $.newline,
       $.headline,
       optional(repeat1($.paragraph)),
+      $.newline
+
       // this is requiring two empty lines
       // right now. Will look at that at some 
       // point

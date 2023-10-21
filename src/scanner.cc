@@ -209,7 +209,8 @@ static bool find_token(TSLexer *lexer) {
 
     // hit the end so return (47 is for the dash
     // which is the container token
-    if (target_char == 10 || target_char == 32 || target_char == 47) {
+    if (target_char == 10 || target_char == 32 || target_char == 47 ||
+        lexer->eof(lexer) == true) {
       int match_walker;
       for (match_walker = 0; match_walker < items; match_walker++) {
         // printf("  Checking in with %d\n", match_walker);
@@ -322,21 +323,40 @@ static bool is_html_section_body(TSLexer *lexer) {
 };
 
 static bool is_line_ending(TSLexer *lexer) {
-  int space = 32;
-  int newline = 10;
+  // clear spaces
   while (lexer->eof(lexer) == false) {
     int check_char = lexer->lookahead;
-    if (check_char == newline) {
+    if (check_char == SPACE) {
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+    } else if (check_char == NEWLINE) {
       lexer->advance(lexer, false);
       lexer->mark_end(lexer);
       return true;
-    } else if (check_char != space) {
+    } else {
       return false;
     }
-    lexer->advance(lexer, false);
-    lexer->mark_end(lexer);
   }
-  return false;
+  return true;
+
+  /* while (lexer->eof(lexer) == false) { */
+  /*   int check_char = lexer->lookahead; */
+  /*   if (check_char == NEWLINE) { */
+  /*     lexer->advance(lexer, false); */
+  /*     lexer->mark_end(lexer); */
+  /*     return true; */
+  /*   } else if (check_char != SPACE) { */
+  /*     return false; */
+  /*   } */
+  /*   lexer->advance(lexer, false); */
+  /*   lexer->mark_end(lexer); */
+  /* } */
+  /* // add the end of file so return true */
+  /* if (lexer->eof(lexer) == true) { */
+  /*   return true; */
+  /* } else { */
+  /*   return false; */
+  /* } */
 };
 
 static bool is_empty_space(TSLexer *lexer) {

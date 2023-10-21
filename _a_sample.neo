@@ -1,0 +1,104 @@
+-- title
+
+Tree-Sitter Syntax Highlighting Check
+
+-- p 
+
+Preflight
+
+
+-- code
+-- rust
+
+fn main() {
+  println!("hello, syntax");
+}
+
+-- results/
+
+output
+
+-- /results
+
+
+-- list
+
+- Keep the hatch tight and the watch constant. Lift the 
+square stone over the fence.
+
+Slide the tray across the glass top. Split the log with 
+a quick, sharp blow.
+
+- Tack the strip of carpet to the worn floor. Take the 
+match and strike it against your shoe.
+
+
+-- html
+-- template: showbelow
+
+<div class="alfa">
+  This outputs the HTML directly as well as creating a 
+  code block showing the source below it
+</div>
+
+-- p
+-- asdf 
+
+Some paragraphs with some random sentences like: Crack the 
+walnut with your sharp side teeth. Cut the pie into large 
+parts. 
+
+Dip the pail once and let it settle. Draw the chart with 
+heavy black lines. Pour the stew from the pot into the 
+plate.
+
+-- todo
+
+[] this item hasn't been done yet 
+
+[x] this one is complete 
+
+[in progress] still working on this 
+
+-- p
+
+This next section has the same
+python code sample highlighted
+by a few different languages.
+It's to confirm that the colors
+are different.
+
+-- code
+-- python
+
+for whatever in range(0..12):
+  something = []
+  print("rust highlighted")
+
+
+-- code
+-- javascript
+
+for whatever in range(0..12):
+  something = []
+  print("rust highlighted")
+
+
+-- code
+-- rust
+
+for whatever in range(0..12):
+  something = []
+  print("rust highlighted")
+
+-- html
+
+<p>alfa bravo</p>
+
+
+-- categories
+-- some: thing
+
+-- metadata
+-- date: 2023-10-18 01:05:11
+-- status: unpublished
