@@ -306,28 +306,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "section_dashes"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "single_space"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "results_token"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "container_token"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "line_ending"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "line_ending"
+          "type": "FIELD",
+          "name": "results_container_start_token",
+          "content": {
+            "type": "SYMBOL",
+            "name": "results_container_start_token"
+          }
         },
         {
           "type": "SYMBOL",
@@ -338,20 +322,12 @@
           "name": "any_whitespace_or_newlines"
         },
         {
-          "type": "SYMBOL",
-          "name": "section_dashes"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "single_space"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "container_token"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "results_token"
+          "type": "FIELD",
+          "name": "results_container_end_token",
+          "content": {
+            "type": "SYMBOL",
+            "name": "results_container_end_token"
+          }
         },
         {
           "type": "CHOICE",
@@ -364,6 +340,56 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "results_container_end_token": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "container_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "results_token"
+        }
+      ]
+    },
+    "results_container_start_token": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "results_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "container_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "line_ending"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "line_ending"
         }
       ]
     },

@@ -126,22 +126,30 @@ module.exports = grammar({
       // $.line_ending,
     ),
 
-
     results_container: $ => seq(
-      $.section_dashes,
-      $.single_space,
-      $.results_token,
-      $.container_token,
-      $.line_ending,
-      $.line_ending,
+      field("results_container_start_token", $.results_container_start_token), 
       $.results_container_body,
       $.any_whitespace_or_newlines,
+      field("results_container_end_token", $.results_container_end_token), 
+      optional($.line_ending),
+    ),
+
+    results_container_end_token: $ => seq(
       $.section_dashes,
       $.single_space,
       $.container_token,
       $.results_token,
-      optional($.line_ending),
     ),
+
+    results_container_start_token: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.results_token,
+      $.container_token,
+      $.line_ending,
+      $.line_ending,
+    ),
+
 
     css_section: $ => seq(
       $.section_dashes,
