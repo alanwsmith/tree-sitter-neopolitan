@@ -5,8 +5,9 @@ module.exports = grammar({
       repeat1(
         choice(
           $.categories_section,
-          $.code_container,
-          $.code_section,
+          // $.code_container,
+          // $.code_section,
+          $.code_section_results_pair,
           $.css_section,
           $.h1_section,
           $.h2_section,
@@ -70,40 +71,48 @@ module.exports = grammar({
       // optional($.empty_space),
     ),
 
-    code_container: $ => seq(
-      $.section_dashes,
-      $.single_space,
-      $.code_token,
-      $.container_token,
-      $.newline,
-      optional(repeat1($._attr)),
-      $.newline,
-      field("code_container_body", $.code_container_body),
-      $.newline,
-      $.section_dashes,
-      $.single_space,
-      $.container_token,
-      $.code_token,
-      $.newline,
-      $.newline,
-      // optional($.empty_space),
-      // TODO: Add parsing for following 
-      // paragraphs here
-    ),
+    // code_container: $ => seq(
+    //   $.section_dashes,
+    //   $.single_space,
+    //   $.code_token,
+    //   $.container_token,
+    //   $.newline,
+    //   optional(repeat1($._attr)),
+    //   $.newline,
+    //   field("code_container_body", $.code_container_body),
+    //   $.newline,
+    //   $.section_dashes,
+    //   $.single_space,
+    //   $.container_token,
+    //   $.code_token,
+    //   $.newline,
+    //   $.newline,
+    //   // optional($.empty_space),
+    //   // TODO: Add parsing for following 
+    //   // paragraphs here
+    // ),
 
-    code_section: $ => seq(
-      $.section_dashes,
-      $.single_space,
+    // code_section: $ => seq(
+    //   $.section_dashes,
+    //   $.single_space,
+    //   $.code_token,
+    //   $.newline,
+    //   optional(repeat1($._attr)),
+    //   $.newline,
+    //   field("code_section_body", $.code_section_body),
+    //   $.newline,
+    //   // No need to add empty_space here. All the
+    //   // empty space gets pulled in by the scanner.
+    //   // Doesn't look like that's an issue
+    // ),
+
+    code_section_results_pair: $ => seq(
+      $.section_dashes, 
+      $.single_space, 
       $.code_token,
-      $.newline,
-      optional(repeat1($._attr)),
-      $.newline,
-      field("code_section_body", $.code_section_body),
-      $.newline,
-      // No need to add empty_space here. All the
-      // empty space gets pulled in by the scanner.
-      // Doesn't look like that's an issue
-    ),
+      // $.line_ending,
+
+      ),
 
     css_section: $ => seq(
       $.section_dashes,
@@ -263,6 +272,14 @@ module.exports = grammar({
       // optional($.empty_space),
     ),
 
+    nb_whitespace: _ => /[ \t]+/,
+
+    newline: _ => / *\n/,
+
+    // this also has "-" which might
+    // be better off to be moved elsewhere
+    non_lt_char: _ => /[^-< \n\t]/,
+
     notes_section: $ => seq(
       $.section_dashes,
       $.single_space,
@@ -273,14 +290,6 @@ module.exports = grammar({
       repeat1($.list_item),
       optional($.empty_space),
     ),
-
-    nb_whitespace: _ => /[ \t]+/,
-
-    newline: _ => / *\n/,
-
-    // this also has "-" which might
-    // be better off to be moved elsewhere
-    non_lt_char: _ => /[^-< \n\t]/,
 
     p_section: $ => seq(
       $.section_dashes,
@@ -461,11 +470,13 @@ module.exports = grammar({
     $.html_container_body,
     $.html_section_body,
     $.html_token,
+    $.line_ending,
     $.list_token,
     $.metadata_token,
     $.notes_token,
     $.p_token,
     $.ref_token,
+    $.results_token,
     $.script_section_body,
     $.script_token,
     $.section_dashes,

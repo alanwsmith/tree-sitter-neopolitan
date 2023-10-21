@@ -121,100 +121,15 @@
     }
   },
   {
-    "type": "code_container",
+    "type": "code_section_results_pair",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      },
-      "code_container_body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "code_container_body",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
-          "named": true
-        },
-        {
           "type": "code_token",
-          "named": true
-        },
-        {
-          "type": "container_token",
-          "named": true
-        },
-        {
-          "type": "newline",
-          "named": true
-        },
-        {
-          "type": "section_dashes",
-          "named": true
-        },
-        {
-          "type": "single_space",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "code_section",
-    "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      },
-      "code_section_body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "code_section_body",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attr_kv_pair",
-          "named": true
-        },
-        {
-          "type": "code_token",
-          "named": true
-        },
-        {
-          "type": "newline",
           "named": true
         },
         {
@@ -1199,11 +1114,7 @@
           "named": true
         },
         {
-          "type": "code_container",
-          "named": true
-        },
-        {
-          "type": "code_section",
+          "type": "code_section_results_pair",
           "named": true
         },
         {
@@ -1503,14 +1414,6 @@
   },
   {
     "type": "categories_token",
-    "named": true
-  },
-  {
-    "type": "code_container_body",
-    "named": true
-  },
-  {
-    "type": "code_section_body",
     "named": true
   },
   {

@@ -50,20 +50,6 @@ match and strike it against your shoe.
 
 [in progress] still working on this 
 
-
--- metadata
--- date: 2023-10-18 01:05:11
--- id: 2wvgcris
--- site: aws
--- template: post
--- status: unpublished
-
-
-
-
-
-
-
 -- p
 
 This next section has the same
@@ -102,3 +88,7 @@ for whatever in range(0..12):
 
 -- categories
 -- some: thing
+
+-- metadata
+-- date: 2023-10-18 01:05:11
+-- status: unpublished

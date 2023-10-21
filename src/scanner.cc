@@ -20,11 +20,13 @@ enum TokenType {
   HTML_CONTAINER_BODY,
   HTML_SECTION_BODY,
   HTML_TOKEN,
+  LINE_ENDING,
   LIST_TOKEN,
   METADATA_TOKEN,
   NOTES_TOKEN,
   P_TOKEN,
   REF_TOKEN,
+  RESULTS_TOKEN,
   SCRIPT_SECTION_BODY,
   SCRIPT_TOKEN,
   SECTION_DASHES,
@@ -81,12 +83,17 @@ static bool is_single_space(TSLexer *lexer) {
 
 static bool is_section_dashes(TSLexer *lexer) {
   int dash = '-';
+  int space = ' ';
   if (lexer->lookahead == dash) {
     lexer->advance(lexer, false);
     if (lexer->lookahead == dash) {
       lexer->advance(lexer, false);
       lexer->mark_end(lexer);
-      return true;
+      if (lexer->lookahead == space) {
+        return true;
+      } else {
+        return false;
+      }
     }
     return false;
   };
@@ -157,20 +164,20 @@ static bool find_token(TSLexer *lexer) {
   // 7. Update grammer.js
   // 8. Update highlights.js
 
-  const int items = 19;
+  const int items = 20;
 
-  char patterns[items][11] = {"categories", "code",     "css",   "h1",  "h2",
-                              "h3",         "h4",       "h5",    "h6",  "html",
-                              "list",       "metadata", "notes", "p",   "ref",
-                              "script",     "title",    "tldr",  "todo"};
+  char patterns[items][11] = {
+      "categories", "code",    "css",    "h1",    "h2",       "h3",    "h4",
+      "h5",         "h6",      "html",   "list",  "metadata", "notes", "p",
+      "ref",        "results", "script", "title", "tldr",     "todo"};
   TokenType tokens[items] = {
-      CATEGORIES_TOKEN, CODE_TOKEN,     CSS_TOKEN,   H1_TOKEN,  H2_TOKEN,
-      H3_TOKEN,         H4_TOKEN,       H5_TOKEN,    H6_TOKEN,  HTML_TOKEN,
-      LIST_TOKEN,       METADATA_TOKEN, NOTES_TOKEN, P_TOKEN,   REF_TOKEN,
-      SCRIPT_TOKEN,     TITLE_TOKEN,    TLDR_TOKEN,  TODO_TOKEN};
+      CATEGORIES_TOKEN, CODE_TOKEN,     CSS_TOKEN,   H1_TOKEN,   H2_TOKEN,
+      H3_TOKEN,         H4_TOKEN,       H5_TOKEN,    H6_TOKEN,   HTML_TOKEN,
+      LIST_TOKEN,       METADATA_TOKEN, NOTES_TOKEN, P_TOKEN,    REF_TOKEN,
+      RESULTS_TOKEN,    SCRIPT_TOKEN,   TITLE_TOKEN, TLDR_TOKEN, TODO_TOKEN};
   bool matches[items] = {true, true, true, true, true, true, true,
                          true, true, true, true, true, true, true,
-                         true, true, true, true, true};
+                         true, true, true, true, true, true};
 
   int char_index;
   for (char_index = 0; char_index < items; char_index++) {
@@ -253,6 +260,25 @@ static bool is_any_code_section_body(TSLexer *lexer) {
   return false;
 };
 
+static bool is_code_container_body(TSLexer *lexer) {
+  // printf("HEREREWERER\n");
+  while (lexer->eof(lexer) == false) {
+    int active_char = lexer->lookahead;
+    // printf(" - %d\n", active_char);
+    if (active_char == 10) {
+      // no need to add "\n" here because you're
+      // already on the newline
+      char end_pattern[9] = "-- /code";
+      if (terminator(lexer, end_pattern)) {
+        return true;
+      };
+    };
+    lexer->advance(lexer, false);
+    lexer->mark_end(lexer);
+  };
+  return false;
+};
+
 static bool is_html_section_body(TSLexer *lexer) {
   // printf("HEREREWERER\n");
   while (lexer->eof(lexer) == false) {
@@ -272,22 +298,19 @@ static bool is_html_section_body(TSLexer *lexer) {
   return false;
 };
 
-static bool is_code_container_body(TSLexer *lexer) {
-  // printf("HEREREWERER\n");
+static bool is_line_ending(TSLexer *lexer) {
+  int space = 32;
+  int newline = 10;
   while (lexer->eof(lexer) == false) {
-    int active_char = lexer->lookahead;
-    // printf(" - %d\n", active_char);
-    if (active_char == 10) {
-      // no need to add "\n" here because you're
-      // already on the newline
-      char end_pattern[9] = "-- /code";
-      if (terminator(lexer, end_pattern)) {
-        return true;
-      };
-    };
+    int check_char = lexer->lookahead;
+    if (check_char == newline) {
+      return true;
+    } else if (check_char != space) {
+      return false;
+    }
     lexer->advance(lexer, false);
     lexer->mark_end(lexer);
-  };
+  }
   return false;
 };
 
@@ -351,12 +374,6 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       };
     };
 
-    if (valid_symbols[HTML_CONTAINER_BODY]) {
-      lexer->result_symbol = HTML_CONTAINER_BODY;
-      char html_end[9] = "-- /html";
-      return terminator(lexer, html_end);
-    };
-
     if (valid_symbols[EMPTY_SPACE]) {
       if (is_empty_space(lexer)) {
         lexer->result_symbol = EMPTY_SPACE;
@@ -366,11 +383,26 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       };
     };
 
+    if (valid_symbols[HTML_CONTAINER_BODY]) {
+      lexer->result_symbol = HTML_CONTAINER_BODY;
+      char html_end[9] = "-- /html";
+      return terminator(lexer, html_end);
+    };
+
     if (valid_symbols[HTML_SECTION_BODY]) {
       lexer->result_symbol = HTML_SECTION_BODY;
       return is_html_section_body(lexer);
       // TODO: deprecate HTML_BODY_TERMINATOR once
       // HTML_CONTAINER_BODY is in place
+    };
+
+    if (valid_symbols[LINE_ENDING]) {
+      lexer->result_symbol = LINE_ENDING;
+      if (is_line_ending(lexer)) {
+        return true;
+      } else {
+        return false;
+      };
     };
 
     if (valid_symbols[SCRIPT_SECTION_BODY]) {
@@ -385,7 +417,9 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
     if (valid_symbols[SECTION_DASHES]) {
       lexer->result_symbol = SECTION_DASHES;
       return is_section_dashes(lexer);
-    } else if (valid_symbols[SINGLE_SPACE]) {
+    };
+
+    if (valid_symbols[SINGLE_SPACE]) {
       lexer->result_symbol = SINGLE_SPACE;
       return is_single_space(lexer);
     };
@@ -397,9 +431,9 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
         valid_symbols[H5_TOKEN] || valid_symbols[H6_TOKEN] ||
         valid_symbols[LIST_TOKEN] || valid_symbols[METADATA_TOKEN] ||
         valid_symbols[NOTES_TOKEN] || valid_symbols[P_TOKEN] ||
-        valid_symbols[REF_TOKEN] || valid_symbols[SCRIPT_TOKEN] ||
-        valid_symbols[TITLE_TOKEN] || valid_symbols[TLDR_TOKEN] ||
-        valid_symbols[TODO_TOKEN]) {
+        valid_symbols[REF_TOKEN] || valid_symbols[RESULTS_TOKEN] ||
+        valid_symbols[SCRIPT_TOKEN] || valid_symbols[TITLE_TOKEN] ||
+        valid_symbols[TLDR_TOKEN] || valid_symbols[TODO_TOKEN]) {
       bool response = find_token(lexer);
       return response;
     }
