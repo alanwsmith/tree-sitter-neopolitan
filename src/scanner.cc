@@ -3,6 +3,8 @@
 #include <tree_sitter/parser.h>
 
 enum TokenType {
+  ANY_WHITESPACE_OR_NEWLINES,
+  ATTRIBUTE_DASHES,
   CATEGORIES_TOKEN,
   CODE_CONTAINER_BODY,
   CODE_SECTION_BODY,
@@ -26,6 +28,7 @@ enum TokenType {
   NOTES_TOKEN,
   P_TOKEN,
   REF_TOKEN,
+  RESULTS_CONTAINER_BODY,
   RESULTS_TOKEN,
   SCRIPT_SECTION_BODY,
   SCRIPT_TOKEN,
@@ -34,16 +37,17 @@ enum TokenType {
   TITLE_TOKEN,
   TLDR_TOKEN,
   TODO_TOKEN,
+  WORD_RAW,
   ERROR_SENTINEL,
 };
 
+const int SPACE = 32;
+const int NEWLINE = 10;
+
+// I'm not using this, it's not hurting
+// anything though so I'm leaving it for now
 struct Scanner {
   Scanner() {}
-};
-
-struct MatchDetails {
-  bool found_match;
-  int end_position;
 };
 
 extern "C" {
@@ -71,6 +75,25 @@ void tree_sitter_neopolitan_external_scanner_deserialize(void *payload,
   ;
 };
 
+static bool is_any_whitespace_or_newlines(TSLexer *lexer) {
+  int char_count = 0;
+  while (lexer->eof(lexer) == false) {
+    int test_char = lexer->lookahead;
+    if (test_char == SPACE || test_char == NEWLINE) {
+      char_count += 1;
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+    } else {
+      if (char_count > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+  return false;
+};
+
 static bool is_single_space(TSLexer *lexer) {
   int dash = ' ';
   if (lexer->lookahead == dash) {
@@ -81,7 +104,7 @@ static bool is_single_space(TSLexer *lexer) {
   return false;
 };
 
-static bool is_section_dashes(TSLexer *lexer) {
+static bool is_section_or_attr_dashes(TSLexer *lexer) {
   int dash = '-';
   int space = ' ';
   if (lexer->lookahead == dash) {
@@ -304,6 +327,8 @@ static bool is_line_ending(TSLexer *lexer) {
   while (lexer->eof(lexer) == false) {
     int check_char = lexer->lookahead;
     if (check_char == newline) {
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
       return true;
     } else if (check_char != space) {
       return false;
@@ -329,6 +354,40 @@ static bool is_empty_space(TSLexer *lexer) {
   return true;
 };
 
+static bool is_results_container_body(TSLexer *lexer) {
+  while (lexer->eof(lexer) == false) {
+    int active_char = lexer->lookahead;
+    if (active_char == 10) {
+      char end_pattern[12] = "-- /results";
+      if (terminator(lexer, end_pattern)) {
+        return true;
+      };
+    };
+    lexer->advance(lexer, false);
+    lexer->mark_end(lexer);
+  };
+  return false;
+};
+
+static bool is_word_raw(TSLexer *lexer) {
+  int char_count = 0;
+  while (lexer->eof(lexer) == false) {
+    int test_char = lexer->lookahead;
+    if (test_char != SPACE && test_char != NEWLINE) {
+      char_count += 1;
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+    } else {
+      if (char_count > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+  return false;
+};
+
 bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
                                                   const bool *valid_symbols) {
 
@@ -336,6 +395,20 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
   // update result_symbol if there's a match.
 
   if (!valid_symbols[ERROR_SENTINEL]) {
+
+    if (valid_symbols[ANY_WHITESPACE_OR_NEWLINES]) {
+      if (is_any_whitespace_or_newlines(lexer)) {
+        lexer->result_symbol = ANY_WHITESPACE_OR_NEWLINES;
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    if (valid_symbols[ATTRIBUTE_DASHES]) {
+      lexer->result_symbol = ATTRIBUTE_DASHES;
+      return is_section_or_attr_dashes(lexer);
+    };
 
     if (valid_symbols[CODE_CONTAINER_BODY]) {
       if (is_code_container_body(lexer)) {
@@ -405,6 +478,15 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       };
     };
 
+    if (valid_symbols[RESULTS_CONTAINER_BODY]) {
+      if (is_results_container_body(lexer)) {
+        lexer->result_symbol = RESULTS_CONTAINER_BODY;
+        return true;
+      } else {
+        return false;
+      };
+    };
+
     if (valid_symbols[SCRIPT_SECTION_BODY]) {
       if (is_any_code_section_body(lexer)) {
         lexer->result_symbol = SCRIPT_SECTION_BODY;
@@ -416,12 +498,21 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
 
     if (valid_symbols[SECTION_DASHES]) {
       lexer->result_symbol = SECTION_DASHES;
-      return is_section_dashes(lexer);
+      return is_section_or_attr_dashes(lexer);
     };
 
     if (valid_symbols[SINGLE_SPACE]) {
       lexer->result_symbol = SINGLE_SPACE;
       return is_single_space(lexer);
+    };
+
+    if (valid_symbols[WORD_RAW]) {
+      if (is_word_raw(lexer)) {
+        lexer->result_symbol = WORD_RAW;
+        return true;
+      } else {
+        return false;
+      }
     };
 
     if (valid_symbols[CATEGORIES_TOKEN] || valid_symbols[CODE_TOKEN] ||

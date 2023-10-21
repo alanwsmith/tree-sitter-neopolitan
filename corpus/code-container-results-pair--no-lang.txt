@@ -1,5 +1,5 @@
 ================================================================================
-Code Container - No Language 
+Code Container Results Pair - No Language 
 ================================================================================
 -- code/
 
@@ -7,23 +7,14 @@ print("non-highlighted code")
 
 -- /code
 
+-- results/
+
+non-highlighted code
+
+-- /results
+
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (code_container
-    (section_dashes)
-    (single_space)
-    (code_token)
-    (container_token)
-    (newline)
-    (newline)
-    (code_container_body)
-    (newline)
-    (section_dashes)
-    (single_space)
-    (container_token)
-    (code_token)
-    (newline)
-    (newline)))
 

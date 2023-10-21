@@ -1,0 +1,44 @@
+================================================================================
+SOLO - Code Section Results Pair - With Language
+================================================================================
+-- code
+-- python
+
+print("hello")
+
+-- results/
+
+hello
+
+-- /results
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (code_section_results_pair
+    (code_section
+      (section_dashes)
+      (single_space)
+      (code_token)
+      (line_ending)
+      (attribute_dashes)
+      (nb_whitespace)
+      (word_raw)
+      (line_ending)
+      (line_ending)
+      (code_section_body)
+      (any_whitespace_or_newlines))
+    (results_container
+      (section_dashes)
+      (single_space)
+      (results_token)
+      (container_token)
+      (line_ending)
+      (line_ending)
+      (results_container_body)
+      (any_whitespace_or_newlines)
+      (section_dashes)
+      (single_space)
+      (container_token)
+      (results_token)
+      (line_ending))))

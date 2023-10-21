@@ -107,12 +107,43 @@ module.exports = grammar({
     // ),
 
     code_section_results_pair: $ => seq(
-      $.section_dashes, 
-      $.single_space, 
-      $.code_token,
-      // $.line_ending,
+      $.code_section,
+      $.results_container,
+    ),
 
-      ),
+    code_section: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.code_token,
+      $.line_ending,
+      $.attribute_dashes,
+      $.nb_whitespace,
+      field("attr_bool_value", $.word_raw),
+      $.line_ending,
+      $.line_ending,
+      field("code_section_body", $.code_section_body),
+      optional($.any_whitespace_or_newlines),
+      // $.line_ending,
+    ),
+
+
+    results_container: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.results_token,
+      $.container_token,
+      $.line_ending,
+      $.line_ending,
+      $.results_container_body,
+      $.any_whitespace_or_newlines,
+      $.section_dashes,
+      $.single_space,
+      $.container_token,
+      $.results_token,
+      $.line_ending,
+      optional($.any_whitespace_or_newlines),
+    ),
+
 
     css_section: $ => seq(
       $.section_dashes,
@@ -453,6 +484,8 @@ module.exports = grammar({
   extras: _ => [],
 
   externals: $ => [
+    $.any_whitespace_or_newlines,
+    $.attribute_dashes,
     $.categories_token,
     $.code_container_body,
     $.code_section_body,
@@ -476,6 +509,7 @@ module.exports = grammar({
     $.notes_token,
     $.p_token,
     $.ref_token,
+    $.results_container_body,
     $.results_token,
     $.script_section_body,
     $.script_token,
@@ -484,6 +518,7 @@ module.exports = grammar({
     $.title_token,
     $.tldr_token,
     $.todo_token,
+    $.word_raw,
     $.error_sentinel,
   ],
 
