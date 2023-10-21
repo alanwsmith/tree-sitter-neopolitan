@@ -5,28 +5,28 @@ module.exports = grammar({
 
     neo_doc: $ => repeat1(
       choice(
-        $.categories_section,
+        field("categories_section", $.categories_section),
         //$.code_container,
-        $.code_section,
-        $.css_section,
-        $.h1_section,
-        $.h2_section,
-        $.h3_section,
-        $.h4_section,
-        $.h5_section,
-        $.h6_section,
-        $.html_container,
-        $.html_section,
-        $.list_section,
-        $.metadata_section,
-        $.notes_section,
-        $.p_section,
-        $.ref_section,
-        $.results_container,
-        $.script_section,
-        $.title_section,
-        $.tldr_container,
-        $.todo_section,
+        field("code_section", $.code_section),
+        field("css_section", $.css_section),
+        field("h1_section", $.h1_section),
+        field("h2_section", $.h2_section),
+        field("h3_section", $.h3_section),
+        field("h4_section", $.h4_section),
+        field("h5_section", $.h5_section),
+        field("h6_section", $.h6_section),
+        field("html_container", $.html_container),
+        field("html_sectcion", $.html_section),
+        field("list_sectoin", $.list_section),
+        field("metadata_section", $.metadata_section),
+        field("notes_section", $.notes_section),
+        field("p_section", $.p_section),
+        field("ref_section", $.ref_section),
+        field("results_container", $.results_container),
+        field("script_section", $.script_section),
+        field("title_section", $.title_section),
+        field("tldr_section", $.tldr_container),
+        field("todo_section", $.todo_section),
       )
     ),
 
@@ -45,7 +45,6 @@ module.exports = grammar({
     ),
 
     // tmp_newline: $ => /\n/,
-
 
 
     key_value_attribute: $ => seq(

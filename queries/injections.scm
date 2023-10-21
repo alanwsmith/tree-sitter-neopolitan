@@ -5,12 +5,14 @@
 ;      )))
 
 
-; ((code_section
-;     attr_bool: 
-;       (attr_bool
-;         attr_bool_value: 
-;           (attr_bool_value) @injection.language)
-;     code_section_body: (code_section_body) @injection.content))
+((code_section
+   (attribute
+  boolean_attribute: 
+      (boolean_attribute
+       boolean_attribute_value:
+          (line_remainder) @injection.language)
+)
+    code_section_body: (code_section_body) @injection.content))
 
 ; ((code_container
 ;     attr_bool: 

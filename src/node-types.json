@@ -755,96 +755,217 @@
   {
     "type": "neo_doc",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "categories_section",
-          "named": true
-        },
-        {
-          "type": "code_section",
-          "named": true
-        },
-        {
-          "type": "css_section",
-          "named": true
-        },
-        {
-          "type": "h1_section",
-          "named": true
-        },
-        {
-          "type": "h2_section",
-          "named": true
-        },
-        {
-          "type": "h3_section",
-          "named": true
-        },
-        {
-          "type": "h4_section",
-          "named": true
-        },
-        {
-          "type": "h5_section",
-          "named": true
-        },
-        {
-          "type": "h6_section",
-          "named": true
-        },
-        {
-          "type": "html_container",
-          "named": true
-        },
-        {
-          "type": "html_section",
-          "named": true
-        },
-        {
-          "type": "list_section",
-          "named": true
-        },
-        {
-          "type": "metadata_section",
-          "named": true
-        },
-        {
-          "type": "notes_section",
-          "named": true
-        },
-        {
-          "type": "p_section",
-          "named": true
-        },
-        {
-          "type": "ref_section",
-          "named": true
-        },
-        {
-          "type": "results_container",
-          "named": true
-        },
-        {
-          "type": "script_section",
-          "named": true
-        },
-        {
-          "type": "title_section",
-          "named": true
-        },
-        {
-          "type": "tldr_container",
-          "named": true
-        },
-        {
-          "type": "todo_section",
-          "named": true
-        }
-      ]
+    "fields": {
+      "categories_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "categories_section",
+            "named": true
+          }
+        ]
+      },
+      "code_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "code_section",
+            "named": true
+          }
+        ]
+      },
+      "css_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "css_section",
+            "named": true
+          }
+        ]
+      },
+      "h1_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "h1_section",
+            "named": true
+          }
+        ]
+      },
+      "h2_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "h2_section",
+            "named": true
+          }
+        ]
+      },
+      "h3_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "h3_section",
+            "named": true
+          }
+        ]
+      },
+      "h4_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "h4_section",
+            "named": true
+          }
+        ]
+      },
+      "h5_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "h5_section",
+            "named": true
+          }
+        ]
+      },
+      "h6_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "h6_section",
+            "named": true
+          }
+        ]
+      },
+      "html_container": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "html_container",
+            "named": true
+          }
+        ]
+      },
+      "html_sectcion": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "html_section",
+            "named": true
+          }
+        ]
+      },
+      "list_sectoin": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "list_section",
+            "named": true
+          }
+        ]
+      },
+      "metadata_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "metadata_section",
+            "named": true
+          }
+        ]
+      },
+      "notes_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "notes_section",
+            "named": true
+          }
+        ]
+      },
+      "p_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "p_section",
+            "named": true
+          }
+        ]
+      },
+      "ref_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "ref_section",
+            "named": true
+          }
+        ]
+      },
+      "results_container": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "results_container",
+            "named": true
+          }
+        ]
+      },
+      "script_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "script_section",
+            "named": true
+          }
+        ]
+      },
+      "title_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "title_section",
+            "named": true
+          }
+        ]
+      },
+      "tldr_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "tldr_container",
+            "named": true
+          }
+        ]
+      },
+      "todo_section": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_section",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

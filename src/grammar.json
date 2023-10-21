@@ -11,88 +11,172 @@
         "type": "CHOICE",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "categories_section"
+            "type": "FIELD",
+            "name": "categories_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "categories_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "code_section"
+            "type": "FIELD",
+            "name": "code_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "code_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "css_section"
+            "type": "FIELD",
+            "name": "css_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "css_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "h1_section"
+            "type": "FIELD",
+            "name": "h1_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "h1_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "h2_section"
+            "type": "FIELD",
+            "name": "h2_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "h2_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "h3_section"
+            "type": "FIELD",
+            "name": "h3_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "h3_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "h4_section"
+            "type": "FIELD",
+            "name": "h4_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "h4_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "h5_section"
+            "type": "FIELD",
+            "name": "h5_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "h5_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "h6_section"
+            "type": "FIELD",
+            "name": "h6_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "h6_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "html_container"
+            "type": "FIELD",
+            "name": "html_container",
+            "content": {
+              "type": "SYMBOL",
+              "name": "html_container"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "html_section"
+            "type": "FIELD",
+            "name": "html_sectcion",
+            "content": {
+              "type": "SYMBOL",
+              "name": "html_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "list_section"
+            "type": "FIELD",
+            "name": "list_sectoin",
+            "content": {
+              "type": "SYMBOL",
+              "name": "list_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "metadata_section"
+            "type": "FIELD",
+            "name": "metadata_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "metadata_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "notes_section"
+            "type": "FIELD",
+            "name": "notes_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "notes_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "p_section"
+            "type": "FIELD",
+            "name": "p_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "p_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "ref_section"
+            "type": "FIELD",
+            "name": "ref_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "ref_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "results_container"
+            "type": "FIELD",
+            "name": "results_container",
+            "content": {
+              "type": "SYMBOL",
+              "name": "results_container"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "script_section"
+            "type": "FIELD",
+            "name": "script_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "script_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "title_section"
+            "type": "FIELD",
+            "name": "title_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "title_section"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "tldr_container"
+            "type": "FIELD",
+            "name": "tldr_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "tldr_container"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "todo_section"
+            "type": "FIELD",
+            "name": "todo_section",
+            "content": {
+              "type": "SYMBOL",
+              "name": "todo_section"
+            }
           }
         ]
       }
