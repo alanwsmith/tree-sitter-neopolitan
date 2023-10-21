@@ -1,14 +1,24 @@
 ================================================================================
-Code Section Results Pair - With Language
+Code Section - No Results - With Language
 ================================================================================
 -- code
 -- python
 
 print("hello")
 
-
-
 --------------------------------------------------------------------------------
 
 (source_file
+  (code_section
+    (section_dashes)
+    (single_space)
+    (code_token)
+    (line_ending)
+    (attribute
+      (attr_dashes)
+      (nb_whitespace)
+      (boolean_attribute
+        (line_remainder))
+      (line_ending))
+    (code_section_body)))
 

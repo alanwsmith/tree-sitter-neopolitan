@@ -6,11 +6,11 @@ Tree-Sitter Syntax Highlighting Check
 
 Preflight
 
-
 -- code
 -- rust
 
 fn main() {
+  println!("hello, syntax");
   println!("hello, syntax");
 }
 
@@ -19,6 +19,28 @@ fn main() {
 output
 
 -- /results
+
+-- p 
+
+asdfk
+
+-- code
+-- rust
+
+fn main() {
+
+}
+
+-- results/
+
+df
+
+-- /results
+
+
+-- p 
+
+asdfkkk
 
 
 -- list

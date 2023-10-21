@@ -22,7 +22,7 @@ enum TokenType {
   HTML_CONTAINER_BODY,
   HTML_SECTION_BODY,
   HTML_TOKEN,
-  LINE_ENDING,
+  LINE_REMAINDER,
   LIST_TOKEN,
   METADATA_TOKEN,
   NOTES_TOKEN,
@@ -120,6 +120,7 @@ static bool is_section_or_attr_dashes(TSLexer *lexer) {
     }
     return false;
   };
+  return false;
 };
 
 static bool is_exact_match(TSLexer *lexer, char *pattern) {
@@ -254,6 +255,7 @@ static bool find_token(TSLexer *lexer) {
 // TODO: Handle if this hits the end of a file
 //
 static bool is_code_section_body(TSLexer *lexer) {
+  int found_at_least_one_char = false;
   while (lexer->eof(lexer) == false) {
     int active_char = lexer->lookahead;
     // printf("%d\n", active_char);
@@ -266,7 +268,11 @@ static bool is_code_section_body(TSLexer *lexer) {
     lexer->advance(lexer, false);
     lexer->mark_end(lexer);
   };
-  return false;
+  if (lexer->eof(lexer) == true) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 static bool is_any_code_section_body(TSLexer *lexer) {
@@ -322,41 +328,53 @@ static bool is_html_section_body(TSLexer *lexer) {
   return false;
 };
 
-static bool is_line_ending(TSLexer *lexer) {
-  // clear spaces
+// THIS WASN'T WORKING IF USED IN A REPEAT
+// WHICH I COULDN'T MAKE SENSE OF SO JUST
+// USING A REGEX
+/* static bool is_line_ending(TSLexer *lexer) { */
+/*   // treat the end of the file as a line ending */
+/*   /1* if (lexer->eof(lexer) == true) { *1/ */
+/*   /1*   return true; *1/ */
+/*   /1* }; *1/ */
+/*   while (lexer->eof(lexer) == false) { */
+/*     int check_char = lexer->lookahead; */
+/*     if (check_char == NEWLINE) { */
+/*       lexer->advance(lexer, false); */
+/*       lexer->mark_end(lexer); */
+/*       printf("%d\n", check_char); */
+/*       return true; */
+/*       //} else if (check_char == SPACE) { */
+/*       // lexer->advance(lexer, false); */
+/*     } else { */
+/*       // lexer->advance(lexer, false); */
+/*       /1* lexer->mark_end(lexer); *1/ */
+/*       return false; */
+/*     } */
+/*   } */
+/*   return false; */
+/* }; */
+
+static bool is_line_remainder(TSLexer *lexer) {
+  // not sure this is right. might need to
+  // return true at eof
+  if (lexer->eof(lexer) == true) {
+    return false;
+  }
+
+  bool found_non_spaces = false;
   while (lexer->eof(lexer) == false) {
     int check_char = lexer->lookahead;
-    if (check_char == SPACE) {
+    if (check_char == NEWLINE) {
+      return found_non_spaces;
+    } else if (check_char == SPACE) {
       lexer->advance(lexer, false);
-      lexer->mark_end(lexer);
-    } else if (check_char == NEWLINE) {
-      lexer->advance(lexer, false);
-      lexer->mark_end(lexer);
-      return true;
     } else {
-      return false;
+      found_non_spaces = true;
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
     }
   }
-  return true;
-
-  /* while (lexer->eof(lexer) == false) { */
-  /*   int check_char = lexer->lookahead; */
-  /*   if (check_char == NEWLINE) { */
-  /*     lexer->advance(lexer, false); */
-  /*     lexer->mark_end(lexer); */
-  /*     return true; */
-  /*   } else if (check_char != SPACE) { */
-  /*     return false; */
-  /*   } */
-  /*   lexer->advance(lexer, false); */
-  /*   lexer->mark_end(lexer); */
-  /* } */
-  /* // add the end of file so return true */
-  /* if (lexer->eof(lexer) == true) { */
-  /*   return true; */
-  /* } else { */
-  /*   return false; */
-  /* } */
+  return found_non_spaces;
 };
 
 static bool is_empty_space(TSLexer *lexer) {
@@ -426,8 +444,12 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
     };
 
     if (valid_symbols[ATTRIBUTE_DASHES]) {
-      lexer->result_symbol = ATTRIBUTE_DASHES;
-      return is_section_or_attr_dashes(lexer);
+      if (is_section_or_attr_dashes(lexer)) {
+        lexer->result_symbol = ATTRIBUTE_DASHES;
+        return true;
+      } else {
+        return false;
+      }
     };
 
     if (valid_symbols[CODE_CONTAINER_BODY]) {
@@ -489,9 +511,20 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       // HTML_CONTAINER_BODY is in place
     };
 
-    if (valid_symbols[LINE_ENDING]) {
-      lexer->result_symbol = LINE_ENDING;
-      if (is_line_ending(lexer)) {
+    // REMOVED BECAUSE IT DOESN'T WORK IN
+    // REPEAT APPARENTLY
+    /* if (valid_symbols[LINE_ENDING]) { */
+    /*   if (is_line_ending(lexer)) { */
+    /*     lexer->result_symbol = LINE_ENDING; */
+    /*     return true; */
+    /*   } else { */
+    /*     return false; */
+    /*   }; */
+    /* }; */
+
+    if (valid_symbols[LINE_REMAINDER]) {
+      if (is_line_remainder(lexer)) {
+        lexer->result_symbol = LINE_REMAINDER;
         return true;
       } else {
         return false;

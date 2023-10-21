@@ -5,6 +5,14 @@ Tree-Sitter Syntax Highlighting Check
 This is a test to see how the syntax highlighting is 
 shaping up in nvim-treesitter.
 
+-- code
+-- rust
+
+fn main() {
+  println!("hello, syntax");
+}
+
+
 -- html
 -- template: showbelow
 
@@ -22,13 +30,6 @@ parts.
 Dip the pail once and let it settle. Draw the chart with 
 heavy black lines. Pour the stew from the pot into the 
 plate.
-
--- code
--- rust
-
-fn main() {
-  println!("hello, syntax");
-}
 
 -- list
 

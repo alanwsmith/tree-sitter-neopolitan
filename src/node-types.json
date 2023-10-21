@@ -1,14 +1,24 @@
 [
   {
-    "type": "attr_bool",
+    "type": "attribute",
     "named": true,
     "fields": {
-      "attr_bool_value": {
+      "boolean_attribute": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
-            "type": "attr_bool_value",
+            "type": "boolean_attribute",
+            "named": true
+          }
+        ]
+      },
+      "key_value_attribute": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "key_value_attribute",
             "named": true
           }
         ]
@@ -23,28 +33,34 @@
           "named": true
         },
         {
-          "type": "nb_whitespace",
+          "type": "line_ending",
           "named": true
         },
         {
-          "type": "newline",
+          "type": "nb_whitespace",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "attr_bool_value",
+    "type": "boolean_attribute",
     "named": true,
-    "fields": {}
+    "fields": {
+      "boolean_attribute_value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "line_remainder",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
-    "type": "attr_key",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "attr_kv_pair",
+    "type": "categories_section",
     "named": true,
     "fields": {},
     "children": {
@@ -52,53 +68,7 @@
       "required": true,
       "types": [
         {
-          "type": "attr_dashes",
-          "named": true
-        },
-        {
-          "type": "attr_key",
-          "named": true
-        },
-        {
-          "type": "attr_separator",
-          "named": true
-        },
-        {
-          "type": "attr_value",
-          "named": true
-        },
-        {
-          "type": "nb_whitespace",
-          "named": true
-        },
-        {
-          "type": "newline",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "categories_section",
-    "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -106,7 +76,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -124,16 +94,6 @@
     "type": "code_section",
     "named": true,
     "fields": {
-      "attr_bool_value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "word_raw",
-            "named": true
-          }
-        ]
-      },
       "code_section_body": {
         "multiple": false,
         "required": true,
@@ -150,11 +110,11 @@
       "required": true,
       "types": [
         {
-          "type": "any_whitespace_or_newlines",
+          "type": "any_whitespace_or_line_endings",
           "named": true
         },
         {
-          "type": "attribute_dashes",
+          "type": "attribute",
           "named": true
         },
         {
@@ -166,34 +126,11 @@
           "named": true
         },
         {
-          "type": "nb_whitespace",
-          "named": true
-        },
-        {
           "type": "section_dashes",
           "named": true
         },
         {
           "type": "single_space",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "code_section_results_pair",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "code_section",
-          "named": true
-        },
-        {
-          "type": "results_container",
           "named": true
         }
       ]
@@ -226,16 +163,6 @@
     "type": "css_section",
     "named": true,
     "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      },
       "css_section_body": {
         "multiple": false,
         "required": true,
@@ -252,7 +179,7 @@
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -260,7 +187,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -296,24 +223,13 @@
   {
     "type": "h1_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -325,7 +241,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -346,24 +262,13 @@
   {
     "type": "h2_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -375,7 +280,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -396,24 +301,13 @@
   {
     "type": "h3_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -425,7 +319,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -446,24 +340,13 @@
   {
     "type": "h4_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -475,7 +358,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -496,24 +379,13 @@
   {
     "type": "h5_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -525,7 +397,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -546,24 +418,13 @@
   {
     "type": "h6_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -575,7 +436,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -602,11 +463,11 @@
       "required": false,
       "types": [
         {
-          "type": "nb_whitespace",
+          "type": "line_ending",
           "named": true
         },
         {
-          "type": "newline",
+          "type": "nb_whitespace",
           "named": true
         },
         {
@@ -623,24 +484,13 @@
   {
     "type": "html_container",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -656,7 +506,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -674,16 +524,6 @@
     "type": "html_section",
     "named": true,
     "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      },
       "html_section_body": {
         "multiple": false,
         "required": true,
@@ -700,7 +540,7 @@
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -708,7 +548,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -765,6 +605,46 @@
     }
   },
   {
+    "type": "key_value_attribute",
+    "named": true,
+    "fields": {
+      "key_value_attribute_key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "attr_key",
+            "named": true
+          }
+        ]
+      },
+      "key_value_attribute_value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "attr_value",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_separator",
+          "named": true
+        },
+        {
+          "type": "nb_whitespace",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "list_item",
     "named": true,
     "fields": {},
@@ -790,28 +670,21 @@
   {
     "type": "list_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
           "type": "empty_space",
+          "named": true
+        },
+        {
+          "type": "line_ending",
           "named": true
         },
         {
@@ -820,10 +693,6 @@
         },
         {
           "type": "list_token",
-          "named": true
-        },
-        {
-          "type": "newline",
           "named": true
         },
         {
@@ -855,32 +724,21 @@
   {
     "type": "metadata_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "line_ending",
           "named": true
         },
         {
           "type": "metadata_token",
-          "named": true
-        },
-        {
-          "type": "newline",
           "named": true
         },
         {
@@ -897,24 +755,13 @@
   {
     "type": "notes_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -922,11 +769,11 @@
           "named": true
         },
         {
-          "type": "list_item",
+          "type": "line_ending",
           "named": true
         },
         {
-          "type": "newline",
+          "type": "list_item",
           "named": true
         },
         {
@@ -947,28 +794,17 @@
   {
     "type": "p_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -999,11 +835,11 @@
       "required": true,
       "types": [
         {
-          "type": "nb_whitespace",
+          "type": "line_ending",
           "named": true
         },
         {
-          "type": "newline",
+          "type": "nb_whitespace",
           "named": true
         },
         {
@@ -1026,11 +862,11 @@
       "required": true,
       "types": [
         {
-          "type": "nb_whitespace",
+          "type": "line_ending",
           "named": true
         },
         {
-          "type": "newline",
+          "type": "nb_whitespace",
           "named": true
         },
         {
@@ -1062,28 +898,17 @@
   {
     "type": "ref_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -1135,11 +960,7 @@
       "required": true,
       "types": [
         {
-          "type": "any_whitespace_or_newlines",
-          "named": true
-        },
-        {
-          "type": "line_ending",
+          "type": "any_whitespace_or_line_endings",
           "named": true
         },
         {
@@ -1211,16 +1032,6 @@
     "type": "script_section",
     "named": true,
     "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      },
       "script_section_body": {
         "multiple": false,
         "required": true,
@@ -1237,11 +1048,11 @@
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -1272,7 +1083,7 @@
           "named": true
         },
         {
-          "type": "code_section_results_pair",
+          "type": "code_section",
           "named": true
         },
         {
@@ -1332,6 +1143,10 @@
           "named": true
         },
         {
+          "type": "results_container",
+          "named": true
+        },
+        {
           "type": "script_section",
           "named": true
         },
@@ -1353,24 +1168,13 @@
   {
     "type": "title_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -1378,7 +1182,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -1403,24 +1207,13 @@
   {
     "type": "tldr_container",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -1428,7 +1221,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -1471,11 +1264,11 @@
           "named": true
         },
         {
-          "type": "nb_whitespace",
+          "type": "line_ending",
           "named": true
         },
         {
-          "type": "newline",
+          "type": "nb_whitespace",
           "named": true
         },
         {
@@ -1488,24 +1281,13 @@
   {
     "type": "todo_section",
     "named": true,
-    "fields": {
-      "attr_bool": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attr_bool",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "attr_kv_pair",
+          "type": "attribute",
           "named": true
         },
         {
@@ -1513,7 +1295,7 @@
           "named": true
         },
         {
-          "type": "newline",
+          "type": "line_ending",
           "named": true
         },
         {
@@ -1559,11 +1341,15 @@
     "named": false
   },
   {
-    "type": "any_whitespace_or_newlines",
+    "type": "any_whitespace_or_line_endings",
     "named": true
   },
   {
     "type": "attr_dashes",
+    "named": true
+  },
+  {
+    "type": "attr_key",
     "named": true
   },
   {
@@ -1572,10 +1358,6 @@
   },
   {
     "type": "attr_value",
-    "named": true
-  },
-  {
-    "type": "attribute_dashes",
     "named": true
   },
   {
@@ -1651,6 +1433,10 @@
     "named": true
   },
   {
+    "type": "line_remainder",
+    "named": true
+  },
+  {
     "type": "list_dash",
     "named": true
   },
@@ -1664,10 +1450,6 @@
   },
   {
     "type": "nb_whitespace",
-    "named": true
-  },
-  {
-    "type": "newline",
     "named": true
   },
   {
@@ -1736,10 +1518,6 @@
   },
   {
     "type": "todo_token",
-    "named": true
-  },
-  {
-    "type": "word_raw",
     "named": true
   }
 ]
