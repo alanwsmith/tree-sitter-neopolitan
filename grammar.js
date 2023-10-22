@@ -4,69 +4,69 @@ module.exports = grammar({
     source_file: $ => $.neo_doc,
 
     neo_doc: $ => repeat1(
-      choice(
-        field("categories_section", $.categories_section),
-        //$.code_container,
-        field("code_section", $.code_section),
-        field("css_section", $.css_section),
-        field("h1_section", $.h1_section),
-        field("h2_section", $.h2_section),
-        field("h3_section", $.h3_section),
-        field("h4_section", $.h4_section),
-        field("h5_section", $.h5_section),
-        field("h6_section", $.h6_section),
-        field("html_container", $.html_container),
-        field("html_sectcion", $.html_section),
-        field("list_sectoin", $.list_section),
-        field("metadata_section", $.metadata_section),
-        field("notes_section", $.notes_section),
-        field("p_section", $.p_section),
-        field("ref_section", $.ref_section),
-        field("results_container", $.results_container),
-        field("script_section", $.script_section),
-        field("title_section", $.title_section),
-        field("tldr_section", $.tldr_container),
-        field("todo_section", $.todo_section),
+      seq(
+        choice(
+          field("categories_section", $.categories_section),
+          //$.code_container,
+          field("code_section", $.code_section),
+          field("css_section", $.css_section),
+          field("h1_section", $.h1_section),
+          field("h2_section", $.h2_section),
+          field("h3_section", $.h3_section),
+          field("h4_section", $.h4_section),
+          field("h5_section", $.h5_section),
+          field("h6_section", $.h6_section),
+          field("html_container", $.html_container),
+          field("html_sectcion", $.html_section),
+          field("list_sectoin", $.list_section),
+          field("metadata_section", $.metadata_section),
+          field("notes_section", $.notes_section),
+          field("p_section", $.p_section),
+          field("ref_section", $.ref_section),
+          field("results_container", $.results_container),
+          field("script_section", $.script_section),
+          field("title_section", $.title_section),
+          field("tldr_section", $.tldr_container),
+          field("todo_section", $.todo_section),
+        ), 
+
+
+
       )
     ),
 
-
     attribute: $ => seq(
-      $.attr_dashes,
-      $.nb_whitespace,
       choice(
-        field("boolean_attribute", $.boolean_attribute),
         field("key_value_attribute", $.key_value_attribute),
+        field("boolean_attribute", $.boolean_attribute),
       ),
-      // For some reason the "line_ending" call doesn't work
-      // here so hard coding the regex
-      // $.tmp_newline,
-      $.line_ending,
+      $.line_ending_or_eof,
     ),
 
-    // tmp_newline: $ => /\n/,
-
+    tmp_newline: $ => /\n/,
 
     key_value_attribute: $ => seq(
-      field('key_value_attribute_key', $.attr_key),
-      $.attr_separator,
+      $.attribute_dashes,
       $.nb_whitespace,
-      field('key_value_attribute_value', $.attr_value),
+      field('attribute_key', $.attribute_key),
+      $.attribute_separator,
+      $.nb_whitespace,
+      field('attribute_value', $.attribute_value),
     ),
 
     boolean_attribute: $ => seq(
-      field('boolean_attribute_value', $.line_remainder),
+      $.attribute_dashes,
+      $.nb_whitespace,
+      field('boolean_value', $.boolean_value),
     ),
 
-    // attr_bool_value: _ => /[^:\n]+/,
+    boolean_value: $ => /[^:\n]+/,
 
-    // attr_dashes: _ => "--",
+    attribute_key: _ => /[^:\n]+/,
 
-    attr_key: _ => /[^:\n]+/,
+    attribute_separator: _ => ":",
 
-    attr_separator: _ => ":",
-
-    attr_value: _ => /[^\n]+/,
+    attribute_value: _ => /[^\n]+/,
 
     categories_section: $ => seq(
       $.section_dashes,
@@ -141,7 +141,7 @@ module.exports = grammar({
       $.css_token,
       $.line_ending,
       optional(repeat1($.attribute)),
-      $.line_ending,
+      //$.line_ending,
       field("css_section_body", $.css_section_body),
       $.line_ending,
       // No need to add empty_space here. All the
@@ -157,7 +157,7 @@ module.exports = grammar({
       $.h1_token,
       $.line_ending,
       optional(repeat1($.attribute)),
-      $.line_ending,
+      // $.line_ending,
       $.headline,
       optional(repeat1($.paragraph)),
       // optional($.empty_space),
@@ -288,13 +288,17 @@ module.exports = grammar({
     lt_with_non_lt_char: $ => seq("<", $.non_lt_char),
 
     metadata_section: $ => seq(
+      $.metadata_semaphore,
+      $.line_ending,
+      repeat1($.attribute),
+       optional($.line_ending_or_eof),
+      $.any_whitespace_or_line_endings,
+    ),
+
+    metadata_semaphore: $ => seq(
       $.section_dashes,
       $.single_space,
       $.metadata_token,
-      $.line_ending,
-      optional(repeat1($.attribute)),
-      $.line_ending,
-      // optional($.empty_space),
     ),
 
     nb_whitespace: _ => /[ \t]+/,
@@ -480,8 +484,8 @@ module.exports = grammar({
 
   externals: $ => [
     $.any_whitespace_or_line_endings,
-    // $.attribute_dashes, // remove when attr_dashes is working
-    $.attr_dashes,
+    // $.attribute_dashes, // remove when attribute_dashes is working
+    $.attribute_dashes,
     $.categories_token,
     $.code_container_body,
     $.code_section_body,
@@ -499,6 +503,7 @@ module.exports = grammar({
     $.html_container_body,
     $.html_section_body,
     $.html_token,
+    $.line_ending_or_eof,
     $.line_remainder,
     $.list_token,
     $.metadata_token,

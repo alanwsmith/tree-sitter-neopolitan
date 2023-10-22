@@ -1,0 +1,23 @@
+================================================================================
+Attribute - Multiple - Boolean First 
+================================================================================
+-- metadata
+-- autofocus
+-- class: tango
+--------------------------------------------------------------------------------
+
+(source_file
+  (neo_doc
+    (metadata_section
+      (metadata_semaphore
+        (section_dashes)
+        (single_space)
+        (metadata_token))
+      (line_ending)
+      (attribute
+        (boolean_attribute
+          (attribute_dashes)
+          (nb_whitespace)
+          (boolean_value))
+        (line_ending_or_eof))
+        (any_whitespace_or_line_endings))))

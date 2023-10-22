@@ -1,8 +1,8 @@
 ; (boolean_attribute_value) @neo_attr_bool
-(attr_dashes) @neo_attr_dashes
-(attr_key) @neo_attr_key
-(attr_separator) @neo_attr_separator
-(attr_value) @neo_attr_value
+(attribute_dashes) @neo_attr_dashes
+(attribute_key) @neo_attr_key
+(attribute_separator) @neo_attr_separator
+(attribute_value) @neo_attr_value
 (categories_token) @neo_section_token
 (code_token) @neo_section_token
 (container_token) @neo_section_start_end_token

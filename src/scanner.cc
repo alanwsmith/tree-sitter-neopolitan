@@ -22,6 +22,7 @@ enum TokenType {
   HTML_CONTAINER_BODY,
   HTML_SECTION_BODY,
   HTML_TOKEN,
+  LINE_ENDING_OR_EOF,
   LINE_REMAINDER,
   LIST_TOKEN,
   METADATA_TOKEN,
@@ -76,6 +77,10 @@ void tree_sitter_neopolitan_external_scanner_deserialize(void *payload,
 };
 
 static bool is_any_whitespace_or_newlines(TSLexer *lexer) {
+  if (lexer->eof(lexer) == true) {
+    return true;
+  };
+
   int char_count = 0;
   while (lexer->eof(lexer) == false) {
     int test_char = lexer->lookahead;
@@ -83,6 +88,9 @@ static bool is_any_whitespace_or_newlines(TSLexer *lexer) {
       char_count += 1;
       lexer->advance(lexer, false);
       lexer->mark_end(lexer);
+      if (lexer->eof(lexer) == true) {
+        return true;
+      }
     } else {
       if (char_count > 0) {
         return true;
@@ -354,13 +362,38 @@ static bool is_html_section_body(TSLexer *lexer) {
 /*   return false; */
 /* }; */
 
+static bool is_line_ending_or_eof(TSLexer *lexer) {
+  // Any number of spaces in front of a newline
+  // Or, the end of the file
+  if (lexer->eof(lexer) == true) {
+    return true;
+  }
+  while (lexer->eof(lexer) == false) {
+    int check_char = lexer->lookahead;
+    if (check_char == NEWLINE) {
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+      return true;
+    } else if (check_char == SPACE) {
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+      // check if you're at the end of the
+      // file here too
+      if (lexer->eof(lexer) == true) {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+}
+
 static bool is_line_remainder(TSLexer *lexer) {
   // not sure this is right. might need to
   // return true at eof
   if (lexer->eof(lexer) == true) {
     return false;
   }
-
   bool found_non_spaces = false;
   while (lexer->eof(lexer) == false) {
     int check_char = lexer->lookahead;
@@ -521,6 +554,15 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
     /*     return false; */
     /*   }; */
     /* }; */
+
+    if (valid_symbols[LINE_ENDING_OR_EOF]) {
+      if (is_line_ending_or_eof(lexer)) {
+        lexer->result_symbol = LINE_ENDING_OR_EOF;
+        return true;
+      } else {
+        return false;
+      };
+    };
 
     if (valid_symbols[LINE_REMAINDER]) {
       if (is_line_remainder(lexer)) {

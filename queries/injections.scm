@@ -7,11 +7,9 @@
 
 ((code_section
    (attribute
-  boolean_attribute: 
       (boolean_attribute
-       boolean_attribute_value:
-          (line_remainder) @injection.language)
-)
+       boolean_value:
+          (boolean_value) @injection.language))
     code_section_body: (code_section_body) @injection.content))
 
 ; ((code_container
