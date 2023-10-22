@@ -1,21 +1,16 @@
 ================================================================================
-Code Container Results Pair - With Language 
+Code Container - No Results - No Language
 ================================================================================
 -- code/
--- python
 
-print("foxtrot romeo")
+print("non-highlighted code")
 
 -- /code
-
--- results/
-
-foxtort romeo
-
--- /results
 
 
 --------------------------------------------------------------------------------
 
 (source_file
 (neo_doc
+
+

@@ -1,17 +1,11 @@
 ================================================================================
-Code Container Results Pair - No Language 
+Code Container - No Results - With Language 
 ================================================================================
 -- code/
 
 print("non-highlighted code")
 
 -- /code
-
--- results/
-
-non-highlighted code
-
--- /results
 
 
 --------------------------------------------------------------------------------
