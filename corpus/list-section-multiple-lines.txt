@@ -11,12 +11,13 @@ romeo whiskey
 --------------------------------------------------------------------------------
 
 (source_file
+(neo_doc
   (list_section
     (section_dashes)
     (single_space)
     (list_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (list_item
       (list_dash)
       (nb_whitespace)
@@ -29,8 +30,8 @@ romeo whiskey
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
-        (newline)
-        (newline))
+        (line_ending)
+        (line_ending))
       (paragraph
         (paragraph_first_word
           (non_lt_char)
@@ -40,6 +41,6 @@ romeo whiskey
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
-        (newline)
-        (newline)))
-      (empty_space)))
+        (line_ending)
+        (line_ending)))
+      (empty_space))))

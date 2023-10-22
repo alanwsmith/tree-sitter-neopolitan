@@ -7,15 +7,17 @@ alfa bravo charlie
 delta echo
 
 
+
 --------------------------------------------------------------------------------
 
 (source_file
+(neo_doc
   (p_section
     (section_dashes)
     (single_space)
     (p_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (paragraph
       (paragraph_first_word
         (non_lt_char)
@@ -30,7 +32,7 @@ delta echo
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (newline)
+      (line_ending)
       (word
         (initial_word_chars
           (non_lt_char))
@@ -40,5 +42,6 @@ delta echo
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (newline)
-      (newline))))
+      (line_ending)
+      (line_ending))
+      (line_ending))))

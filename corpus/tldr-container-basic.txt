@@ -11,13 +11,14 @@ print("non-highlighted code")
 --------------------------------------------------------------------------------
 
 (source_file
+(neo_doc
   (tldr_container
     (section_dashes)
     (single_space)
     (tldr_token)
     (container_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (paragraph
       (paragraph_first_word
         (non_lt_char)
@@ -27,12 +28,12 @@ print("non-highlighted code")
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (newline)
-      (newline))
+      (line_ending)
+      (line_ending))
     (section_dashes)
     (single_space)
     (container_token)
     (tldr_token)
-    (newline)
-    (newline)))
+    (line_ending)
+    (line_ending))))
 

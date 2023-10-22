@@ -11,12 +11,13 @@ TODO Section - Unchecked Items
 --------------------------------------------------------------------------------
 
 (source_file
+  (neo_doc
   (todo_section
     (section_dashes)
     (single_space)
     (todo_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (todo_item
       (empty_todo_bracket
         (todo_left_bracket)
@@ -32,8 +33,8 @@ TODO Section - Unchecked Items
             (initial_word_chars
               (non_lt_char))
           (following_word_chars))
-            (newline))
-          (newline))
+            (line_ending))
+          (line_ending))
     (todo_item
       (empty_todo_bracket
         (todo_left_bracket)
@@ -49,9 +50,9 @@ TODO Section - Unchecked Items
             (initial_word_chars
               (non_lt_char))
           (following_word_chars))
-            (newline))
-        (newline))
-      (empty_space)))
+            (line_ending))
+        (line_ending))
+      (empty_space))))
 
 
 

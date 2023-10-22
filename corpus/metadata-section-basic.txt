@@ -8,17 +8,18 @@ Metadata Section - Basic
 --------------------------------------------------------------------------------
 
 (source_file
+(neo_doc
   (metadata_section
     (section_dashes)
     (single_space)
     (metadata_token)
-    (newline)
-    (attr_kv_pair
+    (line_ending)
+    (attribute
       (attr_dashes)
       (nb_whitespace)
       (attr_key)
       (attr_separator)
       (nb_whitespace)
       (attr_value)
-      (newline))
-    (newline)))
+      (line_ending))
+    (line_ending)))

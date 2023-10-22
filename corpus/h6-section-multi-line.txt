@@ -11,12 +11,13 @@ Alfa bravo
 --------------------------------------------------------------------------------
 
 (source_file
+(neo_doc
   (h6_section
     (section_dashes)
     (single_space)
     (h6_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (headline
       (paragraph_first_word
         (non_lt_char)
@@ -31,8 +32,8 @@ Alfa bravo
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (newline)
-      (newline))
+      (line_ending)
+      (line_ending))
     (paragraph
       (paragraph_first_word
         (non_lt_char)
@@ -42,5 +43,5 @@ Alfa bravo
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (newline)
-      (newline))))
+      (line_ending)
+      (line_ending)))))

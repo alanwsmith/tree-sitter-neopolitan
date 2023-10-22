@@ -19,21 +19,21 @@ kilo juliette
     (single_space)
     (code_section_token)
     (section_start_end_token)
-    (newline)
+    (line_ending)
     (attr_bool
       (attr_dashes)
       (nb_whitespace)
       (attr_bool_value)
-      (newline))
-    (newline)
+      (line_ending))
+    (line_ending)
     (code_body))
   (code_end_section
     (section_dashes)
     (single_space)
     (section_start_end_token)
     (code_section_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (paragraph
       (paragraph_first_word
         (non_lt_char)
@@ -43,5 +43,5 @@ kilo juliette
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (newline)
-      (newline))))
+      (line_ending)
+      (line_ending))))

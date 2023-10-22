@@ -13,18 +13,19 @@ HTML Container - Basic
 --------------------------------------------------------------------------------
 
 (source_file
+(neo_doc
   (html_container
     (section_dashes)
     (single_space)
     (html_token)
     (container_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (html_container_body)
-    (newline)
+    (line_ending)
     (section_dashes)
     (single_space)
     (container_token)
     (html_token)
-    (newline)
-    (newline)))
+    (line_ending)
+    (line_ending))))

@@ -10,23 +10,25 @@ print("non-highlighted code")
 Something else
 
 
+
 --------------------------------------------------------------------------------
 
 (source_file
+(neo_doc
   (css_section
     (section_dashes)
     (single_space)
     (css_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (css_section_body)
-    (newline))
+    (line_ending))
   (p_section
     (section_dashes)
     (single_space)
     (p_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (paragraph
       (paragraph_first_word
         (non_lt_char)
@@ -36,5 +38,6 @@ Something else
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (newline)
-      (newline))))
+      (line_ending)
+      (line_ending))
+      (line_ending))))
