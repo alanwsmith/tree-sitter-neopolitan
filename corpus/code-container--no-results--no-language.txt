@@ -1,5 +1,5 @@
 ================================================================================
-Code Container - No Language 
+Code Container - No Results - No Language
 ================================================================================
 -- code/
 
@@ -11,19 +11,6 @@ print("non-highlighted code")
 --------------------------------------------------------------------------------
 
 (source_file
-  (code_container
-    (section_dashes)
-    (single_space)
-    (code_token)
-    (container_token)
-    (newline)
-    (newline)
-    (code_container_body)
-    (newline)
-    (section_dashes)
-    (single_space)
-    (container_token)
-    (code_token)
-    (newline)
-    (newline)))
+(neo_doc
+
 

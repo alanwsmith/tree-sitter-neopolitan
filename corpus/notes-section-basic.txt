@@ -11,12 +11,13 @@ Notes Section - Multiple Items
 --------------------------------------------------------------------------------
 
 (source_file
+(neo_doc
   (notes_section
     (section_dashes)
     (single_space)
     (notes_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (list_item
       (list_dash)
       (nb_whitespace)
@@ -29,8 +30,8 @@ Notes Section - Multiple Items
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
-        (newline)
-      (newline)))
+        (line_ending)
+      (line_ending)))
     (list_item
       (list_dash)
       (nb_whitespace)
@@ -43,6 +44,6 @@ Notes Section - Multiple Items
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
-        (newline)
-        (newline)))
-      (empty_space)))
+        (line_ending)
+        (line_ending)))
+      (empty_space))))

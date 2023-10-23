@@ -1,25 +1,25 @@
 ================================================================================
-Categories Section - Basic
+Code Section - No Results - With Language
 ================================================================================
--- categories
--- class: foxtrot
+-- code
+-- python
 
+print("hello")
 
 --------------------------------------------------------------------------------
 
 (source_file
 (neo_doc
-  (categories_section
+  (code_section
     (section_dashes)
     (single_space)
-    (categories_token)
+    (code_token)
     (line_ending)
-    (attr_kv_pair
+    (attribute
       (attr_dashes)
       (nb_whitespace)
-      (attr_key)
-      (attr_separator)
-      (nb_whitespace)
-      (attr_value)
+      (boolean_attribute
+        (line_remainder))
       (line_ending))
-    (line_ending)))
+    (code_section_body))))
+

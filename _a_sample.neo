@@ -2,34 +2,46 @@
 
 Tree-Sitter Syntax Highlighting Check
 
-This is a test to see how the syntax highlighting is 
-shaping up in nvim-treesitter.
+-- p 
+
+Preflight
 
 -- code
 -- rust
 
 fn main() {
   println!("hello, syntax");
+  println!("hello, syntax");
 }
 
+-- results/
 
--- html
--- template: showbelow
+output
 
-<div class="alfa">
-  This outputs the HTML directly as well as creating a 
-  code block showing the source below it
-</div>
+-- /results
 
--- p
+-- p 
 
-Some paragraphs with some random sentences like: Crack the 
-walnut with your sharp side teeth. Cut the pie into large 
-parts. 
+asdfk
 
-Dip the pail once and let it settle. Draw the chart with 
-heavy black lines. Pour the stew from the pot into the 
-plate.
+-- code
+-- rust
+
+fn main() {
+
+}
+
+-- results/
+
+df
+
+-- /results
+
+
+-- p 
+
+asdfkkk
+
 
 -- list
 
@@ -42,6 +54,25 @@ a quick, sharp blow.
 - Tack the strip of carpet to the worn floor. Take the 
 match and strike it against your shoe.
 
+
+-- html
+-- template: showbelow
+
+<div class="alfa">
+  This outputs the HTML directly as well as creating a 
+  code block showing the source below it
+</div>
+
+-- p
+-- asdf 
+
+Some paragraphs with some random sentences like: Crack the 
+walnut with your sharp side teeth. Cut the pie into large 
+parts. 
+
+Dip the pail once and let it settle. Draw the chart with 
+heavy black lines. Pour the stew from the pot into the 
+plate.
 
 -- todo
 

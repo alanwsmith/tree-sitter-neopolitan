@@ -12,23 +12,25 @@ HTML Section - Basic
 Other Text
 
 
+
 --------------------------------------------------------------------------------
 
 (source_file
+(neo_doc
   (html_section
     (section_dashes)
     (single_space)
     (html_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (html_section_body)
-    (newline))
+    (line_ending))
   (p_section
     (section_dashes)
     (single_space)
     (p_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (paragraph
       (paragraph_first_word
         (non_lt_char)
@@ -38,6 +40,7 @@ Other Text
         (initial_word_chars
           (non_lt_char))
         (following_word_chars))
-      (newline)
-      (newline))))
+      (line_ending)
+      (line_ending))
+      (line_ending))))
 

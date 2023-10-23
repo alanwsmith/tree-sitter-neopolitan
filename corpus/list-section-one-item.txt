@@ -9,12 +9,13 @@ List Section - One Item
 --------------------------------------------------------------------------------
 
 (source_file
+(neo_doc
   (list_section
     (section_dashes)
     (single_space)
     (list_token)
-    (newline)
-    (newline)
+    (line_ending)
+    (line_ending)
     (list_item
       (list_dash)
       (nb_whitespace)
@@ -27,8 +28,8 @@ List Section - One Item
           (initial_word_chars
             (non_lt_char))
           (following_word_chars))
-        (newline)
-        (newline)))
-      (empty_space)))
+        (line_ending)
+        (line_ending)))
+      (empty_space))))
           
           

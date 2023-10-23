@@ -3,6 +3,8 @@
 #include <tree_sitter/parser.h>
 
 enum TokenType {
+  ANY_WHITESPACE_OR_NEWLINES,
+  ATTRIBUTE_DASHES,
   CATEGORIES_TOKEN,
   CODE_CONTAINER_BODY,
   CODE_SECTION_BODY,
@@ -20,11 +22,15 @@ enum TokenType {
   HTML_CONTAINER_BODY,
   HTML_SECTION_BODY,
   HTML_TOKEN,
+  LINE_ENDING_OR_EOF,
+  LINE_REMAINDER,
   LIST_TOKEN,
   METADATA_TOKEN,
   NOTES_TOKEN,
   P_TOKEN,
   REF_TOKEN,
+  RESULTS_CONTAINER_BODY,
+  RESULTS_TOKEN,
   SCRIPT_SECTION_BODY,
   SCRIPT_TOKEN,
   SECTION_DASHES,
@@ -32,16 +38,17 @@ enum TokenType {
   TITLE_TOKEN,
   TLDR_TOKEN,
   TODO_TOKEN,
+  WORD_RAW,
   ERROR_SENTINEL,
 };
 
+const int SPACE = 32;
+const int NEWLINE = 10;
+
+// I'm not using this, it's not hurting
+// anything though so I'm leaving it for now
 struct Scanner {
   Scanner() {}
-};
-
-struct MatchDetails {
-  bool found_match;
-  int end_position;
 };
 
 extern "C" {
@@ -69,6 +76,32 @@ void tree_sitter_neopolitan_external_scanner_deserialize(void *payload,
   ;
 };
 
+static bool is_any_whitespace_or_newlines(TSLexer *lexer) {
+  if (lexer->eof(lexer) == true) {
+    return true;
+  };
+
+  int char_count = 0;
+  while (lexer->eof(lexer) == false) {
+    int test_char = lexer->lookahead;
+    if (test_char == SPACE || test_char == NEWLINE) {
+      char_count += 1;
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+      if (lexer->eof(lexer) == true) {
+        return true;
+      }
+    } else {
+      if (char_count > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+  return false;
+};
+
 static bool is_single_space(TSLexer *lexer) {
   int dash = ' ';
   if (lexer->lookahead == dash) {
@@ -79,17 +112,23 @@ static bool is_single_space(TSLexer *lexer) {
   return false;
 };
 
-static bool is_section_dashes(TSLexer *lexer) {
+static bool is_section_or_attr_dashes(TSLexer *lexer) {
   int dash = '-';
+  int space = ' ';
   if (lexer->lookahead == dash) {
     lexer->advance(lexer, false);
     if (lexer->lookahead == dash) {
       lexer->advance(lexer, false);
       lexer->mark_end(lexer);
-      return true;
+      if (lexer->lookahead == space) {
+        return true;
+      } else {
+        return false;
+      }
     }
     return false;
   };
+  return false;
 };
 
 static bool is_exact_match(TSLexer *lexer, char *pattern) {
@@ -157,20 +196,20 @@ static bool find_token(TSLexer *lexer) {
   // 7. Update grammer.js
   // 8. Update highlights.js
 
-  const int items = 19;
+  const int items = 20;
 
-  char patterns[items][11] = {"categories", "code",     "css",   "h1",  "h2",
-                              "h3",         "h4",       "h5",    "h6",  "html",
-                              "list",       "metadata", "notes", "p",   "ref",
-                              "script",     "title",    "tldr",  "todo"};
+  char patterns[items][11] = {
+      "categories", "code",    "css",    "h1",    "h2",       "h3",    "h4",
+      "h5",         "h6",      "html",   "list",  "metadata", "notes", "p",
+      "ref",        "results", "script", "title", "tldr",     "todo"};
   TokenType tokens[items] = {
-      CATEGORIES_TOKEN, CODE_TOKEN,     CSS_TOKEN,   H1_TOKEN,  H2_TOKEN,
-      H3_TOKEN,         H4_TOKEN,       H5_TOKEN,    H6_TOKEN,  HTML_TOKEN,
-      LIST_TOKEN,       METADATA_TOKEN, NOTES_TOKEN, P_TOKEN,   REF_TOKEN,
-      SCRIPT_TOKEN,     TITLE_TOKEN,    TLDR_TOKEN,  TODO_TOKEN};
+      CATEGORIES_TOKEN, CODE_TOKEN,     CSS_TOKEN,   H1_TOKEN,   H2_TOKEN,
+      H3_TOKEN,         H4_TOKEN,       H5_TOKEN,    H6_TOKEN,   HTML_TOKEN,
+      LIST_TOKEN,       METADATA_TOKEN, NOTES_TOKEN, P_TOKEN,    REF_TOKEN,
+      RESULTS_TOKEN,    SCRIPT_TOKEN,   TITLE_TOKEN, TLDR_TOKEN, TODO_TOKEN};
   bool matches[items] = {true, true, true, true, true, true, true,
                          true, true, true, true, true, true, true,
-                         true, true, true, true, true};
+                         true, true, true, true, true, true};
 
   int char_index;
   for (char_index = 0; char_index < items; char_index++) {
@@ -179,7 +218,8 @@ static bool find_token(TSLexer *lexer) {
 
     // hit the end so return (47 is for the dash
     // which is the container token
-    if (target_char == 10 || target_char == 32 || target_char == 47) {
+    if (target_char == 10 || target_char == 32 || target_char == 47 ||
+        lexer->eof(lexer) == true) {
       int match_walker;
       for (match_walker = 0; match_walker < items; match_walker++) {
         // printf("  Checking in with %d\n", match_walker);
@@ -223,6 +263,7 @@ static bool find_token(TSLexer *lexer) {
 // TODO: Handle if this hits the end of a file
 //
 static bool is_code_section_body(TSLexer *lexer) {
+  int found_at_least_one_char = false;
   while (lexer->eof(lexer) == false) {
     int active_char = lexer->lookahead;
     // printf("%d\n", active_char);
@@ -235,32 +276,17 @@ static bool is_code_section_body(TSLexer *lexer) {
     lexer->advance(lexer, false);
     lexer->mark_end(lexer);
   };
-  return false;
+  if (lexer->eof(lexer) == true) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 static bool is_any_code_section_body(TSLexer *lexer) {
   while (lexer->eof(lexer) == false) {
     int active_char = lexer->lookahead;
     if (active_char == 10) {
-      char end_pattern[4] = "-- ";
-      if (terminator(lexer, end_pattern)) {
-        return true;
-      };
-    };
-    lexer->advance(lexer, false);
-    lexer->mark_end(lexer);
-  };
-  return false;
-};
-
-static bool is_html_section_body(TSLexer *lexer) {
-  // printf("HEREREWERER\n");
-  while (lexer->eof(lexer) == false) {
-    int active_char = lexer->lookahead;
-    // printf(" - %d\n", active_char);
-    if (active_char == 10) {
-      // no need to add "\n" here because you're
-      // already on the newline
       char end_pattern[4] = "-- ";
       if (terminator(lexer, end_pattern)) {
         return true;
@@ -291,6 +317,99 @@ static bool is_code_container_body(TSLexer *lexer) {
   return false;
 };
 
+static bool is_html_section_body(TSLexer *lexer) {
+  // printf("HEREREWERER\n");
+  while (lexer->eof(lexer) == false) {
+    int active_char = lexer->lookahead;
+    // printf(" - %d\n", active_char);
+    if (active_char == 10) {
+      // no need to add "\n" here because you're
+      // already on the newline
+      char end_pattern[4] = "-- ";
+      if (terminator(lexer, end_pattern)) {
+        return true;
+      };
+    };
+    lexer->advance(lexer, false);
+    lexer->mark_end(lexer);
+  };
+  return false;
+};
+
+// THIS WASN'T WORKING IF USED IN A REPEAT
+// WHICH I COULDN'T MAKE SENSE OF SO JUST
+// USING A REGEX
+/* static bool is_line_ending(TSLexer *lexer) { */
+/*   // treat the end of the file as a line ending */
+/*   /1* if (lexer->eof(lexer) == true) { *1/ */
+/*   /1*   return true; *1/ */
+/*   /1* }; *1/ */
+/*   while (lexer->eof(lexer) == false) { */
+/*     int check_char = lexer->lookahead; */
+/*     if (check_char == NEWLINE) { */
+/*       lexer->advance(lexer, false); */
+/*       lexer->mark_end(lexer); */
+/*       printf("%d\n", check_char); */
+/*       return true; */
+/*       //} else if (check_char == SPACE) { */
+/*       // lexer->advance(lexer, false); */
+/*     } else { */
+/*       // lexer->advance(lexer, false); */
+/*       /1* lexer->mark_end(lexer); *1/ */
+/*       return false; */
+/*     } */
+/*   } */
+/*   return false; */
+/* }; */
+
+static bool is_line_ending_or_eof(TSLexer *lexer) {
+  // Any number of spaces in front of a newline
+  // Or, the end of the file
+  if (lexer->eof(lexer) == true) {
+    return true;
+  }
+  while (lexer->eof(lexer) == false) {
+    int check_char = lexer->lookahead;
+    if (check_char == NEWLINE) {
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+      return true;
+    } else if (check_char == SPACE) {
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+      // check if you're at the end of the
+      // file here too
+      if (lexer->eof(lexer) == true) {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+}
+
+static bool is_line_remainder(TSLexer *lexer) {
+  // not sure this is right. might need to
+  // return true at eof
+  if (lexer->eof(lexer) == true) {
+    return false;
+  }
+  bool found_non_spaces = false;
+  while (lexer->eof(lexer) == false) {
+    int check_char = lexer->lookahead;
+    if (check_char == NEWLINE) {
+      return found_non_spaces;
+    } else if (check_char == SPACE) {
+      lexer->advance(lexer, false);
+    } else {
+      found_non_spaces = true;
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+    }
+  }
+  return found_non_spaces;
+};
+
 static bool is_empty_space(TSLexer *lexer) {
   bool found_space = false;
   while (lexer->eof(lexer) == false) {
@@ -306,6 +425,40 @@ static bool is_empty_space(TSLexer *lexer) {
   return true;
 };
 
+static bool is_results_container_body(TSLexer *lexer) {
+  while (lexer->eof(lexer) == false) {
+    int active_char = lexer->lookahead;
+    if (active_char == 10) {
+      char end_pattern[12] = "-- /results";
+      if (terminator(lexer, end_pattern)) {
+        return true;
+      };
+    };
+    lexer->advance(lexer, false);
+    lexer->mark_end(lexer);
+  };
+  return false;
+};
+
+static bool is_word_raw(TSLexer *lexer) {
+  int char_count = 0;
+  while (lexer->eof(lexer) == false) {
+    int test_char = lexer->lookahead;
+    if (test_char != SPACE && test_char != NEWLINE) {
+      char_count += 1;
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+    } else {
+      if (char_count > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+  return false;
+};
+
 bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
                                                   const bool *valid_symbols) {
 
@@ -313,6 +466,24 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
   // update result_symbol if there's a match.
 
   if (!valid_symbols[ERROR_SENTINEL]) {
+
+    if (valid_symbols[ANY_WHITESPACE_OR_NEWLINES]) {
+      if (is_any_whitespace_or_newlines(lexer)) {
+        lexer->result_symbol = ANY_WHITESPACE_OR_NEWLINES;
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    if (valid_symbols[ATTRIBUTE_DASHES]) {
+      if (is_section_or_attr_dashes(lexer)) {
+        lexer->result_symbol = ATTRIBUTE_DASHES;
+        return true;
+      } else {
+        return false;
+      }
+    };
 
     if (valid_symbols[CODE_CONTAINER_BODY]) {
       if (is_code_container_body(lexer)) {
@@ -351,12 +522,6 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       };
     };
 
-    if (valid_symbols[HTML_CONTAINER_BODY]) {
-      lexer->result_symbol = HTML_CONTAINER_BODY;
-      char html_end[9] = "-- /html";
-      return terminator(lexer, html_end);
-    };
-
     if (valid_symbols[EMPTY_SPACE]) {
       if (is_empty_space(lexer)) {
         lexer->result_symbol = EMPTY_SPACE;
@@ -366,11 +531,55 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
       };
     };
 
+    if (valid_symbols[HTML_CONTAINER_BODY]) {
+      lexer->result_symbol = HTML_CONTAINER_BODY;
+      char html_end[9] = "-- /html";
+      return terminator(lexer, html_end);
+    };
+
     if (valid_symbols[HTML_SECTION_BODY]) {
       lexer->result_symbol = HTML_SECTION_BODY;
       return is_html_section_body(lexer);
       // TODO: deprecate HTML_BODY_TERMINATOR once
       // HTML_CONTAINER_BODY is in place
+    };
+
+    // REMOVED BECAUSE IT DOESN'T WORK IN
+    // REPEAT APPARENTLY
+    /* if (valid_symbols[LINE_ENDING]) { */
+    /*   if (is_line_ending(lexer)) { */
+    /*     lexer->result_symbol = LINE_ENDING; */
+    /*     return true; */
+    /*   } else { */
+    /*     return false; */
+    /*   }; */
+    /* }; */
+
+    if (valid_symbols[LINE_ENDING_OR_EOF]) {
+      if (is_line_ending_or_eof(lexer)) {
+        lexer->result_symbol = LINE_ENDING_OR_EOF;
+        return true;
+      } else {
+        return false;
+      };
+    };
+
+    if (valid_symbols[LINE_REMAINDER]) {
+      if (is_line_remainder(lexer)) {
+        lexer->result_symbol = LINE_REMAINDER;
+        return true;
+      } else {
+        return false;
+      };
+    };
+
+    if (valid_symbols[RESULTS_CONTAINER_BODY]) {
+      if (is_results_container_body(lexer)) {
+        lexer->result_symbol = RESULTS_CONTAINER_BODY;
+        return true;
+      } else {
+        return false;
+      };
     };
 
     if (valid_symbols[SCRIPT_SECTION_BODY]) {
@@ -384,10 +593,21 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
 
     if (valid_symbols[SECTION_DASHES]) {
       lexer->result_symbol = SECTION_DASHES;
-      return is_section_dashes(lexer);
-    } else if (valid_symbols[SINGLE_SPACE]) {
+      return is_section_or_attr_dashes(lexer);
+    };
+
+    if (valid_symbols[SINGLE_SPACE]) {
       lexer->result_symbol = SINGLE_SPACE;
       return is_single_space(lexer);
+    };
+
+    if (valid_symbols[WORD_RAW]) {
+      if (is_word_raw(lexer)) {
+        lexer->result_symbol = WORD_RAW;
+        return true;
+      } else {
+        return false;
+      }
     };
 
     if (valid_symbols[CATEGORIES_TOKEN] || valid_symbols[CODE_TOKEN] ||
@@ -397,9 +617,9 @@ bool tree_sitter_neopolitan_external_scanner_scan(void *payload, TSLexer *lexer,
         valid_symbols[H5_TOKEN] || valid_symbols[H6_TOKEN] ||
         valid_symbols[LIST_TOKEN] || valid_symbols[METADATA_TOKEN] ||
         valid_symbols[NOTES_TOKEN] || valid_symbols[P_TOKEN] ||
-        valid_symbols[REF_TOKEN] || valid_symbols[SCRIPT_TOKEN] ||
-        valid_symbols[TITLE_TOKEN] || valid_symbols[TLDR_TOKEN] ||
-        valid_symbols[TODO_TOKEN]) {
+        valid_symbols[REF_TOKEN] || valid_symbols[RESULTS_TOKEN] ||
+        valid_symbols[SCRIPT_TOKEN] || valid_symbols[TITLE_TOKEN] ||
+        valid_symbols[TLDR_TOKEN] || valid_symbols[TODO_TOKEN]) {
       bool response = find_token(lexer);
       return response;
     }
