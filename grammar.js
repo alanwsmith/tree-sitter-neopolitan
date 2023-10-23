@@ -28,7 +28,7 @@ module.exports = grammar({
           field("title_section", $.title_section),
           field("tldr_section", $.tldr_container),
           field("todo_section", $.todo_section),
-        ), 
+        ),
 
 
 
@@ -291,7 +291,7 @@ module.exports = grammar({
       $.metadata_semaphore,
       $.line_ending,
       repeat1($.attribute),
-       optional($.line_ending_or_eof),
+      optional($.line_ending_or_eof),
       $.any_whitespace_or_line_endings,
     ),
 
