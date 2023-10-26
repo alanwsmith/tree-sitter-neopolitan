@@ -1,0 +1,351 @@
+-- NOTE: This currently only works with a single code block on the_code
+-- page because editing the first block might change the positining on the
+-- page which would mess with later blocks.
+--
+-- NOTE: The -- /results block can't be the last thing right now.
+-- Another section has to be behind it for it to work. Not worried about
+-- that right now given the standard of having metadata at the end of
+-- every page
+--
+
+local log_to_file = function(message)
+  local log_file = io.open("/Users/alan/Desktop/nvim-log.txt", "a")
+  io.output(log_file)
+  io.write(message .. "\n")
+  io.close(log_file)
+end
+
+local get_code_block_v2 = function(runner)
+  local query = vim.treesitter.query.parse("neopolitan",
+    [[ ((code_section_body) @content) ]])
+  local parser = vim.treesitter.get_string_parser(runner.code_section_text, "neopolitan", {})
+  local tree = parser:parse()[1]
+  local root = tree:root()
+  for _, node in query:iter_captures(root) do
+    runner.the_code_snippet = vim.treesitter.get_node_text(node, runner.code_section_text, {})
+  end
+end
+
+local get_language_v2 = function()
+  local query = vim.treesitter.query.parse("neopolitan",
+    [[ ((boolean_value) @lang) ]])
+  local parser = vim.treesitter.get_string_parser(section_text, "neopolitan", {})
+  local tree = parser:parse()[1]
+  local root = tree:root()
+  for _, node in query:iter_captures(root) do
+    return vim.treesitter.get_node_text(node, section_text, {})
+  end
+end
+
+
+-- local get_code_block = function(raw_string)
+--   local query = vim.treesitter.query.parse("neopolitan",
+--     [[ ((code_section_body) @content) ]])
+--   local parser = vim.treesitter.get_string_parser(raw_string, "neopolitan", {})
+--   local tree = parser:parse()[1]
+--   local root = tree:root()
+--   for _, node in query:iter_captures(root) do
+--     local the_code = vim.treesitter.get_node_text(node, raw_string, {})
+--     return the_code
+--   end
+-- end
+
+-- local get_results_range = function(raw_string)
+--   local query = vim.treesitter.query.parse(
+--     "neopolitan",
+--     [[ ((results_container) @content) ]])
+--   local parser = vim.treesitter.get_string_parser(raw_string, "neopolitan", {})
+--   local tree = parser:parse()[1]
+--   local root = tree:root()
+--   for _, node in query:iter_captures(root) do
+--     return { node:range() }
+--   end
+-- end
+
+local get_code_section_language = function(section_text)
+  local query = vim.treesitter.query.parse("neopolitan",
+    [[ ((boolean_value) @lang) ]])
+  local parser = vim.treesitter.get_string_parser(section_text, "neopolitan", {})
+  local tree = parser:parse()[1]
+  local root = tree:root()
+  for _, node in query:iter_captures(root) do
+    return vim.treesitter.get_node_text(node, section_text, {})
+  end
+end
+
+local function update_to_results(data, payload)
+  output = { "-- results/", "" }
+  for _, line in ipairs(data) do
+    table.insert(output, line)
+  end
+  table.insert(output, "-- /results")
+  table.insert(output, "")
+  vim.api.nvim_buf_set_lines(
+    payload.bufnr, payload.results_start, payload.results_end, false, output
+  )
+end
+
+local function log_error(data, payload)
+  output = { "-- results/", "" }
+  for _, line in ipairs(data) do
+    table.insert(output, line)
+  end
+  table.insert(output, "-- /results")
+  table.insert(output, "")
+  vim.api.nvim_buf_set_lines(
+    payload.bufnr, payload.results_start, payload.results_end, false, output
+  )
+end
+
+local function run_a_code_block(payload)
+  local commands = {}
+  if payload.language == "python" then
+    table.insert(commands, "python3")
+    table.insert(commands, "-c")
+    table.insert(commands, payload.code)
+    payload.ready = true
+  elseif payload.language == "rust" then
+    local script_file_path = '/Users/alan/Desktop/tmp-neo-execute-script.rs'
+    local script_file = io.open(script_file_path, "w")
+    io.output(script_file)
+    io.write(payload.code)
+    io.close(script_file)
+    table.insert(commands, "/Users/alan/.cargo/bin/cargo")
+    table.insert(commands, "+nightly")
+    table.insert(commands, "-Zscript")
+    table.insert(commands, script_file_path)
+    payload.ready = true
+  elseif payload.language == "lua" then
+    local script_file_path = '/Users/alan/Desktop/tmp-lua-code.lua'
+    local script_file = io.open(script_file_path, "w")
+    io.output(script_file)
+    io.write(payload.code)
+    io.close(script_file)
+    local out_string = vim.cmd('source /Users/alan/Desktop/tmp-lua-code.lua')
+    -- table.insert(commands, "/Users/alan/.cargo/bin/cargo")
+    -- table.insert(commands, "+nightly")
+    -- table.insert(commands, "-Zscript")
+    -- table.insert(commands, script_file_path)
+    -- payload.ready = true
+  end
+
+  if payload.ready then
+    vim.fn.jobwait({ vim.fn.jobstart(
+      commands,
+      {
+        stdout_buffered = true,
+        stderr_buffered = true,
+        on_stdout = function(_, data)
+          update_to_results(data, payload)
+        end,
+        -- need to figure out how to make This
+        -- not throw errors when things are okay
+        on_stderr = function(_, data)
+          log_error(data, payload)
+        end
+      })
+    })
+  end
+end
+
+Get_code_section_with_existing_results_container = function(bufnr)
+  local query = vim.treesitter.query.parse("neopolitan",
+    [[ ((neo_doc ((code_section) @code . (results_container) @results))) ]])
+  local parser = vim.treesitter.get_parser(bufnr, "neopolitan", {})
+  local tree = parser:parse()[1]
+  local root = tree:root()
+  local counter = 1
+  local payload = { bufnr = bufnr }
+  for _, node in query:iter_captures(root, bufnr, 0, -1) do
+    if counter == 1 then
+      local code_section = vim.treesitter.get_node_text(node, bufnr, {})
+      payload.code = get_code_block(code_section)
+      payload.language = get_code_section_language(code_section)
+    end
+    if counter == 2 then
+      local results_range = { node:range() }
+      payload.results_start = results_range[1]
+      payload.results_end = results_range[3]
+      run_a_code_block(payload)
+    end
+    counter = counter + 1
+  end
+end
+
+Get_code_section_without_existing_results_container = function(bufnr)
+  local query = vim.treesitter.query.parse("neopolitan",
+    [[ (( neo_doc ((code_section) @code ) !results_container )) ]])
+  local parser = vim.treesitter.get_parser(bufnr, "neopolitan", {})
+  local tree = parser:parse()[1]
+  local root = tree:root()
+  local counter = 1
+  local payload = { bufnr = bufnr }
+
+  for _, node in query:iter_captures(root, bufnr, 0, -1) do
+    if counter == 1 then
+      local code_section = vim.treesitter.get_node_text(node, bufnr, {})
+      payload.code = get_code_block(code_section)
+      payload.language = get_code_section_language(code_section)
+      local code_range = { node:range() }
+      payload.results_start = code_range[3]
+      payload.results_end = code_range[3]
+      run_a_code_block(payload)
+    end
+
+    --local node_range = { node:range() }
+    --local replace_line = node_range[3]
+    --local code_section = vim.treesitter.get_node_text(node, bufnr, {})
+    --language = get_code_section_language(code_section)
+    --code = get_code_block(code_section)
+    --vim.fn.jobwait({ vim.fn.jobstart(
+    --  { "python3", "-c", code },
+    --  {
+    --    stdout_buffered = true,
+    --    stderr_buffered = true,
+    --    on_stdout = function(_, data)
+    --      if data then
+    --        output = { "-- results/", "" }
+    --        for _, line in ipairs(data) do
+    --          table.insert(output, line)
+    --        end
+    --        table.insert(output, "-- /results")
+    --        table.insert(output, "")
+    --        vim.api.nvim_buf_set_lines(
+    --          bufnr, replace_line, replace_line, false, output
+    --        )
+    --      end
+    --    end,
+    --    -- This causing blank lines when there aren't
+    --    -- errors. not worrying about it for now
+    --    on_stderr = function(_, data)
+    --      if #data > 1 then
+    --        --output = { "-- results/", "" }
+    --        -- for _, line in ipairs(data) do
+    --        --table.insert(output, line)
+    --        -- end
+    --        --table.insert(output, "-- /results")
+    --        --vim.api.nvim_buf_set_lines(
+    --        -- bufnr, replace_start, replace_end, false, output
+    --        --)
+    --      end
+    --    end,
+    --  }
+    --) })
+    --end
+  end
+end
+
+local function get_code_node(runner)
+  local query = vim.treesitter.query.parse("neopolitan",
+    [[ ( neo_doc ((code_section)) @code ) ]])
+  local parser = vim.treesitter.get_parser(runner.bufnr, "neopolitan", {})
+  local tree = parser:parse()[1]
+  local root = tree:root()
+  for _, node in query:iter_captures(root, runner.bufnr, 0, -1) do
+    local range = { node:range() }
+    if runner.cursor_line > range[1] and runner.cursor_line <= range[3] then
+      runner.code_node = node
+      runner.code_section_text = vim.treesitter.get_node_text(runner.code_node, runner.bufnr, {})
+    end
+
+    -- runner.code_node = node
+    -- runner.code_range = { node:range() }
+    -- runner.code_start_line = runner.code_range[1]
+    -- runner.code_end_line = runner.code_range[3]
+    -- if runner.cursor_line > runner.code_start_line and runner.cursor_line <= runner.code_end_line then
+    --   -- print(node:next_sibling())
+    --   runner.code_node_text = vim.treesitter.get_node_text(node, runner.bufnr, {})
+    --   runner.code = get_code_block(runner.code_node_text)
+    --   runner.language = get_code_section_language(runner.code_node_text)
+    -- end
+  end
+end
+
+function Execute_code_block(bufnr)
+  log_to_file("STARTING")
+  local runner = {
+    bufnr = bufnr or vim.api.nvim_get_current_buf(),
+    cursor_line = vim.fn.getcurpos()[2]
+  }
+
+  get_code_node(runner)
+  get_code_block_v2(runner)
+
+  if runner.the_code_snippet then
+    print(runner.the_code_snippet)
+  end
+
+  -- Get_code_section_with_existing_results_container(bufnr)
+  -- Get_code_section_without_existing_results_container(bufnr)
+  -- vim.cmd("w")
+end
+
+-- for testing: just remember it'll throw errors in other files
+-- Execute_code_block(40)
+
+
+-- local get_results_range = function(raw_string)
+--   local query = vim.treesitter.query.parse(
+--     "neopolitan",
+--     [[ ((results_container) @content) ]])
+--   local parser = vim.treesitter.get_string_parser(raw_string, "neopolitan", {})
+--   local tree = parser:parse()[1]
+--   local root = tree:root()
+--   for _, node in query:iter_captures(root) do
+--     return { node:range() }
+--   end
+-- end
+
+--get_code_section_result_pairs = function(bufnr)
+--  local query = vim.treesitter.query.parse(
+--    "neopolitan",
+--    [[ ((code_section_results_pair) @content) ]])
+--  local parser = vim.treesitter.get_parser(bufnr, "neopolitan", {})
+--  local tree = parser:parse()[1]
+--  local root = tree:root()
+--  for _, node in query:iter_captures(root, bufnr, 0, -1) do
+--    local section_range = { node:range() }
+--    local code_section = vim.treesitter.get_node_text(node, bufnr, {})
+--    local code = get_code_block(code_section)
+--    local results_range = get_results_range(code_section)
+--    local replace_start = section_range[1] + results_range[1]
+--    local replace_end = section_range[1] + results_range[3] + 1
+--    vim.fn.jobstart(
+--      { "python3", "-c", code },
+--      {
+--        stdout_buffered = true,
+--        stderr_buffered = true,
+--        on_stdout = function(_, data)
+--          if data then
+--            output = { "-- results/", "" }
+--            for _, line in ipairs(data) do
+--              table.insert(output, line)
+--            end
+--            table.insert(output, "-- /results")
+--            vim.api.nvim_buf_set_lines(
+--              bufnr, replace_start, replace_end, false, output
+--            )
+--          end
+--        end,
+--        -- This causing blank lines when there aren't
+--        -- errors. not worrying about it for now
+--        on_stderr = function(_, data)
+--          if #data > 1 then
+--            --output = { "-- results/", "" }
+--            -- for _, line in ipairs(data) do
+--            --table.insert(output, line)
+--            -- end
+--            --table.insert(output, "-- /results")
+--            --vim.api.nvim_buf_set_lines(
+--            -- bufnr, replace_start, replace_end, false, output
+--            --)
+--          end
+--        end,
+--      }
+--    )
+--  end
+--end
+
+-- Prototype Neopolitan Code Block Execution
+
+-- vim.keymap.set({ 'n', 'i' }, '<M-R>', function() get_code_section_result_pairs(vim.api.nvim_get_current_buf()) end)

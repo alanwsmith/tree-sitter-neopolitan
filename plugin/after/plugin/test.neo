@@ -1,0 +1,26 @@
+-- title
+
+Some Eample Name
+
+-- code
+-- python
+
+from random import randint
+
+for num in range(0,10):
+  print(randint(0,10000))
+
+
+-- categories
+-- Miscellaneous
+
+-- groups
+
+-- metadata
+-- date: 2023-10-21 19:29:02
+-- id: 2x5tomct
+-- site: aws
+-- template: post
+-- status: unpublished
+
+
