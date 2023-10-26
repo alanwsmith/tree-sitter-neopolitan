@@ -1,10 +1,8 @@
 # tree-sitter-neopolitan
 
-A Tree-Sitter parser and syntax highlighter 
-for neopolitan 
+A Tree-Sitter parser, syntax highlighter, and
+inline code block runner for neopolitan 
 
-The README and documentation are maintained at:
-
-https://www.alanwsmith.com/tree-sitter-neopolitan/
+Details [here](https://www.alanwsmith.com/tree-sitter-neopolitan/)
 
 
