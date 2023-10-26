@@ -227,10 +227,15 @@ local function run_code(runner)
       end,
       on_exit = function(job_id, exit_code, exit_type)
         output_results_v2(runner)
+        if runner.clean_tmp_path then
+          os.remove(runner.tmp_path)
+        end
       end
     })
 
-  local job_exit_code = vim.fn.jobwait({ the_job }, 7000)
+  -- halt the process after 9000ms to prevent locking
+  -- up forever
+  local job_exit_code = vim.fn.jobwait({ the_job }, 12000)
   if job_exit_code[1] == -1 then
     vim.fn.jobstop(the_job)
     runner.message = "Process took to long and was halted"
@@ -247,30 +252,44 @@ end
 local function prep_rust(runner)
   log("- prep_rust", runner)
   runner.commands = {}
-  local script_file_path = '/Users/alan/Desktop/tmp-neo-execute-script.rs'
-  local script_file = io.open(script_file_path, "w")
+  local script_file = io.open(runner.tmp_path, "w")
   io.output(script_file)
   io.write(runner.code)
   io.close(script_file)
   table.insert(runner.commands, "/Users/alan/.cargo/bin/cargo")
   table.insert(runner.commands, "+nightly")
   table.insert(runner.commands, "-Zscript")
-  table.insert(runner.commands, script_file_path)
+  table.insert(runner.commands, runner.tmp_path)
+  runner.clean_tmp_file = true
+  run_code(runner)
+end
+
+local function prep_osascript(runner)
+  log("- prep_osascript", runner)
+  runner.commands = {}
+  local script_file = io.open(runner.tmp_file, "w")
+  io.output(script_file)
+  io.write(runner.code)
+  io.close(script_file)
+  table.insert(runner.commands, "/usr/bin/osascript")
+  table.insert(runner.commands, "-l")
+  table.insert(runner.commands, "JavaScript")
+  table.insert(runner.commands, runner.tmp_file)
+  runner.clean_tmp_file = true
   run_code(runner)
 end
 
 local function prep_lua(runner)
   log("- prep_lua", runner)
   runner.commands = {}
-  local script_file_path = '/Users/alan/Desktop/tmp-neo-execute-script.lua'
-  local script_file = io.open(script_file_path, "w")
+  local script_file = io.open(runner.tmp_file, "w")
   io.output(script_file)
   io.write(runner.code)
   io.close(script_file)
   table.insert(runner.commands, "/opt/homebrew/bin/lua")
-  table.insert(runner.commands, script_file_path)
+  table.insert(runner.commands, runner.tmp_file)
+  runner.clean_tmp_file = true
   run_code(runner)
-  -- vim.cmd("source /Users/alan/Desktop/tmp-neo-execute-script.lua")
 end
 
 -- local function prep_lua(runner)
@@ -312,6 +331,7 @@ function Execute_code_block(bufnr)
   local runner = {
     bufnr = bufnr or vim.api.nvim_get_current_buf(),
     cursor_line = vim.fn.getcurpos()[2],
+    tmp_file = "/tmp/neopolitan_code_run"
     -- debug_buffer = open_debug_window()
   }
   log("- Starting", runner)
@@ -327,6 +347,8 @@ function Execute_code_block(bufnr)
         prep_bash(runner)
       elseif runner.language == "lua" then
         prep_lua(runner)
+      elseif runner.language == "osascript" then
+        prep_osascript(runner)
       elseif runner.language == "python" then
         prep_python(runner)
       elseif runner.language == "rust" then
