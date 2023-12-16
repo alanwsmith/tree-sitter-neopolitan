@@ -210,8 +210,10 @@ local function output_results(data, runner)
   )
 end
 
+
 local function run_code(runner)
   log("- run_code", runner)
+  vim.api.nvim_set_current_dir(runner.working_dir)
   local the_job = vim.fn.jobstart(
     runner.commands,
     {
@@ -232,7 +234,6 @@ local function run_code(runner)
         end
       end
     })
-
   -- halt the process after 9000ms to prevent locking
   -- up forever
   local job_exit_code = vim.fn.jobwait({ the_job }, 12000)
@@ -243,24 +244,24 @@ local function run_code(runner)
   end
 end
 
-local function prep_python(runner)
-  log("- prep_python", runner)
-  runner.commands = { "python3", "-c", runner.code }
-  run_code(runner)
-end
-
 local function prep_rust(runner)
   log("- prep_rust", runner)
   runner.commands = {}
-  local script_file = io.open(runner.tmp_path, "w")
+  local script_file = io.open(runner.tmp_file, "w")
   io.output(script_file)
   io.write(runner.code)
   io.close(script_file)
   table.insert(runner.commands, "/Users/alan/.cargo/bin/cargo")
   table.insert(runner.commands, "+nightly")
   table.insert(runner.commands, "-Zscript")
-  table.insert(runner.commands, runner.tmp_path)
+  table.insert(runner.commands, runner.tmp_file)
   runner.clean_tmp_file = true
+  run_code(runner)
+end
+
+local function prep_python(runner)
+  log("- prep_python", runner)
+  runner.commands = { "python3", "-c", runner.code }
   run_code(runner)
 end
 
@@ -331,7 +332,8 @@ function Execute_code_block(bufnr)
   local runner = {
     bufnr = bufnr or vim.api.nvim_get_current_buf(),
     cursor_line = vim.fn.getcurpos()[2],
-    tmp_file = "/tmp/neopolitan_code_run"
+    tmp_file = "/Users/alan/workshop/examples/_active_nvim_run",
+    working_dir = "/Users/alan/workshop/examples/"
     -- debug_buffer = open_debug_window()
   }
   log("- Starting", runner)
