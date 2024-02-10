@@ -20,4 +20,13 @@ Attribute - Multiple - Boolean First
           (attribute_dashes)
           (nb_whitespace)
           (boolean_value)
+          (line_ending_or_eof)))
+      (attribute
+        (key_value_attribute
+          (attribute_dashes)
+          (nb_whitespace)
+          (attribute_key)
+          (attribute_separator)
+          (nb_whitespace)
+          (attribute_value)
           (line_ending_or_eof))))))
