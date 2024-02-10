@@ -1,5 +1,5 @@
 ================================================================================
-Code Section - With Results - With Language SOLO
+Code Section - With Results - With Language 
 ================================================================================
 -- code
 -- python 
