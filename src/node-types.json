@@ -109,6 +109,10 @@
       "required": true,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
           "type": "code_container_body",
           "named": true
         },

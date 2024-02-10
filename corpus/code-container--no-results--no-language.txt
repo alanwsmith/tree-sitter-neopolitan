@@ -1,5 +1,5 @@
 ================================================================================
-Code Container - No Results - No Language SOLO
+Code Container - No Results - No Language 
 ================================================================================
 -- code/
 
@@ -18,7 +18,7 @@ print("non-highlighted code")
     (code_token)
     (slash)
     (line_ending_or_eof)
-    (line_ending_or_eof)
+    (line_ending)
     (code_container_body)
     (line_ending))))
 

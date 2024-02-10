@@ -353,8 +353,23 @@
           "name": "line_ending_or_eof"
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "attribute"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "SYMBOL",
-          "name": "line_ending_or_eof"
+          "name": "line_ending"
         },
         {
           "type": "SYMBOL",
