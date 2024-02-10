@@ -152,6 +152,7 @@ module.exports = grammar({
       $.h1_token,
       $.line_ending,
       optional(repeat1($.attribute)),
+      $.line_ending,
       // $.line_ending,
       $.headline,
       optional(repeat1($.paragraph)),
@@ -259,7 +260,7 @@ module.exports = grammar({
 
     // For some reason the scanner version doesn't
     // work so using the regex here
-    line_ending: $ => / *\n/,
+    line_ending: _ => / *\n/,
 
     list_dash: _ => "-",
 

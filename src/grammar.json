@@ -552,6 +552,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "line_ending"
+        },
+        {
+          "type": "SYMBOL",
           "name": "headline"
         },
         {

@@ -216,10 +216,9 @@ static bool find_token(TSLexer *lexer) {
     int target_char = lexer->lookahead;
     // printf("Target Char: %d\n", target_char);
 
-    // hit the end so return (47 is for the dash
-    // which is the container token
-    if (target_char == 10 || target_char == 32 || target_char == 47 ||
-        lexer->eof(lexer) == true) {
+    // hit the end so return 
+    // (47 is for the dash which is the container token
+    if (target_char == 10 || target_char == 32 || target_char == 47 || lexer->eof(lexer) == true) {
       int match_walker;
       for (match_walker = 0; match_walker < items; match_walker++) {
         // printf("  Checking in with %d\n", match_walker);
