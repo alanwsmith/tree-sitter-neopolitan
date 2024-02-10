@@ -3,6 +3,7 @@ Attributes - Single - Boolean - SOLO
 ================================================================================
 -- metadata
 -- autofocus
+
 --------------------------------------------------------------------------------
 
 (source_file
@@ -17,6 +18,5 @@ Attributes - Single - Boolean - SOLO
         (boolean_attribute
           (attribute_dashes)
           (nb_whitespace)
-          (boolean_value))
-        (line_ending_or_eof))
-        (any_whitespace_or_line_endings))))
+          (boolean_value)
+          (line_ending_or_eof))))))

@@ -1,9 +1,9 @@
 ================================================================================
-Attribute - Multiple - Boolean First 
+Attribute - Multiple - Boolean First - SOLO
 ================================================================================
 -- metadata
 -- autofocus
--- class: tango
+
 --------------------------------------------------------------------------------
 
 (source_file
@@ -18,6 +18,5 @@ Attribute - Multiple - Boolean First
         (boolean_attribute
           (attribute_dashes)
           (nb_whitespace)
-          (boolean_value))
-        (line_ending_or_eof))
-        (any_whitespace_or_line_endings))))
+          (boolean_value)
+          (line_ending_or_eof))))))

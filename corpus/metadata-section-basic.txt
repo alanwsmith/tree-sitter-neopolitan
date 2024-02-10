@@ -24,6 +24,6 @@ Metadata Section - Basic
         (attribute_key)
         (attribute_separator)
         (nb_whitespace)
-        (attribute_value))
-      (line_ending_or_eof))
+        (attribute_value)
+        (line_ending_or_eof)))
       (any_whitespace_or_line_endings))))

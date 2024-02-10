@@ -1,8 +1,8 @@
 ================================================================================
-H1 Section - Multi-line
+H1 Section - Multi-line 
 ================================================================================
 -- h1
- 
+
 Multi line Example
 
 Alfa bravo
@@ -17,7 +17,7 @@ Alfa bravo
     (single_space)
     (h1_token)
     (line_ending)
-    (line_ending)
+    (line_ending))
     (headline
       (paragraph_first_word
         (non_lt_char)

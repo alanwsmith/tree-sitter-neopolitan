@@ -23,16 +23,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "line_ending_or_eof",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -61,6 +51,10 @@
       "types": [
         {
           "type": "attribute_dashes",
+          "named": true
+        },
+        {
+          "type": "line_ending_or_eof",
           "named": true
         },
         {
@@ -658,6 +652,10 @@
           "named": true
         },
         {
+          "type": "line_ending_or_eof",
+          "named": true
+        },
+        {
           "type": "nb_whitespace",
           "named": true
         }
@@ -749,10 +747,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "any_whitespace_or_line_endings",
-          "named": true
-        },
         {
           "type": "attribute",
           "named": true

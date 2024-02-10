@@ -20,6 +20,5 @@ Attribute - Single  - Key Value - SOLO
           (attribute_key)
           (attribute_separator)
           (nb_whitespace)
-          (attribute_value))
-        (line_ending_or_eof))
-        (any_whitespace_or_line_endings))))
+          (attribute_value)
+          (line_ending_or_eof))))))

@@ -29,19 +29,13 @@ module.exports = grammar({
           field("tldr_section", $.tldr_container),
           field("todo_section", $.todo_section),
         ),
-
-
-
       )
     ),
 
-    attribute: $ => seq(
-      choice(
+    attribute: $ => choice(
         field("key_value_attribute", $.key_value_attribute),
         field("boolean_attribute", $.boolean_attribute),
       ),
-      $.line_ending_or_eof,
-    ),
 
     tmp_newline: $ => /\n/,
 
@@ -52,15 +46,17 @@ module.exports = grammar({
       $.attribute_separator,
       $.nb_whitespace,
       field('attribute_value', $.attribute_value),
+      $.line_ending_or_eof,
     ),
 
     boolean_attribute: $ => seq(
       $.attribute_dashes,
       $.nb_whitespace,
       field('boolean_value', $.boolean_value),
+      $.line_ending_or_eof,
     ),
 
-    boolean_value: $ => /[^:\n]+/,
+    boolean_value: _ => /[^:\n]+/,
 
     attribute_key: _ => /[^:\n]+/,
 
@@ -133,7 +129,6 @@ module.exports = grammar({
       $.line_ending,
       $.line_ending,
     ),
-
 
     css_section: $ => seq(
       $.section_dashes,
@@ -292,7 +287,6 @@ module.exports = grammar({
       $.line_ending,
       repeat1($.attribute),
       optional($.line_ending_or_eof),
-      $.any_whitespace_or_line_endings,
     ),
 
     metadata_semaphore: $ => seq(
