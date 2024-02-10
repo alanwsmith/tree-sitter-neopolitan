@@ -1,9 +1,8 @@
 ================================================================================
-Categories Section - Basic
+Categories Section - Basic 
 ================================================================================
 -- categories
 -- class: foxtrot
-
 
 --------------------------------------------------------------------------------
 
@@ -14,12 +13,12 @@ Categories Section - Basic
     (single_space)
     (categories_token)
     (line_ending)
-    (attr_kv_pair
-      (attr_dashes)
-      (nb_whitespace)
-      (attr_key)
-      (attr_separator)
-      (nb_whitespace)
-      (attr_value)
-      (line_ending))
-    (line_ending)))
+    (attribute
+      (key_value_attribute
+        (attribute_dashes)
+        (nb_whitespace)
+        (attribute_key)
+        (attribute_separator)
+        (nb_whitespace)
+        (attribute_value)
+    (line_ending_or_eof))))))
