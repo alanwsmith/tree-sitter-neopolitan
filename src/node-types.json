@@ -103,17 +103,24 @@
   {
     "type": "code_container",
     "named": true,
-    "fields": {},
+    "fields": {
+      "code_container_body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "code_container_body",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
           "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "code_container_body",
           "named": true
         },
         {

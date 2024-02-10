@@ -372,8 +372,12 @@
           "name": "line_ending"
         },
         {
-          "type": "SYMBOL",
-          "name": "code_container_body"
+          "type": "FIELD",
+          "name": "code_container_body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "code_container_body"
+          }
         },
         {
           "type": "SYMBOL",

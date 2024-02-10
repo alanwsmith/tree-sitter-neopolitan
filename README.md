@@ -10,6 +10,20 @@ Details [here](https://www.alanwsmith.com/tree-sitter-neopolitan/)
 This executes codes blocks too. 
 More details on that at a later date
 
+## Updating
+
+Run:
+
+:TSUpdate
+
+
+## Installing
+
+I'm not sure what I did to install. Need
+to look up the directions from the main site
+
+
+
 ## Dev And Testing
 
 - Make new tests under `corpus`

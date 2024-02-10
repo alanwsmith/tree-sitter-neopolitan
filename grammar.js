@@ -81,11 +81,9 @@ module.exports = grammar({
       $.line_ending_or_eof,
       optional(repeat1($.attribute)),
       $.line_ending,
-      $.code_container_body,
+      field('code_container_body', $.code_container_body),
       $.line_ending,
     ),
-
-//    code_container_body: _ => /.*-- \/code/,
 
     code_container_close_tag: _ => /-- \/code/,
 
