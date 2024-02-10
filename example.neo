@@ -86,6 +86,14 @@ for whatever in range(0..12):
 
 <p>alfa bravo</p>
 
+-- code/
+-- lua
+
+print("this is lua")
+
+-- /code
+
+
 
 -- categories
 -- some: thing

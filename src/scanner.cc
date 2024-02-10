@@ -214,15 +214,14 @@ static bool find_token(TSLexer *lexer) {
   int char_index;
   for (char_index = 0; char_index < items; char_index++) {
     int target_char = lexer->lookahead;
-    // printf("Target Char: %d\n", target_char);
+    //  printf("Target Char: %d\n", target_char);
 
-    // hit the end so return (47 is for the dash
-    // which is the container token
-    if (target_char == 10 || target_char == 32 || target_char == 47 ||
-        lexer->eof(lexer) == true) {
+    // hit the end so return 
+    // (47 is for the dash which is the container token
+    if (target_char == 10 || target_char == 32 || target_char == 47 || lexer->eof(lexer) == true) {
       int match_walker;
       for (match_walker = 0; match_walker < items; match_walker++) {
-        // printf("  Checking in with %d\n", match_walker);
+         // printf("  Checking in with %d\n", match_walker);
         if (matches[match_walker]) {
           // printf("  Send it\n");
           lexer->mark_end(lexer);
@@ -308,6 +307,8 @@ static bool is_code_container_body(TSLexer *lexer) {
       // already on the newline
       char end_pattern[9] = "-- /code";
       if (terminator(lexer, end_pattern)) {
+        lexer->advance(lexer, false);
+        lexer->mark_end(lexer);
         return true;
       };
     };

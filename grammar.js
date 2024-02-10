@@ -7,7 +7,7 @@ module.exports = grammar({
       seq(
         choice(
           field("categories_section", $.categories_section),
-          //$.code_container,
+          field("code_container", $.code_container),
           field("code_section", $.code_section),
           field("css_section", $.css_section),
           field("h1_section", $.h1_section),
@@ -29,19 +29,13 @@ module.exports = grammar({
           field("tldr_section", $.tldr_container),
           field("todo_section", $.todo_section),
         ),
-
-
-
       )
     ),
 
-    attribute: $ => seq(
-      choice(
+    attribute: $ => choice(
         field("key_value_attribute", $.key_value_attribute),
         field("boolean_attribute", $.boolean_attribute),
       ),
-      $.line_ending_or_eof,
-    ),
 
     tmp_newline: $ => /\n/,
 
@@ -52,15 +46,17 @@ module.exports = grammar({
       $.attribute_separator,
       $.nb_whitespace,
       field('attribute_value', $.attribute_value),
+      $.line_ending_or_eof,
     ),
 
     boolean_attribute: $ => seq(
       $.attribute_dashes,
       $.nb_whitespace,
       field('boolean_value', $.boolean_value),
+      $.line_ending_or_eof,
     ),
 
-    boolean_value: $ => /[^:\n]+/,
+    boolean_value: _ => /[^:\n]+/,
 
     attribute_key: _ => /[^:\n]+/,
 
@@ -77,6 +73,19 @@ module.exports = grammar({
       //   // optional($.empty_space),
     ),
 
+    code_container: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.code_token,
+      $.slash,
+      $.line_ending_or_eof,
+      optional(repeat1($.attribute)),
+      $.line_ending,
+      field('code_container_body', $.code_container_body),
+      $.line_ending,
+    ),
+
+    code_container_close_tag: _ => /-- \/code/,
 
     code_section: $ => seq(
       $.section_dashes,
@@ -134,7 +143,6 @@ module.exports = grammar({
       $.line_ending,
     ),
 
-
     css_section: $ => seq(
       $.section_dashes,
       $.single_space,
@@ -157,6 +165,7 @@ module.exports = grammar({
       $.h1_token,
       $.line_ending,
       optional(repeat1($.attribute)),
+      $.line_ending,
       // $.line_ending,
       $.headline,
       optional(repeat1($.paragraph)),
@@ -264,7 +273,7 @@ module.exports = grammar({
 
     // For some reason the scanner version doesn't
     // work so using the regex here
-    line_ending: $ => / *\n/,
+    line_ending: _ => / *\n/,
 
     list_dash: _ => "-",
 
@@ -292,7 +301,6 @@ module.exports = grammar({
       $.line_ending,
       repeat1($.attribute),
       optional($.line_ending_or_eof),
-      $.any_whitespace_or_line_endings,
     ),
 
     metadata_semaphore: $ => seq(
@@ -383,6 +391,8 @@ module.exports = grammar({
     ),
 
     section_dashes: _ => /-- +/,
+
+    slash: _ => /\//,
 
     title_section: $ => seq(
       $.section_dashes,

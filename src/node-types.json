@@ -23,16 +23,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "line_ending_or_eof",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -61,6 +51,10 @@
       "types": [
         {
           "type": "attribute_dashes",
+          "named": true
+        },
+        {
+          "type": "line_ending_or_eof",
           "named": true
         },
         {
@@ -101,6 +95,56 @@
         },
         {
           "type": "single_space",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "code_container",
+    "named": true,
+    "fields": {
+      "code_container_body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "code_container_body",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "code_token",
+          "named": true
+        },
+        {
+          "type": "line_ending",
+          "named": true
+        },
+        {
+          "type": "line_ending_or_eof",
+          "named": true
+        },
+        {
+          "type": "section_dashes",
+          "named": true
+        },
+        {
+          "type": "single_space",
+          "named": true
+        },
+        {
+          "type": "slash",
           "named": true
         }
       ]
@@ -658,6 +702,10 @@
           "named": true
         },
         {
+          "type": "line_ending_or_eof",
+          "named": true
+        },
+        {
           "type": "nb_whitespace",
           "named": true
         }
@@ -750,10 +798,6 @@
       "required": true,
       "types": [
         {
-          "type": "any_whitespace_or_line_endings",
-          "named": true
-        },
-        {
           "type": "attribute",
           "named": true
         },
@@ -805,6 +849,16 @@
         "types": [
           {
             "type": "categories_section",
+            "named": true
+          }
+        ]
+      },
+      "code_container": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "code_container",
             "named": true
           }
         ]
@@ -1540,6 +1594,10 @@
     "named": true
   },
   {
+    "type": "code_container_body",
+    "named": true
+  },
+  {
     "type": "code_section_body",
     "named": true
   },
@@ -1669,6 +1727,10 @@
   },
   {
     "type": "single_space",
+    "named": true
+  },
+  {
+    "type": "slash",
     "named": true
   },
   {

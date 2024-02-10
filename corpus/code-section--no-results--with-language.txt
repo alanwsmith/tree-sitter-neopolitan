@@ -1,5 +1,5 @@
 ================================================================================
-Code Section - No Results - With Language
+Code Section - No Results - With Language 
 ================================================================================
 -- code
 -- python
@@ -16,10 +16,11 @@ print("hello")
     (code_token)
     (line_ending)
     (attribute
-      (attr_dashes)
-      (nb_whitespace)
       (boolean_attribute
-        (line_remainder))
-      (line_ending))
-    (code_section_body))))
+        (attribute_dashes)
+        (nb_whitespace)
+        (boolean_value)
+        (line_ending_or_eof)))
+    (code_section_body)
+    (any_whitespace_or_line_endings))))
 

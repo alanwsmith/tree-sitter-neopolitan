@@ -1,5 +1,5 @@
 ================================================================================
-Code Section - With Results - With Language
+Code Section - With Results - With Language 
 ================================================================================
 -- code
 -- python 
@@ -21,11 +21,11 @@ hello
       (code_token)
       (line_ending)
       (attribute
-        (attr_dashes)
-        (nb_whitespace)
         (boolean_attribute
-          (line_remainder))
-        (line_ending))
+          (attribute_dashes)
+          (nb_whitespace)
+          (boolean_value)
+          (line_ending_or_eof)))
       (code_section_body)
       (any_whitespace_or_line_endings))
     (results_container
@@ -42,4 +42,5 @@ hello
         (section_dashes)
         (single_space)
         (container_token)
-        (results_token)))))
+        (results_token))
+      (any_whitespace_or_line_endings))))

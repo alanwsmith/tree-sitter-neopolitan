@@ -23,6 +23,14 @@
               },
               {
                 "type": "FIELD",
+                "name": "code_container",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "code_container"
+                }
+              },
+              {
+                "type": "FIELD",
                 "name": "code_section",
                 "content": {
                   "type": "SYMBOL",
@@ -187,32 +195,23 @@
       }
     },
     "attribute": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "key_value_attribute",
-              "content": {
-                "type": "SYMBOL",
-                "name": "key_value_attribute"
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "boolean_attribute",
-              "content": {
-                "type": "SYMBOL",
-                "name": "boolean_attribute"
-              }
-            }
-          ]
+          "type": "FIELD",
+          "name": "key_value_attribute",
+          "content": {
+            "type": "SYMBOL",
+            "name": "key_value_attribute"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "line_ending_or_eof"
+          "type": "FIELD",
+          "name": "boolean_attribute",
+          "content": {
+            "type": "SYMBOL",
+            "name": "boolean_attribute"
+          }
         }
       ]
     },
@@ -254,6 +253,10 @@
             "type": "SYMBOL",
             "name": "attribute_value"
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "line_ending_or_eof"
         }
       ]
     },
@@ -275,6 +278,10 @@
             "type": "SYMBOL",
             "name": "boolean_value"
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "line_ending_or_eof"
         }
       ]
     },
@@ -321,6 +328,66 @@
           }
         }
       ]
+    },
+    "code_container": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "slash"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "line_ending_or_eof"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "attribute"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "line_ending"
+        },
+        {
+          "type": "FIELD",
+          "name": "code_container_body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "code_container_body"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "line_ending"
+        }
+      ]
+    },
+    "code_container_close_tag": {
+      "type": "PATTERN",
+      "value": "-- \\/code"
     },
     "code_section": {
       "type": "SEQ",
@@ -550,6 +617,10 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "line_ending"
         },
         {
           "type": "SYMBOL",
@@ -1146,10 +1217,6 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "any_whitespace_or_line_endings"
         }
       ]
     },
@@ -1456,6 +1523,10 @@
     "section_dashes": {
       "type": "PATTERN",
       "value": "-- +"
+    },
+    "slash": {
+      "type": "PATTERN",
+      "value": "\\/"
     },
     "title_section": {
       "type": "SEQ",
