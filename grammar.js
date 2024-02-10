@@ -7,7 +7,7 @@ module.exports = grammar({
       seq(
         choice(
           field("categories_section", $.categories_section),
-          //$.code_container,
+          field("code_container", $.code_container),
           field("code_section", $.code_section),
           field("css_section", $.css_section),
           field("h1_section", $.h1_section),
@@ -73,6 +73,20 @@ module.exports = grammar({
       //   // optional($.empty_space),
     ),
 
+    code_container: $ => seq(
+      $.section_dashes,
+      $.single_space,
+      $.code_token,
+      $.slash,
+      $.line_ending_or_eof,
+      $.line_ending_or_eof,
+      $.code_container_body,
+      $.line_ending,
+    ),
+
+//    code_container_body: _ => /.*-- \/code/,
+
+    code_container_close_tag: _ => /-- \/code/,
 
     code_section: $ => seq(
       $.section_dashes,
@@ -378,6 +392,8 @@ module.exports = grammar({
     ),
 
     section_dashes: _ => /-- +/,
+
+    slash: _ => /\//,
 
     title_section: $ => seq(
       $.section_dashes,

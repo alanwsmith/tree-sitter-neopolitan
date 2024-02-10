@@ -23,6 +23,14 @@
               },
               {
                 "type": "FIELD",
+                "name": "code_container",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "code_container"
+                }
+              },
+              {
+                "type": "FIELD",
                 "name": "code_section",
                 "content": {
                   "type": "SYMBOL",
@@ -320,6 +328,47 @@
           }
         }
       ]
+    },
+    "code_container": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "section_dashes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "single_space"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "slash"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "line_ending_or_eof"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "line_ending_or_eof"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code_container_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "line_ending"
+        }
+      ]
+    },
+    "code_container_close_tag": {
+      "type": "PATTERN",
+      "value": "-- \\/code"
     },
     "code_section": {
       "type": "SEQ",
@@ -1455,6 +1504,10 @@
     "section_dashes": {
       "type": "PATTERN",
       "value": "-- +"
+    },
+    "slash": {
+      "type": "PATTERN",
+      "value": "\\/"
     },
     "title_section": {
       "type": "SEQ",
